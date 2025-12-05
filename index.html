@@ -152,7 +152,7 @@
         .topbar-search input {
             width: 100%;
             height: 36px;
-            padding: 0 3rem 0 1rem;
+            padding: 0 4rem 0 2.25rem;
             border: none;
             border-radius: 8px;
             background: rgba(255,255,255,0.15);
@@ -172,23 +172,33 @@
             background: rgba(0,0,0,0.4);
         }
 
+        .search-icon {
+            position: absolute;
+            left: 1.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+            pointer-events: none;
+        }
+
         .search-hint {
             position: absolute;
-            right: 0.75rem;
+            right: 1.75rem;
             top: 50%;
             transform: translateY(-50%);
             font-size: 0.65rem;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255,255,255,0.5);
             pointer-events: none;
             background: rgba(255,255,255,0.15);
-            padding: 0.2rem 0.4rem;
+            padding: 0.15rem 0.4rem;
             border-radius: 4px;
             font-family: -apple-system, system-ui, sans-serif;
         }
 
         .search-clear {
             position: absolute;
-            right: 0.5rem;
+            right: 1.5rem;
             top: 50%;
             transform: translateY(-50%);
             background: rgba(255,255,255,0.3);
@@ -732,9 +742,10 @@
         <header class="topbar">
             <div class="topbar-logo" onclick="showWelcome()">Ducu & Bo' Peptides</div>
             <div class="topbar-search">
+                <span class="search-icon">&#128269;</span>
                 <input type="text" id="searchInput" placeholder="Search peptides..." oninput="handleSearch(this.value)">
                 <span class="search-hint" id="searchHint">Ctrl+K</span>
-                <button class="search-clear" id="searchClear" onclick="clearSearch()">x</button>
+                <button class="search-clear" id="searchClear" onclick="clearSearch()">&#10005;</button>
             </div>
             <div class="topbar-actions">
                 <button class="topbar-btn icon-only" onclick="toggleDarkMode()" id="darkModeBtn" title="Toggle dark mode (D)">
