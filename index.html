@@ -289,6 +289,30 @@
             color: var(--accent);
         }
 
+        .nav-controls {
+            display: flex;
+            justify-content: flex-end;
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-toggle-btn {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.65rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .nav-toggle-btn:hover {
+            background: var(--bg);
+            color: var(--text);
+            border-color: var(--text-light);
+        }
+
         .nav-scroll {
             flex: 1;
             overflow-y: auto;
@@ -573,6 +597,66 @@
             border-radius: 8px;
         }
 
+        .welcome-categories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-top: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .category-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .category-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .category-card .icon {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .category-card .name {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .category-card .count {
+            font-size: 0.7rem;
+            color: var(--text-light);
+        }
+
+        .category-tag {
+            display: inline-block;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 0.15rem 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.15s;
+            margin-right: 0.25rem;
+        }
+
+        .category-tag:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
         /* Markdown Styles */
         .content h1 {
             font-size: 1.6rem;
@@ -635,7 +719,7 @@
         .content .mermaid {
             background: var(--bg);
             border-radius: 8px;
-            padding: 1rem;
+            padding: 1.5rem;
             margin: 1.5rem 0;
             overflow-x: auto;
             text-align: center;
@@ -643,6 +727,30 @@
         .content .mermaid svg {
             max-width: 100%;
             height: auto;
+        }
+
+        /* Mermaid custom styling */
+        .content .mermaid .node rect,
+        .content .mermaid .node polygon,
+        .content .mermaid .node circle {
+            fill: var(--bg-paper) !important;
+            stroke: var(--accent) !important;
+            stroke-width: 2px !important;
+        }
+        .content .mermaid .node .label {
+            color: var(--text) !important;
+        }
+        .content .mermaid .edgePath path {
+            stroke: var(--accent) !important;
+            stroke-width: 2px !important;
+        }
+        .content .mermaid .edgeLabel {
+            background-color: var(--bg) !important;
+            color: var(--text-light) !important;
+        }
+        .content .mermaid .marker {
+            fill: var(--accent) !important;
+            stroke: var(--accent) !important;
         }
 
         /* Document Navigation */
@@ -771,6 +879,10 @@
                 <div class="sidebar-section" id="favSection" style="display:none;">
                     <div class="sidebar-section-title">Favorites</div>
                     <div id="favList"></div>
+                </div>
+
+                <div class="nav-controls">
+                    <button class="nav-toggle-btn" id="navToggleBtn" onclick="toggleAllSections()">Collapse all</button>
                 </div>
 
                 <div class="nav-scroll" id="navScroll"></div>
@@ -908,12 +1020,10 @@
                 document.documentElement.removeAttribute('data-theme');
                 localStorage.setItem(STORAGE_DARK, 'false');
                 updateDarkModeIcon(false);
-                mermaid.initialize({ theme: 'default' });
             } else {
                 document.documentElement.setAttribute('data-theme', 'dark');
                 localStorage.setItem(STORAGE_DARK, 'true');
                 updateDarkModeIcon(true);
-                mermaid.initialize({ theme: 'dark' });
             }
         }
 
@@ -1039,6 +1149,40 @@
 
         function toggleSection(key) {
             document.querySelector(`.nav-section[data-key="${key}"]`).classList.toggle('collapsed');
+            updateToggleButton();
+        }
+
+        function toggleAllSections() {
+            const sections = document.querySelectorAll('.nav-section');
+            const allCollapsed = Array.from(sections).every(s => s.classList.contains('collapsed'));
+
+            sections.forEach(section => {
+                if (allCollapsed) {
+                    section.classList.remove('collapsed');
+                } else {
+                    section.classList.add('collapsed');
+                }
+            });
+            updateToggleButton();
+        }
+
+        function updateToggleButton() {
+            const sections = document.querySelectorAll('.nav-section');
+            const allCollapsed = Array.from(sections).every(s => s.classList.contains('collapsed'));
+            document.getElementById('navToggleBtn').textContent = allCollapsed ? 'Expand all' : 'Collapse all';
+        }
+
+        function goToCategory(key) {
+            // Expand the category and scroll to it
+            const section = document.querySelector(`.nav-section[data-key="${key}"]`);
+            if (section) {
+                section.classList.remove('collapsed');
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Briefly highlight
+                section.style.background = 'rgba(74, 111, 165, 0.1)';
+                setTimeout(() => section.style.background = '', 1000);
+            }
+            updateToggleButton();
         }
 
         // Progress Bar
@@ -1082,7 +1226,7 @@
             document.getElementById('breadcrumb').innerHTML = `
                 <a onclick="showWelcome()">Home</a>
                 <span class="separator">/</span>
-                <span>${catName}</span>
+                <a onclick="goToCategory('${catKey}')">${catName}</a>
                 <span class="separator">/</span>
                 <span>${fileName}</span>
             `;
@@ -1107,6 +1251,9 @@
 
                 // Render content
                 content.innerHTML = marked.parse(currentMarkdown);
+
+                // Make category tags clickable
+                makeCategoryTagsClickable();
 
                 // Render mermaid diagrams
                 await renderMermaid();
@@ -1190,6 +1337,11 @@
             const recent = getRecent();
             const favs = getFavorites();
 
+            const categoryIcons = {
+                'protocols': '📋', 'gh_metabolic': '⚡', 'tissue': '🩹', 'cognitive': '🧠',
+                'immune': '🛡️', 'longevity': '⏳', 'sexual': '💜', 'sleep': '😴', 'organ': '🫀'
+            };
+
             document.getElementById('content').innerHTML = `
                 <div class="welcome">
                     <h1>Welcome</h1>
@@ -1239,6 +1391,17 @@
                                 <p>GLP-1 (Ozempic)</p>
                             </div>
                         </div>
+                    </div>
+
+                    <h3 style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-light);margin-top:2rem;margin-bottom:0.75rem;">Browse by Category</h3>
+                    <div class="welcome-categories">
+                        ${Object.entries(categories).map(([key, cat]) => `
+                            <div class="category-card" onclick="goToCategory('${key}')">
+                                <div class="icon">${categoryIcons[key] || '📄'}</div>
+                                <div class="name">${cat.name}</div>
+                                <div class="count">${cat.files.length} ${cat.files.length === 1 ? 'item' : 'items'}</div>
+                            </div>
+                        `).join('')}
                     </div>
                 </div>
             `;
@@ -1328,6 +1491,55 @@
             }
         });
 
+        // Category tag mapping for markdown content
+        const categoryTagMap = {
+            'GH Axis': 'gh_metabolic',
+            'Metabolic': 'gh_metabolic',
+            'Metabolic / Fat Loss': 'gh_metabolic',
+            'Fat Loss': 'gh_metabolic',
+            'Muscle & Performance': 'gh_metabolic',
+            'Tissue Repair': 'tissue',
+            'Healing': 'tissue',
+            'Cognitive': 'cognitive',
+            'Nootropic': 'cognitive',
+            'Immune': 'immune',
+            'Immune & Thymus': 'immune',
+            'Thymus': 'immune',
+            'Longevity': 'longevity',
+            'Anti-Aging': 'longevity',
+            'Sexual': 'sexual',
+            'Sexual & Hormonal': 'sexual',
+            'Hormonal': 'sexual',
+            'Sleep': 'sleep',
+            'Organ-Specific': 'organ',
+            'Cardiac': 'organ',
+            'Protocols': 'protocols'
+        };
+
+        function makeCategoryTagsClickable() {
+            // Find paragraphs that contain category tags (backticks with · separators)
+            const content = document.getElementById('content');
+            const paragraphs = content.querySelectorAll('p');
+
+            paragraphs.forEach(p => {
+                // Check if this looks like a categories line
+                if (p.innerHTML.includes('<code>') && p.innerHTML.includes('·')) {
+                    const codes = p.querySelectorAll('code');
+                    codes.forEach(code => {
+                        const tagText = code.textContent.trim();
+                        const catKey = categoryTagMap[tagText];
+                        if (catKey) {
+                            const span = document.createElement('span');
+                            span.className = 'category-tag';
+                            span.textContent = tagText;
+                            span.onclick = () => goToCategory(catKey);
+                            code.replaceWith(span);
+                        }
+                    });
+                }
+            });
+        }
+
         // Mermaid rendering
         async function renderMermaid() {
             const codeBlocks = document.querySelectorAll('pre code.language-mermaid');
@@ -1348,9 +1560,44 @@
         function init() {
             initDarkMode();
             marked.setOptions({ breaks: true, gfm: true });
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
             mermaid.initialize({
                 startOnLoad: false,
-                theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+                theme: 'base',
+                themeVariables: isDark ? {
+                    primaryColor: '#4a5568',
+                    primaryTextColor: '#e2e8f0',
+                    primaryBorderColor: '#63b3ed',
+                    lineColor: '#63b3ed',
+                    secondaryColor: '#2d3748',
+                    tertiaryColor: '#1a202c',
+                    background: '#2d3748',
+                    mainBkg: '#2d3748',
+                    nodeBorder: '#63b3ed',
+                    clusterBkg: '#1a202c',
+                    edgeLabelBackground: '#2d3748',
+                    fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif'
+                } : {
+                    primaryColor: '#f7fafc',
+                    primaryTextColor: '#2d3748',
+                    primaryBorderColor: '#4a6fa5',
+                    lineColor: '#4a6fa5',
+                    secondaryColor: '#e2e8f0',
+                    tertiaryColor: '#f7fafc',
+                    background: '#ffffff',
+                    mainBkg: '#ffffff',
+                    nodeBorder: '#4a6fa5',
+                    clusterBkg: '#f7fafc',
+                    edgeLabelBackground: '#f7fafc',
+                    fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif'
+                },
+                flowchart: {
+                    useMaxWidth: true,
+                    htmlLabels: true,
+                    curve: 'basis',
+                    rankSpacing: 50,
+                    nodeSpacing: 30
+                },
                 securityLevel: 'loose'
             });
             renderNav();
