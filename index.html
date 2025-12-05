@@ -3,294 +3,381 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>199 Peptides - Research Documentation</title>
+    <title>Ducu & Bo' Peptides</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         :root {
             --primary: #1a1a2e;
             --accent: #4a6fa5;
-            --accent-light: #6989b9;
             --text: #2d3748;
             --text-light: #718096;
             --bg: #f7fafc;
             --bg-paper: #ffffff;
             --border: #e2e8f0;
-            --shadow: rgba(0,0,0,0.08);
-            --success: #48bb78;
-            --warning: #ed8936;
-            --danger: #f56565;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: var(--text);
             background: var(--bg);
         }
 
-        /* Layout */
-        .container {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: 340px;
-            background: var(--bg-paper);
-            border-right: 1px solid var(--border);
+        /* Password Screen */
+        .password-screen {
             position: fixed;
-            height: 100vh;
-            overflow-y: auto;
+            inset: 0;
+            background: var(--primary);
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
         }
 
-        .sidebar-header {
-            padding: 1.5rem;
+        .password-screen.hidden {
+            display: none;
+        }
+
+        .password-box {
+            background: var(--bg-paper);
+            padding: 3rem;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .password-box h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .password-box p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            text-align: center;
+            outline: none;
+            margin-bottom: 1rem;
+        }
+
+        .password-input:focus {
+            border-color: var(--accent);
+        }
+
+        .password-input.error {
+            border-color: #e53e3e;
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .password-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .password-btn:hover {
+            background: #3d5d8a;
+        }
+
+        .error-msg {
+            color: #e53e3e;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .error-msg.visible {
+            display: block;
+        }
+
+        /* Main App (hidden until authenticated) */
+        .app {
+            display: none;
+        }
+
+        .app.visible {
+            display: block;
+        }
+
+        /* Header */
+        .header {
             background: var(--primary);
             color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
         }
 
-        .sidebar-header h1 {
+        .header h1 {
             font-size: 1.25rem;
             font-weight: 600;
-            margin-bottom: 0.25rem;
+            cursor: pointer;
         }
 
-        .sidebar-header p {
-            font-size: 0.8rem;
-            opacity: 0.8;
+        .header h1:hover {
+            opacity: 0.9;
         }
 
-        /* Search */
-        .search-container {
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--border);
-            background: var(--bg);
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb .separator {
+            opacity: 0.5;
+        }
+
+        .breadcrumb .current {
+            opacity: 0.7;
+        }
+
+        .back-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .back-btn.visible {
+            display: flex;
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Home View */
+        .home-view {
+            display: block;
+        }
+
+        .home-view.hidden {
+            display: none;
+        }
+
+        .search-box {
+            margin-bottom: 2rem;
         }
 
         .search-input {
             width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 0.9rem;
+            max-width: 500px;
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
             outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            transition: border-color 0.2s;
         }
 
         .search-input:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.1);
         }
 
-        .search-input::placeholder {
-            color: var(--text-light);
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
 
-        /* Quick Links */
-        .quick-links {
-            display: flex;
-            gap: 0.5rem;
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .quick-link {
-            flex: 1;
-            padding: 0.75rem;
-            text-align: center;
-            background: var(--bg);
+        .section-card {
+            background: var(--bg-paper);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 12px;
+            padding: 1.5rem;
             cursor: pointer;
             transition: all 0.2s;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--text);
-            text-decoration: none;
         }
 
-        .quick-link:hover {
-            background: var(--accent);
-            color: white;
+        .section-card:hover {
             border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
         }
 
-        .quick-link.active {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-
-        /* Navigation */
-        .nav-scroll {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1rem 0;
-        }
-
-        .nav-section {
+        .section-card h3 {
+            font-size: 1.1rem;
+            color: var(--primary);
             margin-bottom: 0.5rem;
-        }
-
-        .nav-section-header {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 0.5rem 1.5rem;
-            cursor: pointer;
-            user-select: none;
+            gap: 0.5rem;
         }
 
-        .nav-section-header:hover {
-            background: var(--bg);
-        }
-
-        .nav-section-header h2 {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-light);
-            font-weight: 600;
-        }
-
-        .nav-section-header .count {
-            font-size: 0.7rem;
-            color: var(--text-light);
-            background: var(--bg);
-            padding: 0.15rem 0.5rem;
-            border-radius: 10px;
-        }
-
-        .nav-section-header .chevron {
-            font-size: 0.7rem;
-            color: var(--text-light);
-            transition: transform 0.2s;
-        }
-
-        .nav-section.collapsed .chevron {
-            transform: rotate(-90deg);
-        }
-
-        .nav-section.collapsed .nav-items {
-            display: none;
-        }
-
-        .nav-items {
-            padding: 0.25rem 0;
-        }
-
-        .nav-item {
-            display: block;
-            padding: 0.6rem 1.5rem 0.6rem 2rem;
-            color: var(--text);
-            text-decoration: none;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.15s;
-            border-left: 3px solid transparent;
-        }
-
-        .nav-item:hover {
-            background: var(--bg);
-            color: var(--accent);
-        }
-
-        .nav-item.active {
-            background: rgba(74, 111, 165, 0.08);
-            color: var(--accent);
-            border-left-color: var(--accent);
-            font-weight: 500;
-        }
-
-        .nav-item .subtitle {
+        .section-card .count {
             font-size: 0.75rem;
+            background: var(--bg);
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
             color: var(--text-light);
-            display: block;
-            margin-top: 0.1rem;
         }
 
-        .nav-item.hidden {
+        .section-card p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* File List */
+        .file-list {
+            background: var(--bg-paper);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .file-list-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .file-item {
+            display: block;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: background 0.15s;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .file-item:last-child {
+            border-bottom: none;
+        }
+
+        .file-item:hover {
+            background: var(--bg);
+        }
+
+        .file-item .name {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .file-item .subtitle {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .file-item.hidden {
             display: none;
         }
 
-        /* Main Content */
-        .main {
-            flex: 1;
-            margin-left: 340px;
-            padding: 2rem 3rem;
-            max-width: 1100px;
+        /* Document View */
+        .doc-view {
+            display: none;
         }
 
-        /* Content Styling */
-        .content {
+        .doc-view.visible {
+            display: block;
+        }
+
+        .doc-content {
             background: var(--bg-paper);
             padding: 3rem;
             border-radius: 12px;
-            box-shadow: 0 1px 3px var(--shadow);
-            min-height: calc(100vh - 4rem);
+            border: 1px solid var(--border);
         }
 
-        .content h1 {
+        /* Markdown Styles */
+        .doc-content h1 {
             font-size: 2rem;
-            font-weight: 600;
             color: var(--primary);
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             padding-bottom: 1rem;
             border-bottom: 2px solid var(--accent);
         }
 
-        .content h2 {
+        .doc-content h2 {
             font-size: 1.4rem;
-            font-weight: 600;
             color: var(--primary);
             margin: 2.5rem 0 1rem;
             padding-bottom: 0.5rem;
             border-bottom: 1px solid var(--border);
         }
 
-        .content h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
+        .doc-content h3 {
+            font-size: 1.15rem;
             color: var(--text);
             margin: 2rem 0 0.75rem;
         }
 
-        .content h4 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--text-light);
-            margin: 1.5rem 0 0.5rem;
-        }
-
-        .content p {
+        .doc-content p {
             margin-bottom: 1rem;
             line-height: 1.8;
         }
 
-        .content ul, .content ol {
+        .doc-content ul, .doc-content ol {
             margin: 1rem 0 1.5rem 1.5rem;
         }
 
-        .content li {
+        .doc-content li {
             margin-bottom: 0.5rem;
-            line-height: 1.7;
         }
 
-        .content strong {
+        .doc-content strong {
             color: var(--primary);
-            font-weight: 600;
         }
 
-        .content blockquote {
+        .doc-content blockquote {
             border-left: 4px solid var(--accent);
             padding: 1rem 1.5rem;
             margin: 1.5rem 0;
@@ -298,153 +385,61 @@
             border-radius: 0 8px 8px 0;
         }
 
-        .content code {
-            font-family: 'SF Mono', 'Fira Code', monospace;
+        .doc-content code {
+            font-family: 'SF Mono', monospace;
             font-size: 0.85em;
             background: var(--bg);
             padding: 0.2em 0.4em;
             border-radius: 4px;
         }
 
-        .content pre {
+        .doc-content pre {
             background: var(--primary);
             color: #e2e8f0;
             padding: 1.5rem;
             border-radius: 8px;
             overflow-x: auto;
             margin: 1.5rem 0;
-            font-size: 0.85rem;
         }
 
-        .content pre code {
+        .doc-content pre code {
             background: none;
             padding: 0;
-            color: inherit;
         }
 
-        .content hr {
+        .doc-content hr {
             border: none;
             height: 1px;
             background: var(--border);
             margin: 2.5rem 0;
         }
 
-        /* Tables */
-        .content table {
+        .doc-content table {
             width: 100%;
             border-collapse: collapse;
             margin: 1.5rem 0;
             font-size: 0.9rem;
         }
 
-        .content th {
+        .doc-content th {
             background: var(--primary);
             color: white;
             padding: 0.75rem 1rem;
             text-align: left;
             font-weight: 500;
-            font-size: 0.8rem;
         }
 
-        .content td {
+        .doc-content td {
             padding: 0.75rem 1rem;
             border-bottom: 1px solid var(--border);
         }
 
-        .content tr:hover {
+        .doc-content tr:hover {
             background: var(--bg);
         }
 
-        .content a {
+        .doc-content a {
             color: var(--accent);
-            text-decoration: none;
-        }
-
-        .content a:hover {
-            text-decoration: underline;
-        }
-
-        /* Welcome Screen */
-        .welcome {
-            text-align: center;
-            padding: 3rem 2rem;
-        }
-
-        .welcome h1 {
-            border: none;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .welcome-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            margin-bottom: 3rem;
-        }
-
-        .welcome-cards {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            max-width: 700px;
-            margin: 0 auto 3rem;
-        }
-
-        .welcome-card {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .welcome-card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 4px 12px var(--shadow);
-            transform: translateY(-2px);
-        }
-
-        .welcome-card h3 {
-            font-size: 1.1rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .welcome-card p {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin: 0;
-        }
-
-        .welcome-card .icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .welcome-stats {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .welcome-stat {
-            text-align: center;
-        }
-
-        .welcome-stat .number {
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--accent);
-        }
-
-        .welcome-stat .label {
-            font-size: 0.85rem;
-            color: var(--text-light);
         }
 
         /* Loading */
@@ -454,475 +449,452 @@
             color: var(--text-light);
         }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--border);
-            border-radius: 3px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--text-light);
-        }
-
         /* Responsive */
-        @media (max-width: 1024px) {
-            .sidebar {
-                width: 280px;
-            }
-            .main {
-                margin-left: 280px;
-                padding: 1.5rem;
-            }
-            .content {
-                padding: 2rem;
-            }
-        }
-
         @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
+            .header {
+                padding: 1rem;
+                flex-wrap: wrap;
             }
-            .sidebar {
-                position: relative;
-                width: 100%;
-                height: auto;
-                max-height: 50vh;
-            }
-            .main {
-                margin-left: 0;
+            .main-container {
                 padding: 1rem;
             }
-            .content {
+            .doc-content {
                 padding: 1.5rem;
             }
-            .welcome-cards {
+            .section-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <nav class="sidebar">
-            <div class="sidebar-header">
-                <h1>199 Peptides</h1>
-                <p>Research Documentation Library</p>
+    <!-- Password Screen -->
+    <div class="password-screen" id="passwordScreen">
+        <div class="password-box">
+            <h1>Ducu & Bo' Peptides</h1>
+            <p>Enter password to access</p>
+            <input type="password" class="password-input" id="passwordInput"
+                   placeholder="Password" onkeypress="if(event.key==='Enter')checkPassword()">
+            <button class="password-btn" onclick="checkPassword()">Enter</button>
+            <p class="error-msg" id="errorMsg">Incorrect password</p>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div class="app" id="app">
+        <header class="header">
+            <h1 onclick="goHome()">Ducu & Bo' Peptides</h1>
+            <button class="back-btn" id="backBtn" onclick="goBack()">
+                ← Back
+            </button>
+            <nav class="breadcrumb" id="breadcrumb"></nav>
+        </header>
+
+        <div class="main-container">
+            <!-- Home View -->
+            <div class="home-view" id="homeView">
+                <div class="search-box">
+                    <input type="text" class="search-input" id="searchInput"
+                           placeholder="Search peptides and protocols..."
+                           oninput="handleSearch(this.value)">
+                </div>
+
+                <div id="searchResults" style="display:none;">
+                    <h2 style="margin-bottom:1rem;color:var(--primary);">Search Results</h2>
+                    <div class="file-list" id="searchResultsList"></div>
+                </div>
+
+                <div id="categoriesView">
+                    <h2 style="margin-bottom:1rem;color:var(--primary);">Protocols</h2>
+                    <div class="section-grid" style="margin-bottom:2rem;">
+                        <div class="section-card" onclick="showCategory('protocols')">
+                            <h3>📋 Protocols <span class="count">1</span></h3>
+                            <p>Complete treatment protocols and guidelines</p>
+                        </div>
+                    </div>
+
+                    <h2 style="margin-bottom:1rem;color:var(--primary);">Peptides by Category</h2>
+                    <div class="section-grid" id="categoryGrid"></div>
+                </div>
+
+                <div id="categoryDetail" style="display:none;">
+                    <div class="file-list" id="categoryFiles"></div>
+                </div>
             </div>
 
-            <div class="search-container">
-                <input type="text" class="search-input" id="search" placeholder="Search peptides..." oninput="filterNav(this.value)">
-            </div>
-
-            <div class="quick-links">
-                <a class="quick-link" onclick="showSection('all')">All</a>
-                <a class="quick-link" onclick="showSection('protocols')">Protocols</a>
-                <a class="quick-link" onclick="showSection('peptides')">Peptides</a>
-            </div>
-
-            <div class="nav-scroll">
-                <!-- Protocols -->
-                <div class="nav-section" data-section="protocols">
-                    <div class="nav-section-header" onclick="toggleSection(this)">
-                        <h2>Protocols</h2>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="nav-items">
-                        <a class="nav-item" data-file="protocols/titan-protocol.md" onclick="loadFile('protocols/titan-protocol.md')">
-                            TITAN Protocol
-                            <span class="subtitle">Complete longevity protocol</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- GH Axis & Metabolic -->
-                <div class="nav-section" data-section="peptides">
-                    <div class="nav-section-header" onclick="toggleSection(this)">
-                        <h2>GH Axis & Metabolic</h2>
-                        <span class="count">10</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="nav-items">
-                        <a class="nav-item" data-file="peptides/tesamorelin-research.md" onclick="loadFile('peptides/tesamorelin-research.md')">
-                            Tesamorelin
-                            <span class="subtitle">FDA approved GHRH</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/ipamorelin-research.md" onclick="loadFile('peptides/ipamorelin-research.md')">
-                            Ipamorelin
-                            <span class="subtitle">Selective GH secretagogue</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/cjc-1295-research.md" onclick="loadFile('peptides/cjc-1295-research.md')">
-                            CJC-1295
-                            <span class="subtitle">GHRH analog</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/igf-1-lr3-research.md" onclick="loadFile('peptides/igf-1-lr3-research.md')">
-                            IGF-1 LR3
-                            <span class="subtitle">Long-acting IGF-1</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/follistatin-344-research.md" onclick="loadFile('peptides/follistatin-344-research.md')">
-                            Follistatin-344
-                            <span class="subtitle">Myostatin inhibitor</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/semaglutide-research.md" onclick="loadFile('peptides/semaglutide-research.md')">
-                            Semaglutide
-                            <span class="subtitle">GLP-1 agonist</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/tirzepatide-research.md" onclick="loadFile('peptides/tirzepatide-research.md')">
-                            Tirzepatide
-                            <span class="subtitle">Dual GIP/GLP-1 agonist</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/retatrutide-research.md" onclick="loadFile('peptides/retatrutide-research.md')">
-                            Retatrutide
-                            <span class="subtitle">Triple agonist (Phase III)</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/aod-9604-research.md" onclick="loadFile('peptides/aod-9604-research.md')">
-                            AOD-9604
-                            <span class="subtitle">HGH fragment</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/adipotide-research.md" onclick="loadFile('peptides/adipotide-research.md')">
-                            Adipotide
-                            <span class="subtitle">Fat-targeting peptide</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Tissue Repair -->
-                <div class="nav-section" data-section="peptides">
-                    <div class="nav-section-header" onclick="toggleSection(this)">
-                        <h2>Tissue Repair & Healing</h2>
-                        <span class="count">4</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="nav-items">
-                        <a class="nav-item" data-file="peptides/bpc-157-research.md" onclick="loadFile('peptides/bpc-157-research.md')">
-                            BPC-157
-                            <span class="subtitle">Body protection compound</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/tb-500-research.md" onclick="loadFile('peptides/tb-500-research.md')">
-                            TB-500
-                            <span class="subtitle">Thymosin Beta-4 fragment</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/ghk-cu-research.md" onclick="loadFile('peptides/ghk-cu-research.md')">
-                            GHK-Cu
-                            <span class="subtitle">Copper peptide</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/teriparatide-research.md" onclick="loadFile('peptides/teriparatide-research.md')">
-                            Teriparatide
-                            <span class="subtitle">PTH for bone</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Cognitive -->
-                <div class="nav-section" data-section="peptides">
-                    <div class="nav-section-header" onclick="toggleSection(this)">
-                        <h2>Cognitive & Neuroprotective</h2>
-                        <span class="count">4</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="nav-items">
-                        <a class="nav-item" data-file="peptides/semax-research.md" onclick="loadFile('peptides/semax-research.md')">
-                            Semax
-                            <span class="subtitle">ACTH analog nootropic</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/selank-research.md" onclick="loadFile('peptides/selank-research.md')">
-                            Selank
-                            <span class="subtitle">Anxiolytic peptide</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/dihexa-research.md" onclick="loadFile('peptides/dihexa-research.md')">
-                            Dihexa
-                            <span class="subtitle">HGF mimetic (caution)</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/phdp5-research.md" onclick="loadFile('peptides/phdp5-research.md')">
-                            PHDP-5
-                            <span class="subtitle">Cognitive peptide</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Immune & Thymus -->
-                <div class="nav-section" data-section="peptides">
-                    <div class="nav-section-header" onclick="toggleSection(this)">
-                        <h2>Immune & Thymus</h2>
-                        <span class="count">6</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="nav-items">
-                        <a class="nav-item" data-file="peptides/thymalin-research.md" onclick="loadFile('peptides/thymalin-research.md')">
-                            Thymalin
-                            <span class="subtitle">Thymic peptide</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/thymosin-alpha-1-research.md" onclick="loadFile('peptides/thymosin-alpha-1-research.md')">
-                            Thymosin Alpha-1
-                            <span class="subtitle">Immune modulator</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/thymogen-research.md" onclick="loadFile('peptides/thymogen-research.md')">
-                            Thymogen
-                            <span class="subtitle">Thymic dipeptide</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/kpv-research.md" onclick="loadFile('peptides/kpv-research.md')">
-                            KPV
-                            <span class="subtitle">Anti-inflammatory tripeptide</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/gcmaf-research.md" onclick="loadFile('peptides/gcmaf-research.md')">
-                            GcMAF
-                            <span class="subtitle">Macrophage activator</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/cecropins-research.md" onclick="loadFile('peptides/cecropins-research.md')">
-                            Cecropins
-                            <span class="subtitle">Antimicrobial peptides</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Longevity & Mitochondrial -->
-                <div class="nav-section" data-section="peptides">
-                    <div class="nav-section-header" onclick="toggleSection(this)">
-                        <h2>Longevity & Mitochondrial</h2>
-                        <span class="count">5</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="nav-items">
-                        <a class="nav-item" data-file="peptides/epitalon-research.md" onclick="loadFile('peptides/epitalon-research.md')">
-                            Epitalon
-                            <span class="subtitle">Telomerase activator</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/mots-c-research.md" onclick="loadFile('peptides/mots-c-research.md')">
-                            MOTS-c
-                            <span class="subtitle">Mitochondrial peptide</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/humanin-research.md" onclick="loadFile('peptides/humanin-research.md')">
-                            Humanin
-                            <span class="subtitle">Mitochondrial-derived</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/ss-31-research.md" onclick="loadFile('peptides/ss-31-research.md')">
-                            SS-31 (Elamipretide)
-                            <span class="subtitle">Mitochondrial protector</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/nad-research.md" onclick="loadFile('peptides/nad-research.md')">
-                            NAD+
-                            <span class="subtitle">Cellular energy</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Sexual & Hormonal -->
-                <div class="nav-section" data-section="peptides">
-                    <div class="nav-section-header" onclick="toggleSection(this)">
-                        <h2>Sexual & Hormonal</h2>
-                        <span class="count">4</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="nav-items">
-                        <a class="nav-item" data-file="peptides/pt-141-research.md" onclick="loadFile('peptides/pt-141-research.md')">
-                            PT-141 (Bremelanotide)
-                            <span class="subtitle">Sexual function</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/melanotan-2-research.md" onclick="loadFile('peptides/melanotan-2-research.md')">
-                            Melanotan II
-                            <span class="subtitle">Tanning & libido</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/kisspeptin-research.md" onclick="loadFile('peptides/kisspeptin-research.md')">
-                            Kisspeptin
-                            <span class="subtitle">GnRH regulator</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/oxytocin-research.md" onclick="loadFile('peptides/oxytocin-research.md')">
-                            Oxytocin
-                            <span class="subtitle">Bonding hormone</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Sleep & Relaxation -->
-                <div class="nav-section" data-section="peptides">
-                    <div class="nav-section-header" onclick="toggleSection(this)">
-                        <h2>Sleep & Relaxation</h2>
-                        <span class="count">2</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="nav-items">
-                        <a class="nav-item" data-file="peptides/dsip-research.md" onclick="loadFile('peptides/dsip-research.md')">
-                            DSIP
-                            <span class="subtitle">Delta sleep-inducing</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/vip-research.md" onclick="loadFile('peptides/vip-research.md')">
-                            VIP
-                            <span class="subtitle">Vasoactive intestinal peptide</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Organ-Specific -->
-                <div class="nav-section" data-section="peptides">
-                    <div class="nav-section-header" onclick="toggleSection(this)">
-                        <h2>Organ-Specific</h2>
-                        <span class="count">5</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="nav-items">
-                        <a class="nav-item" data-file="peptides/cardiogen-research.md" onclick="loadFile('peptides/cardiogen-research.md')">
-                            Cardiogen
-                            <span class="subtitle">Cardiac peptide</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/bronchogen-research.md" onclick="loadFile('peptides/bronchogen-research.md')">
-                            Bronchogen
-                            <span class="subtitle">Lung peptide</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/prostamax-research.md" onclick="loadFile('peptides/prostamax-research.md')">
-                            Prostamax
-                            <span class="subtitle">Prostate peptide</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/nk-peptide-research.md" onclick="loadFile('peptides/nk-peptide-research.md')">
-                            NK Peptide
-                            <span class="subtitle">Kidney bioregulator</span>
-                        </a>
-                        <a class="nav-item" data-file="peptides/melittin-research.md" onclick="loadFile('peptides/melittin-research.md')">
-                            Melittin
-                            <span class="subtitle">Bee venom peptide</span>
-                        </a>
-                    </div>
+            <!-- Document View -->
+            <div class="doc-view" id="docView">
+                <div class="doc-content" id="docContent">
+                    <div class="loading">Loading...</div>
                 </div>
             </div>
-        </nav>
-
-        <main class="main">
-            <article class="content" id="content">
-                <div class="welcome">
-                    <h1>199 Peptides</h1>
-                    <p class="welcome-subtitle">
-                        Comprehensive research documentation for peptide therapeutics
-                    </p>
-
-                    <div class="welcome-cards">
-                        <div class="welcome-card" onclick="loadFile('protocols/titan-protocol.md')">
-                            <div class="icon">📋</div>
-                            <h3>TITAN Protocol</h3>
-                            <p>Complete longevity and optimization protocol with dosing guidelines</p>
-                        </div>
-                        <div class="welcome-card" onclick="loadFile('peptides/bpc-157-research.md')">
-                            <div class="icon">🔬</div>
-                            <h3>Peptide Research</h3>
-                            <p>Evidence-based documentation for 40 peptides with clinical data</p>
-                        </div>
-                        <div class="welcome-card" onclick="loadFile('peptides/semaglutide-research.md')">
-                            <div class="icon">💊</div>
-                            <h3>FDA Approved</h3>
-                            <p>Explore peptides with regulatory approval and strong evidence</p>
-                        </div>
-                        <div class="welcome-card" onclick="loadFile('peptides/epitalon-research.md')">
-                            <div class="icon">⏳</div>
-                            <h3>Longevity Focus</h3>
-                            <p>Anti-aging peptides targeting telomeres and mitochondria</p>
-                        </div>
-                    </div>
-
-                    <div class="welcome-stats">
-                        <div class="welcome-stat">
-                            <div class="number">40</div>
-                            <div class="label">Peptides</div>
-                        </div>
-                        <div class="welcome-stat">
-                            <div class="number">1</div>
-                            <div class="label">Protocol</div>
-                        </div>
-                        <div class="welcome-stat">
-                            <div class="number">9</div>
-                            <div class="label">Categories</div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </main>
+        </div>
     </div>
 
     <script>
-        marked.setOptions({
-            breaks: true,
-            gfm: true,
-            headerIds: true
-        });
+        // Password check
+        const CORRECT_PASSWORD = 'limitless';
 
-        function setActiveItem(file) {
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-                if (item.dataset.file === file) {
-                    item.classList.add('active');
+        function checkPassword() {
+            const input = document.getElementById('passwordInput');
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (input.value === CORRECT_PASSWORD) {
+                sessionStorage.setItem('authenticated', 'true');
+                document.getElementById('passwordScreen').classList.add('hidden');
+                document.getElementById('app').classList.add('visible');
+                init();
+            } else {
+                input.classList.add('error');
+                errorMsg.classList.add('visible');
+                setTimeout(() => {
+                    input.classList.remove('error');
+                }, 500);
+            }
+        }
+
+        // Check if already authenticated
+        if (sessionStorage.getItem('authenticated') === 'true') {
+            document.getElementById('passwordScreen').classList.add('hidden');
+            document.getElementById('app').classList.add('visible');
+        } else {
+            document.getElementById('passwordInput').focus();
+        }
+
+        marked.setOptions({ breaks: true, gfm: true });
+
+        // Data structure
+        const categories = {
+            protocols: {
+                name: 'Protocols',
+                icon: '📋',
+                files: [
+                    { file: 'protocols/titan-protocol.md', name: 'TITAN Protocol', subtitle: 'Complete longevity protocol' }
+                ]
+            },
+            gh_metabolic: {
+                name: 'GH Axis & Metabolic',
+                icon: '⚡',
+                files: [
+                    { file: 'peptides/tesamorelin-research.md', name: 'Tesamorelin', subtitle: 'FDA approved GHRH analog' },
+                    { file: 'peptides/ipamorelin-research.md', name: 'Ipamorelin', subtitle: 'Selective GH secretagogue' },
+                    { file: 'peptides/cjc-1295-research.md', name: 'CJC-1295', subtitle: 'GHRH analog (with/without DAC)' },
+                    { file: 'peptides/igf-1-lr3-research.md', name: 'IGF-1 LR3', subtitle: 'Long-acting IGF-1' },
+                    { file: 'peptides/follistatin-344-research.md', name: 'Follistatin-344', subtitle: 'Myostatin inhibitor' },
+                    { file: 'peptides/semaglutide-research.md', name: 'Semaglutide', subtitle: 'GLP-1 agonist (Ozempic/Wegovy)' },
+                    { file: 'peptides/tirzepatide-research.md', name: 'Tirzepatide', subtitle: 'Dual GIP/GLP-1 agonist (Mounjaro)' },
+                    { file: 'peptides/retatrutide-research.md', name: 'Retatrutide', subtitle: 'Triple agonist (Phase III)' },
+                    { file: 'peptides/aod-9604-research.md', name: 'AOD-9604', subtitle: 'HGH fragment 177-191' },
+                    { file: 'peptides/adipotide-research.md', name: 'Adipotide', subtitle: 'Fat-targeting peptide' }
+                ]
+            },
+            tissue_repair: {
+                name: 'Tissue Repair & Healing',
+                icon: '🩹',
+                files: [
+                    { file: 'peptides/bpc-157-research.md', name: 'BPC-157', subtitle: 'Body protection compound' },
+                    { file: 'peptides/tb-500-research.md', name: 'TB-500', subtitle: 'Thymosin Beta-4 fragment' },
+                    { file: 'peptides/ghk-cu-research.md', name: 'GHK-Cu', subtitle: 'Copper peptide for skin/tissue' },
+                    { file: 'peptides/teriparatide-research.md', name: 'Teriparatide', subtitle: 'PTH analog for bone (Forteo)' }
+                ]
+            },
+            cognitive: {
+                name: 'Cognitive & Neuroprotective',
+                icon: '🧠',
+                files: [
+                    { file: 'peptides/semax-research.md', name: 'Semax', subtitle: 'ACTH analog nootropic' },
+                    { file: 'peptides/selank-research.md', name: 'Selank', subtitle: 'Anxiolytic peptide' },
+                    { file: 'peptides/dihexa-research.md', name: 'Dihexa', subtitle: 'HGF mimetic (HIGH RISK)' },
+                    { file: 'peptides/phdp5-research.md', name: 'PHDP-5', subtitle: 'Cognitive peptide' }
+                ]
+            },
+            immune: {
+                name: 'Immune & Thymus',
+                icon: '🛡️',
+                files: [
+                    { file: 'peptides/thymalin-research.md', name: 'Thymalin', subtitle: 'Thymic peptide bioregulator' },
+                    { file: 'peptides/thymosin-alpha-1-research.md', name: 'Thymosin Alpha-1', subtitle: 'Immune modulator (Zadaxin)' },
+                    { file: 'peptides/thymogen-research.md', name: 'Thymogen', subtitle: 'Thymic dipeptide' },
+                    { file: 'peptides/kpv-research.md', name: 'KPV', subtitle: 'Anti-inflammatory tripeptide' },
+                    { file: 'peptides/gcmaf-research.md', name: 'GcMAF', subtitle: 'Macrophage activating factor' },
+                    { file: 'peptides/cecropins-research.md', name: 'Cecropins', subtitle: 'Antimicrobial peptides' }
+                ]
+            },
+            longevity: {
+                name: 'Longevity & Mitochondrial',
+                icon: '⏳',
+                files: [
+                    { file: 'peptides/epitalon-research.md', name: 'Epitalon', subtitle: 'Telomerase activator' },
+                    { file: 'peptides/mots-c-research.md', name: 'MOTS-c', subtitle: 'Mitochondrial-derived peptide' },
+                    { file: 'peptides/humanin-research.md', name: 'Humanin', subtitle: 'Cytoprotective peptide' },
+                    { file: 'peptides/ss-31-research.md', name: 'SS-31 (Elamipretide)', subtitle: 'Mitochondrial protector' },
+                    { file: 'peptides/nad-research.md', name: 'NAD+', subtitle: 'Cellular energy cofactor' }
+                ]
+            },
+            sexual: {
+                name: 'Sexual & Hormonal',
+                icon: '💜',
+                files: [
+                    { file: 'peptides/pt-141-research.md', name: 'PT-141 (Bremelanotide)', subtitle: 'Sexual dysfunction (Vyleesi)' },
+                    { file: 'peptides/melanotan-2-research.md', name: 'Melanotan II', subtitle: 'Tanning and libido' },
+                    { file: 'peptides/kisspeptin-research.md', name: 'Kisspeptin', subtitle: 'GnRH/hormone regulator' },
+                    { file: 'peptides/oxytocin-research.md', name: 'Oxytocin', subtitle: 'Bonding/social hormone' }
+                ]
+            },
+            sleep: {
+                name: 'Sleep & Relaxation',
+                icon: '😴',
+                files: [
+                    { file: 'peptides/dsip-research.md', name: 'DSIP', subtitle: 'Delta sleep-inducing peptide' },
+                    { file: 'peptides/vip-research.md', name: 'VIP', subtitle: 'Vasoactive intestinal peptide' }
+                ]
+            },
+            organ: {
+                name: 'Organ-Specific',
+                icon: '🫀',
+                files: [
+                    { file: 'peptides/cardiogen-research.md', name: 'Cardiogen', subtitle: 'Cardiac bioregulator' },
+                    { file: 'peptides/bronchogen-research.md', name: 'Bronchogen', subtitle: 'Lung/bronchial bioregulator' },
+                    { file: 'peptides/prostamax-research.md', name: 'Prostamax', subtitle: 'Prostate bioregulator' },
+                    { file: 'peptides/nk-peptide-research.md', name: 'NK Peptide', subtitle: 'Kidney bioregulator' },
+                    { file: 'peptides/melittin-research.md', name: 'Melittin', subtitle: 'Bee venom peptide' }
+                ]
+            }
+        };
+
+        // State
+        let currentView = 'home';
+        let currentCategory = null;
+        let currentFile = null;
+
+        // Initialize
+        function init() {
+            renderCategoryGrid();
+
+            // Handle browser back/forward
+            window.addEventListener('popstate', (e) => {
+                if (e.state) {
+                    if (e.state.view === 'home') {
+                        showHome(false);
+                    } else if (e.state.view === 'category') {
+                        showCategory(e.state.category, false);
+                    } else if (e.state.view === 'doc') {
+                        loadDocument(e.state.file, e.state.category, false);
+                    }
+                } else {
+                    showHome(false);
                 }
+            });
+
+            // Check URL hash on load
+            if (window.location.hash) {
+                const hash = window.location.hash.slice(1);
+                if (hash.includes('/')) {
+                    loadDocument(decodeURIComponent(hash));
+                }
+            }
+        }
+
+        function renderCategoryGrid() {
+            const grid = document.getElementById('categoryGrid');
+            grid.innerHTML = '';
+
+            Object.entries(categories).forEach(([key, cat]) => {
+                if (key === 'protocols') return;
+                const card = document.createElement('div');
+                card.className = 'section-card';
+                card.onclick = () => showCategory(key);
+                card.innerHTML = `
+                    <h3>${cat.icon} ${cat.name} <span class="count">${cat.files.length}</span></h3>
+                    <p>${cat.files.slice(0, 3).map(f => f.name).join(', ')}${cat.files.length > 3 ? '...' : ''}</p>
+                `;
+                grid.appendChild(card);
             });
         }
 
-        async function loadFile(filename) {
-            const content = document.getElementById('content');
+        function showHome(pushState = true) {
+            currentView = 'home';
+            currentCategory = null;
+            currentFile = null;
+
+            document.getElementById('homeView').classList.remove('hidden');
+            document.getElementById('docView').classList.remove('visible');
+            document.getElementById('categoriesView').style.display = 'block';
+            document.getElementById('categoryDetail').style.display = 'none';
+            document.getElementById('searchResults').style.display = 'none';
+            document.getElementById('searchInput').value = '';
+            document.getElementById('backBtn').classList.remove('visible');
+            updateBreadcrumb([]);
+
+            if (pushState) {
+                window.history.pushState({ view: 'home' }, '', window.location.pathname);
+            }
+        }
+
+        function showCategory(categoryKey, pushState = true) {
+            currentView = 'category';
+            currentCategory = categoryKey;
+            const cat = categories[categoryKey];
+
+            document.getElementById('homeView').classList.remove('hidden');
+            document.getElementById('docView').classList.remove('visible');
+            document.getElementById('categoriesView').style.display = 'none';
+            document.getElementById('categoryDetail').style.display = 'block';
+            document.getElementById('searchResults').style.display = 'none';
+            document.getElementById('backBtn').classList.add('visible');
+
+            updateBreadcrumb([{ name: cat.name }]);
+
+            const list = document.getElementById('categoryFiles');
+            list.innerHTML = `<div class="file-list-header">${cat.icon} ${cat.name}</div>`;
+
+            cat.files.forEach(f => {
+                const item = document.createElement('div');
+                item.className = 'file-item';
+                item.onclick = () => loadDocument(f.file, categoryKey);
+                item.innerHTML = `
+                    <div class="name">${f.name}</div>
+                    <div class="subtitle">${f.subtitle}</div>
+                `;
+                list.appendChild(item);
+            });
+
+            if (pushState) {
+                window.history.pushState({ view: 'category', category: categoryKey }, '', window.location.pathname);
+            }
+        }
+
+        async function loadDocument(filePath, categoryKey = null, pushState = true) {
+            currentView = 'doc';
+            currentFile = filePath;
+
+            // Find file info
+            let fileInfo = null;
+            let catInfo = null;
+            for (const [key, cat] of Object.entries(categories)) {
+                const found = cat.files.find(f => f.file === filePath);
+                if (found) {
+                    fileInfo = found;
+                    catInfo = { key, ...cat };
+                    if (!categoryKey) categoryKey = key;
+                    break;
+                }
+            }
+
+            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('docView').classList.add('visible');
+            document.getElementById('backBtn').classList.add('visible');
+
+            const breadcrumbs = [];
+            if (catInfo) {
+                breadcrumbs.push({ name: catInfo.name, action: () => showCategory(catInfo.key) });
+            }
+            if (fileInfo) {
+                breadcrumbs.push({ name: fileInfo.name });
+            }
+            updateBreadcrumb(breadcrumbs);
+
+            const content = document.getElementById('docContent');
             content.innerHTML = '<div class="loading">Loading...</div>';
-            setActiveItem(filename);
 
             try {
-                const response = await fetch(filename);
-                if (!response.ok) throw new Error('File not found');
+                const response = await fetch(filePath);
+                if (!response.ok) throw new Error('Not found');
                 const markdown = await response.text();
                 content.innerHTML = marked.parse(markdown);
                 window.scrollTo(0, 0);
             } catch (error) {
-                content.innerHTML = `
-                    <div class="welcome">
-                        <h1>Error Loading Document</h1>
-                        <p>Could not load: ${filename}</p>
-                    </div>
-                `;
+                content.innerHTML = `<h1>Error</h1><p>Could not load: ${filePath}</p>`;
+            }
+
+            if (pushState) {
+                window.history.pushState({ view: 'doc', file: filePath, category: categoryKey }, '', `#${encodeURIComponent(filePath)}`);
             }
         }
 
-        function toggleSection(header) {
-            header.parentElement.classList.toggle('collapsed');
+        function goBack() {
+            if (currentView === 'doc' && currentCategory) {
+                showCategory(currentCategory);
+            } else {
+                showHome();
+            }
         }
 
-        function filterNav(query) {
-            const q = query.toLowerCase();
-            document.querySelectorAll('.nav-item').forEach(item => {
-                const text = item.textContent.toLowerCase();
-                item.classList.toggle('hidden', !text.includes(q));
-            });
-
-            // Show sections that have visible items
-            document.querySelectorAll('.nav-section').forEach(section => {
-                const hasVisible = section.querySelectorAll('.nav-item:not(.hidden)').length > 0;
-                section.style.display = hasVisible ? 'block' : 'none';
-                if (hasVisible) section.classList.remove('collapsed');
-            });
+        function goHome() {
+            showHome();
         }
 
-        function showSection(type) {
-            document.querySelectorAll('.quick-link').forEach(l => l.classList.remove('active'));
-            event.target.classList.add('active');
+        function updateBreadcrumb(items) {
+            const bc = document.getElementById('breadcrumb');
+            if (items.length === 0) {
+                bc.innerHTML = '';
+                return;
+            }
 
-            document.querySelectorAll('.nav-section').forEach(section => {
-                if (type === 'all') {
-                    section.style.display = 'block';
+            let html = '';
+            items.forEach((item, i) => {
+                if (i > 0) html += '<span class="separator">/</span>';
+                if (item.action) {
+                    html += `<a onclick="event.stopPropagation(); (${item.action.toString()})()">${item.name}</a>`;
                 } else {
-                    section.style.display = section.dataset.section === type ? 'block' : 'none';
+                    html += `<span class="current">${item.name}</span>`;
                 }
             });
+            bc.innerHTML = html;
         }
 
-        // Keyboard navigation
+        function handleSearch(query) {
+            const q = query.toLowerCase().trim();
+
+            if (!q) {
+                document.getElementById('searchResults').style.display = 'none';
+                document.getElementById('categoriesView').style.display = 'block';
+                document.getElementById('categoryDetail').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('searchResults').style.display = 'block';
+            document.getElementById('categoriesView').style.display = 'none';
+            document.getElementById('categoryDetail').style.display = 'none';
+
+            const results = [];
+            Object.entries(categories).forEach(([key, cat]) => {
+                cat.files.forEach(f => {
+                    if (f.name.toLowerCase().includes(q) || f.subtitle.toLowerCase().includes(q)) {
+                        results.push({ ...f, category: cat.name });
+                    }
+                });
+            });
+
+            const list = document.getElementById('searchResultsList');
+            if (results.length === 0) {
+                list.innerHTML = '<div class="file-item"><div class="name">No results found</div></div>';
+            } else {
+                list.innerHTML = results.map(r => `
+                    <div class="file-item" onclick="loadDocument('${r.file}')">
+                        <div class="name">${r.name}</div>
+                        <div class="subtitle">${r.subtitle} • ${r.category}</div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
             if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
                 e.preventDefault();
-                document.getElementById('search').focus();
+                document.getElementById('searchInput').focus();
             }
             if (e.key === 'Escape') {
-                document.getElementById('search').blur();
-                document.getElementById('search').value = '';
-                filterNav('');
+                document.getElementById('searchInput').blur();
+                if (currentView !== 'home') goBack();
             }
         });
+
+        // Init if already authenticated
+        if (sessionStorage.getItem('authenticated') === 'true') {
+            init();
+        }
     </script>
 </body>
 </html>
