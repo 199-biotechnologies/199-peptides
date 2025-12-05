@@ -215,10 +215,14 @@
             margin-bottom: 2rem;
         }
 
+        .search-wrapper {
+            position: relative;
+            max-width: 500px;
+        }
+
         .search-input {
             width: 100%;
-            max-width: 500px;
-            padding: 1rem 1.25rem;
+            padding: 1rem 3rem 1rem 1.25rem;
             border: 2px solid var(--border);
             border-radius: 10px;
             font-size: 1rem;
@@ -228,6 +232,55 @@
 
         .search-input:focus {
             border-color: var(--accent);
+        }
+
+        .search-clear {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--border);
+            border: none;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: var(--text-light);
+            transition: all 0.15s;
+        }
+
+        .search-clear:hover {
+            background: var(--text-light);
+            color: white;
+        }
+
+        .search-clear.visible {
+            display: flex;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+        }
+
+        .no-results p {
+            margin-bottom: 1rem;
+        }
+
+        .clear-search-link {
+            color: var(--accent);
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .clear-search-link:hover {
+            text-decoration: underline;
         }
 
         .section-grid {
@@ -494,9 +547,12 @@
             <!-- Home View -->
             <div class="home-view" id="homeView">
                 <div class="search-box">
-                    <input type="text" class="search-input" id="searchInput"
-                           placeholder="Search peptides and protocols..."
-                           oninput="handleSearch(this.value)">
+                    <div class="search-wrapper">
+                        <input type="text" class="search-input" id="searchInput"
+                               placeholder="Search peptides and protocols..."
+                               oninput="handleSearch(this.value)">
+                        <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+                    </div>
                 </div>
 
                 <div id="searchResults" style="display:none;">
@@ -845,6 +901,14 @@
 
         function handleSearch(query) {
             const q = query.toLowerCase().trim();
+            const clearBtn = document.getElementById('searchClear');
+
+            // Show/hide clear button
+            if (q) {
+                clearBtn.classList.add('visible');
+            } else {
+                clearBtn.classList.remove('visible');
+            }
 
             if (!q) {
                 document.getElementById('searchResults').style.display = 'none';
@@ -868,7 +932,12 @@
 
             const list = document.getElementById('searchResultsList');
             if (results.length === 0) {
-                list.innerHTML = '<div class="file-item"><div class="name">No results found</div></div>';
+                list.innerHTML = `
+                    <div class="no-results">
+                        <p>No peptides found for "<strong>${q}</strong>"</p>
+                        <a class="clear-search-link" onclick="clearSearch()">Clear search and browse all</a>
+                    </div>
+                `;
             } else {
                 list.innerHTML = results.map(r => `
                     <div class="file-item" onclick="loadDocument('${r.file}')">
@@ -877,6 +946,15 @@
                     </div>
                 `).join('');
             }
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('searchClear').classList.remove('visible');
+            document.getElementById('searchResults').style.display = 'none';
+            document.getElementById('categoriesView').style.display = 'block';
+            document.getElementById('categoryDetail').style.display = 'none';
+            document.getElementById('searchInput').focus();
         }
 
         // Keyboard shortcuts
