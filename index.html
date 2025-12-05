@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ducu & Bo' Peptides</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <style>
         :root {
             --primary: #1a1a2e;
@@ -176,9 +177,13 @@
             right: 0.75rem;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 0.7rem;
-            color: rgba(255,255,255,0.5);
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.4);
             pointer-events: none;
+            background: rgba(255,255,255,0.15);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: -apple-system, system-ui, sans-serif;
         }
 
         .search-clear {
@@ -278,6 +283,42 @@
             flex: 1;
             overflow-y: auto;
             padding: 0.5rem 0;
+        }
+
+        .sidebar-footer {
+            padding: 0.75rem 1rem;
+            border-top: 1px solid var(--border);
+            background: var(--bg);
+        }
+
+        .sidebar-footer-title {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .shortcuts {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+        }
+
+        .shortcuts kbd {
+            background: var(--bg-paper);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 0.1rem 0.4rem;
+            font-family: -apple-system, system-ui, sans-serif;
+            font-size: 0.65rem;
+            color: var(--text-light);
+        }
+
+        .shortcuts span {
+            color: var(--text-light);
         }
 
         .nav-section { margin-bottom: 0.25rem; }
@@ -580,6 +621,20 @@
         .content tr:hover { background: var(--bg); }
         .content a { color: var(--accent); }
 
+        /* Mermaid Diagrams */
+        .content .mermaid {
+            background: var(--bg);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            text-align: center;
+        }
+        .content .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+
         /* Document Navigation */
         .doc-nav {
             display: flex;
@@ -708,6 +763,16 @@
                 </div>
 
                 <div class="nav-scroll" id="navScroll"></div>
+
+                <div class="sidebar-footer">
+                    <div class="sidebar-footer-title">Keyboard Shortcuts</div>
+                    <div class="shortcuts">
+                        <kbd id="searchKey">/</kbd> <span>Search</span>
+                        <kbd>H</kbd> <span>Home</span>
+                        <kbd>D</kbd> <span>Dark mode</span>
+                        <kbd>&#8592; &#8594;</kbd> <span>Prev / Next</span>
+                    </div>
+                </div>
             </nav>
 
             <!-- Main -->
@@ -832,10 +897,12 @@
                 document.documentElement.removeAttribute('data-theme');
                 localStorage.setItem(STORAGE_DARK, 'false');
                 updateDarkModeIcon(false);
+                mermaid.initialize({ theme: 'default' });
             } else {
                 document.documentElement.setAttribute('data-theme', 'dark');
                 localStorage.setItem(STORAGE_DARK, 'true');
                 updateDarkModeIcon(true);
+                mermaid.initialize({ theme: 'dark' });
             }
         }
 
@@ -1029,6 +1096,9 @@
 
                 // Render content
                 content.innerHTML = marked.parse(currentMarkdown);
+
+                // Render mermaid diagrams
+                await renderMermaid();
 
                 // Add navigation
                 addDocNav(catKey, filePath);
@@ -1247,10 +1317,31 @@
             }
         });
 
+        // Mermaid rendering
+        async function renderMermaid() {
+            const codeBlocks = document.querySelectorAll('pre code.language-mermaid');
+            for (const block of codeBlocks) {
+                const code = block.textContent;
+                const pre = block.parentElement;
+                const div = document.createElement('div');
+                div.className = 'mermaid';
+                div.textContent = code;
+                pre.replaceWith(div);
+            }
+            if (codeBlocks.length > 0) {
+                await mermaid.run();
+            }
+        }
+
         // Init
         function init() {
             initDarkMode();
             marked.setOptions({ breaks: true, gfm: true });
+            mermaid.initialize({
+                startOnLoad: false,
+                theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+                securityLevel: 'loose'
+            });
             renderNav();
             renderRecent();
             renderFavorites();
@@ -1274,7 +1365,10 @@
 
             // Detect OS for shortcut hint
             if (navigator.platform.indexOf('Mac') > -1) {
-                document.getElementById('searchHint').textContent = 'Cmd+K';
+                document.getElementById('searchHint').textContent = '⌘K';
+                document.getElementById('searchKey').textContent = '⌘K';
+            } else {
+                document.getElementById('searchKey').textContent = 'Ctrl+K';
             }
         }
 
