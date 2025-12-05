@@ -850,14 +850,14 @@
         <header class="topbar">
             <div class="topbar-logo" onclick="showWelcome()">Ducu & Bo' Peptides</div>
             <div class="topbar-search">
-                <span class="search-icon">&#128269;</span>
+                <span class="search-icon">/</span>
                 <input type="text" id="searchInput" placeholder="Search peptides..." oninput="handleSearch(this.value)">
                 <span class="search-hint" id="searchHint">Ctrl+K</span>
                 <button class="search-clear" id="searchClear" onclick="clearSearch()">&#10005;</button>
             </div>
             <div class="topbar-actions">
                 <button class="topbar-btn icon-only" onclick="toggleDarkMode()" id="darkModeBtn" title="Toggle dark mode (D)">
-                    <span id="darkModeIcon">&#9789;</span>
+                    <span id="darkModeIcon">D</span>
                 </button>
                 <button class="topbar-btn" onclick="logout()">Logout</button>
             </div>
@@ -1028,7 +1028,7 @@
         }
 
         function updateDarkModeIcon(isDark) {
-            document.getElementById('darkModeIcon').innerHTML = isDark ? '&#9788;' : '&#9789;';
+            document.getElementById('darkModeIcon').innerHTML = isDark ? 'L' : 'D';
         }
 
         // Recently Viewed
@@ -1337,10 +1337,7 @@
             const recent = getRecent();
             const favs = getFavorites();
 
-            const categoryIcons = {
-                'protocols': '📋', 'gh_metabolic': '⚡', 'tissue': '🩹', 'cognitive': '🧠',
-                'immune': '🛡️', 'longevity': '⏳', 'sexual': '💜', 'sleep': '😴', 'organ': '🫀'
-            };
+            // Use text-based icons (no emojis)
 
             document.getElementById('content').innerHTML = `
                 <div class="welcome">
@@ -1397,7 +1394,7 @@
                     <div class="welcome-categories">
                         ${Object.entries(categories).map(([key, cat]) => `
                             <div class="category-card" onclick="goToCategory('${key}')">
-                                <div class="icon">${categoryIcons[key] || '📄'}</div>
+                                <div class="icon">${getIcon(cat.icon)}</div>
                                 <div class="name">${cat.name}</div>
                                 <div class="count">${cat.files.length} ${cat.files.length === 1 ? 'item' : 'items'}</div>
                             </div>
