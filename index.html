@@ -9,11 +9,27 @@
         :root {
             --primary: #1a1a2e;
             --accent: #4a6fa5;
+            --accent-hover: #3d5d8a;
             --text: #2d3748;
             --text-light: #718096;
             --bg: #f7fafc;
             --bg-paper: #ffffff;
             --border: #e2e8f0;
+            --success: #38a169;
+            --warning: #d69e2e;
+            --danger: #e53e3e;
+            --topbar-height: 56px;
+        }
+
+        [data-theme="dark"] {
+            --primary: #e2e8f0;
+            --accent: #63b3ed;
+            --accent-hover: #4299e1;
+            --text: #e2e8f0;
+            --text-light: #a0aec0;
+            --bg: #1a202c;
+            --bg-paper: #2d3748;
+            --border: #4a5568;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,7 +45,7 @@
         .password-screen {
             position: fixed;
             inset: 0;
-            background: var(--primary);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -45,6 +61,7 @@
             text-align: center;
             max-width: 400px;
             width: 90%;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
         }
 
         .password-box h1 {
@@ -53,11 +70,7 @@
             margin-bottom: 0.5rem;
         }
 
-        .password-box p {
-            color: var(--text-light);
-            margin-bottom: 2rem;
-        }
-
+        .password-box p { color: var(--text-light); margin-bottom: 2rem; }
         .password-box input {
             width: 100%;
             padding: 1rem;
@@ -67,10 +80,11 @@
             text-align: center;
             margin-bottom: 1rem;
             outline: none;
+            background: var(--bg);
+            color: var(--text);
         }
-
         .password-box input:focus { border-color: var(--accent); }
-        .password-box input.error { border-color: #e53e3e; animation: shake 0.5s; }
+        .password-box input.error { border-color: var(--danger); animation: shake 0.5s; }
 
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
@@ -87,97 +101,184 @@
             border-radius: 10px;
             font-size: 1rem;
             cursor: pointer;
+            transition: background 0.2s;
         }
-
-        .password-box button:hover { background: #3d5d8a; }
-
-        .error-msg { color: #e53e3e; margin-top: 1rem; display: none; }
+        .password-box button:hover { background: var(--accent-hover); }
+        .error-msg { color: var(--danger); margin-top: 1rem; display: none; }
         .error-msg.visible { display: block; }
 
         /* App Layout */
-        .app { display: none; }
-        .app.visible { display: flex; min-height: 100vh; }
+        .app { display: none; flex-direction: column; min-height: 100vh; }
+        .app.visible { display: flex; }
+
+        /* Top Bar */
+        .topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--topbar-height);
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 0 1.5rem;
+            gap: 1rem;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        [data-theme="dark"] .topbar {
+            background: #2d3748;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .topbar-logo {
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: opacity 0.2s;
+        }
+        .topbar-logo:hover { opacity: 0.8; }
+
+        .topbar-search {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .topbar-search input {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            padding-right: 3.5rem;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            font-size: 0.9rem;
+            outline: none;
+            transition: background 0.2s;
+        }
+
+        .topbar-search input::placeholder { color: rgba(255,255,255,0.6); }
+        .topbar-search input:focus { background: rgba(255,255,255,0.25); }
+
+        [data-theme="dark"] .topbar-search input {
+            background: rgba(0,0,0,0.3);
+        }
+        [data-theme="dark"] .topbar-search input:focus {
+            background: rgba(0,0,0,0.4);
+        }
+
+        .search-hint {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.5);
+            pointer-events: none;
+        }
+
+        .search-clear {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.3);
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+        }
+        .search-clear.visible { display: flex; }
+        .search-clear:hover { background: rgba(255,255,255,0.5); }
+
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: auto;
+        }
+
+        .topbar-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 0.75rem;
+            color: white;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .topbar-btn:hover { background: rgba(255,255,255,0.2); }
+
+        /* App Body */
+        .app-body {
+            display: flex;
+            margin-top: var(--topbar-height);
+            min-height: calc(100vh - var(--topbar-height));
+        }
 
         /* Sidebar */
         .sidebar {
-            width: 300px;
+            width: 280px;
             background: var(--bg-paper);
             border-right: 1px solid var(--border);
             position: fixed;
-            height: 100vh;
+            top: var(--topbar-height);
+            bottom: 0;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
         }
 
-        .sidebar-header {
-            padding: 1.25rem 1.5rem;
-            background: var(--primary);
-            color: white;
-        }
-
-        .sidebar-header h1 {
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .sidebar-header p {
-            font-size: 0.75rem;
-            opacity: 0.8;
-        }
-
-        /* Search */
-        .search-box {
-            padding: 1rem;
+        .sidebar-section {
+            padding: 0.75rem 1rem;
             border-bottom: 1px solid var(--border);
         }
 
-        .search-wrapper {
-            position: relative;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 0.6rem 2.5rem 0.6rem 0.75rem;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            font-size: 0.85rem;
-            outline: none;
-        }
-
-        .search-input:focus { border-color: var(--accent); }
-
-        .search-clear {
-            position: absolute;
-            right: 8px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: var(--border);
-            border: none;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
+        .sidebar-section-title {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
             color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
         }
 
-        .search-clear:hover { background: var(--text-light); color: white; }
-        .search-clear.visible { display: flex; }
+        .recent-item, .fav-item {
+            display: flex;
+            align-items: center;
+            padding: 0.4rem 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text);
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.1s;
+        }
+        .recent-item:hover, .fav-item:hover {
+            background: var(--bg);
+            color: var(--accent);
+        }
 
-        /* Navigation */
         .nav-scroll {
             flex: 1;
             overflow-y: auto;
             padding: 0.5rem 0;
         }
 
-        .nav-section {
-            margin-bottom: 0.25rem;
-        }
+        .nav-section { margin-bottom: 0.25rem; }
 
         .nav-section-header {
             display: flex;
@@ -190,10 +291,9 @@
             letter-spacing: 0.05em;
             color: var(--text-light);
             font-weight: 600;
+            transition: background 0.1s;
         }
-
         .nav-section-header:hover { background: var(--bg); }
-
         .nav-section-header .icon { margin-right: 0.5rem; }
         .nav-section-header .name { flex: 1; }
         .nav-section-header .count {
@@ -207,14 +307,14 @@
             font-size: 0.6rem;
             transition: transform 0.2s;
         }
-
         .nav-section.collapsed .chevron { transform: rotate(-90deg); }
         .nav-section.collapsed .nav-items { display: none; }
 
         .nav-items { padding-bottom: 0.25rem; }
 
         .nav-item {
-            display: block;
+            display: flex;
+            align-items: center;
             padding: 0.5rem 1rem 0.5rem 2.25rem;
             font-size: 0.85rem;
             color: var(--text);
@@ -222,114 +322,215 @@
             border-left: 3px solid transparent;
             transition: all 0.1s;
         }
-
         .nav-item:hover {
             background: var(--bg);
             color: var(--accent);
         }
-
         .nav-item.active {
             background: rgba(74, 111, 165, 0.1);
             color: var(--accent);
             border-left-color: var(--accent);
             font-weight: 500;
         }
-
         .nav-item.hidden { display: none; }
 
+        .nav-item-text { flex: 1; }
         .nav-item .subtitle {
             font-size: 0.7rem;
             color: var(--text-light);
             display: block;
         }
 
+        .nav-item .star {
+            opacity: 0;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 0.25rem;
+            transition: opacity 0.1s;
+        }
+        .nav-item:hover .star { opacity: 0.5; }
+        .nav-item .star:hover { opacity: 1; color: #ecc94b; }
+        .nav-item .star.active { opacity: 1; color: #ecc94b; }
+
         /* Main Content */
         .main {
             flex: 1;
-            margin-left: 300px;
-            padding: 2rem;
+            margin-left: 280px;
+            padding: 1.5rem 2rem;
             max-width: 900px;
         }
 
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: var(--topbar-height);
+            left: 280px;
+            right: 0;
+            height: 3px;
+            background: var(--border);
+            z-index: 50;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        /* Breadcrumb */
         .breadcrumb {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             font-size: 0.85rem;
             color: var(--text-light);
         }
-
         .breadcrumb a {
             color: var(--accent);
             text-decoration: none;
             cursor: pointer;
         }
-
         .breadcrumb a:hover { text-decoration: underline; }
         .breadcrumb .separator { opacity: 0.5; }
 
+        /* Document Meta */
+        .doc-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        .badge-low { background: rgba(56, 161, 105, 0.15); color: var(--success); }
+        .badge-moderate { background: rgba(214, 158, 46, 0.15); color: var(--warning); }
+        .badge-high { background: rgba(229, 62, 62, 0.15); color: var(--danger); }
+        .badge-fda { background: rgba(74, 111, 165, 0.15); color: var(--accent); }
+        .badge-neutral { background: var(--bg); color: var(--text-light); }
+
+        /* Content */
         .content {
             background: var(--bg-paper);
-            padding: 2.5rem;
+            padding: 2rem 2.5rem;
             border-radius: 12px;
             border: 1px solid var(--border);
         }
 
         /* Welcome */
-        .welcome { text-align: center; padding: 3rem 1rem; }
-        .welcome h1 { font-size: 2rem; color: var(--primary); margin-bottom: 0.5rem; border: none; }
-        .welcome p { color: var(--text-light); margin-bottom: 2rem; }
+        .welcome { text-align: center; padding: 2rem 1rem; }
+        .welcome h1 {
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            border: none;
+        }
+        .welcome-subtitle { color: var(--text-light); margin-bottom: 1.5rem; }
 
-        .welcome-grid {
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .welcome-sections {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            max-width: 500px;
+            gap: 1.5rem;
+            max-width: 700px;
             margin: 0 auto;
             text-align: left;
+        }
+
+        .welcome-section { margin-bottom: 0.5rem; }
+        .welcome-section h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
         }
 
         .welcome-card {
             background: var(--bg);
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 1.25rem;
+            padding: 1rem 1.25rem;
             cursor: pointer;
             transition: all 0.2s;
+            margin-bottom: 0.5rem;
         }
-
         .welcome-card:hover {
             border-color: var(--accent);
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .welcome-card h4 {
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin-bottom: 0.15rem;
+        }
+        .welcome-card p {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin: 0;
         }
 
-        .welcome-card h3 { font-size: 0.95rem; color: var(--primary); margin-bottom: 0.25rem; }
-        .welcome-card p { font-size: 0.8rem; color: var(--text-light); margin: 0; }
+        .welcome-empty {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-style: italic;
+            padding: 1rem;
+            background: var(--bg);
+            border-radius: 8px;
+        }
 
-        /* Markdown */
+        /* Markdown Styles */
         .content h1 {
-            font-size: 1.75rem;
+            font-size: 1.6rem;
             color: var(--primary);
             margin-bottom: 1rem;
-            padding-bottom: 1rem;
+            padding-bottom: 0.75rem;
             border-bottom: 2px solid var(--accent);
         }
-
         .content h2 {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             color: var(--primary);
             margin: 2rem 0 0.75rem;
             padding-bottom: 0.5rem;
             border-bottom: 1px solid var(--border);
         }
-
-        .content h3 { font-size: 1.1rem; color: var(--text); margin: 1.5rem 0 0.5rem; }
+        .content h3 { font-size: 1.05rem; color: var(--text); margin: 1.5rem 0 0.5rem; }
         .content p { margin-bottom: 1rem; line-height: 1.8; }
         .content ul, .content ol { margin: 1rem 0 1.5rem 1.5rem; }
         .content li { margin-bottom: 0.4rem; }
         .content strong { color: var(--primary); }
-
         .content blockquote {
             border-left: 4px solid var(--accent);
             padding: 1rem 1.5rem;
@@ -337,40 +538,24 @@
             background: var(--bg);
             border-radius: 0 8px 8px 0;
         }
-
         .content code {
-            font-family: 'SF Mono', monospace;
+            font-family: 'SF Mono', 'Consolas', monospace;
             font-size: 0.85em;
             background: var(--bg);
             padding: 0.2em 0.4em;
             border-radius: 4px;
         }
-
         .content pre {
-            background: var(--primary);
+            background: #1a1a2e;
             color: #e2e8f0;
             padding: 1.25rem;
             border-radius: 8px;
             overflow-x: auto;
             margin: 1.5rem 0;
         }
-
-        .content pre code { background: none; padding: 0; }
-
-        .content hr {
-            border: none;
-            height: 1px;
-            background: var(--border);
-            margin: 2rem 0;
-        }
-
-        .content table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 0.9rem;
-        }
-
+        .content pre code { background: none; padding: 0; color: inherit; }
+        .content hr { border: none; height: 1px; background: var(--border); margin: 2rem 0; }
+        .content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
         .content th {
             background: var(--primary);
             color: white;
@@ -379,14 +564,45 @@
             font-weight: 500;
             font-size: 0.8rem;
         }
-
-        .content td {
-            padding: 0.6rem 0.75rem;
-            border-bottom: 1px solid var(--border);
-        }
-
+        [data-theme="dark"] .content th { background: #4a5568; }
+        .content td { padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--border); }
         .content tr:hover { background: var(--bg); }
         .content a { color: var(--accent); }
+
+        /* Document Navigation */
+        .doc-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        .doc-nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .doc-nav-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .doc-nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .doc-nav-btn:disabled:hover {
+            border-color: var(--border);
+            color: var(--text);
+        }
 
         .no-results {
             padding: 1rem;
@@ -394,28 +610,40 @@
             color: var(--text-light);
             font-size: 0.85rem;
         }
+        .no-results a { color: var(--accent); cursor: pointer; }
 
-        .no-results a {
-            color: var(--accent);
-            cursor: pointer;
+        /* Keyboard hints */
+        .kbd {
+            display: inline-block;
+            padding: 0.15rem 0.4rem;
+            font-size: 0.65rem;
+            font-family: monospace;
+            background: rgba(0,0,0,0.1);
+            border-radius: 4px;
+            margin-left: 0.5rem;
         }
 
         /* Responsive */
         @media (max-width: 900px) {
-            .sidebar { width: 260px; }
-            .main { margin-left: 260px; padding: 1.5rem; }
+            .sidebar { width: 240px; }
+            .main { margin-left: 240px; padding: 1.5rem; }
+            .progress-bar { left: 240px; }
+            .topbar-search { max-width: 250px; }
         }
 
         @media (max-width: 700px) {
-            .app.visible { flex-direction: column; }
+            .app-body { flex-direction: column; }
             .sidebar {
                 position: relative;
                 width: 100%;
-                height: auto;
+                top: 0;
                 max-height: 40vh;
             }
             .main { margin-left: 0; }
-            .welcome-grid { grid-template-columns: 1fr; }
+            .progress-bar { left: 0; }
+            .welcome-sections { grid-template-columns: 1fr; }
+            .topbar-search { display: none; }
+            .search-hint { display: none; }
         }
     </style>
 </head>
@@ -433,54 +661,131 @@
 
     <!-- App -->
     <div class="app" id="app">
-        <nav class="sidebar">
-            <div class="sidebar-header">
-                <h1>Ducu & Bo' Peptides</h1>
-                <p>Research Documentation</p>
+        <!-- Top Bar -->
+        <header class="topbar">
+            <div class="topbar-logo" onclick="showWelcome()">Ducu & Bo' Peptides</div>
+            <div class="topbar-search">
+                <input type="text" id="searchInput" placeholder="Search peptides..." oninput="handleSearch(this.value)">
+                <span class="search-hint" id="searchHint">Ctrl+K</span>
+                <button class="search-clear" id="searchClear" onclick="clearSearch()">x</button>
+            </div>
+            <div class="topbar-actions">
+                <button class="topbar-btn" onclick="toggleDarkMode()" id="darkModeBtn" title="Toggle dark mode (D)">
+                    <span id="darkModeIcon">Moon</span>
+                </button>
+                <button class="topbar-btn" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <div class="app-body">
+            <!-- Progress Bar -->
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-bar-fill" id="progressFill"></div>
             </div>
 
-            <div class="search-box">
-                <div class="search-wrapper">
-                    <input type="text" class="search-input" id="searchInput" placeholder="Search..." oninput="handleSearch(this.value)">
-                    <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+            <!-- Sidebar -->
+            <nav class="sidebar">
+                <div class="sidebar-section" id="recentSection" style="display:none;">
+                    <div class="sidebar-section-title">Recently Viewed</div>
+                    <div id="recentList"></div>
                 </div>
-            </div>
 
-            <div class="nav-scroll" id="navScroll"></div>
-        </nav>
-
-        <main class="main">
-            <div class="breadcrumb" id="breadcrumb"></div>
-            <div class="content" id="content">
-                <div class="welcome">
-                    <h1>Welcome</h1>
-                    <p>Select a document from the sidebar to get started</p>
-                    <div class="welcome-grid">
-                        <div class="welcome-card" onclick="loadFile('protocols/titan-protocol.md')">
-                            <h3>📋 TITAN Protocol</h3>
-                            <p>Complete longevity protocol</p>
-                        </div>
-                        <div class="welcome-card" onclick="loadFile('peptides/bpc-157-research.md')">
-                            <h3>🔬 BPC-157</h3>
-                            <p>Body protection compound</p>
-                        </div>
-                        <div class="welcome-card" onclick="loadFile('peptides/semaglutide-research.md')">
-                            <h3>💊 Semaglutide</h3>
-                            <p>GLP-1 for weight loss</p>
-                        </div>
-                        <div class="welcome-card" onclick="loadFile('peptides/epitalon-research.md')">
-                            <h3>⏳ Epitalon</h3>
-                            <p>Telomerase activator</p>
-                        </div>
-                    </div>
+                <div class="sidebar-section" id="favSection" style="display:none;">
+                    <div class="sidebar-section-title">Favorites</div>
+                    <div id="favList"></div>
                 </div>
-            </div>
-        </main>
+
+                <div class="nav-scroll" id="navScroll"></div>
+            </nav>
+
+            <!-- Main -->
+            <main class="main" id="mainArea">
+                <div class="breadcrumb" id="breadcrumb"></div>
+                <div class="doc-meta" id="docMeta"></div>
+                <div class="content" id="content"></div>
+            </main>
+        </div>
     </div>
 
     <script>
         const PASS = 'limitless';
+        const STORAGE_RECENT = 'peptides_recent';
+        const STORAGE_FAV = 'peptides_favorites';
+        const STORAGE_DARK = 'peptides_darkmode';
 
+        // Categories
+        const categories = {
+            protocols: { name: 'Protocols', icon: 'Doc', files: [
+                { file: 'protocols/titan-protocol.md', name: 'TITAN Protocol', subtitle: 'Complete longevity protocol' }
+            ]},
+            gh_metabolic: { name: 'GH Axis & Metabolic', icon: 'Bolt', files: [
+                { file: 'peptides/tesamorelin-research.md', name: 'Tesamorelin', subtitle: 'FDA approved GHRH' },
+                { file: 'peptides/ipamorelin-research.md', name: 'Ipamorelin', subtitle: 'Selective GH secretagogue' },
+                { file: 'peptides/cjc-1295-research.md', name: 'CJC-1295', subtitle: 'GHRH analog' },
+                { file: 'peptides/igf-1-lr3-research.md', name: 'IGF-1 LR3', subtitle: 'Long-acting IGF-1' },
+                { file: 'peptides/follistatin-344-research.md', name: 'Follistatin-344', subtitle: 'Myostatin inhibitor' },
+                { file: 'peptides/semaglutide-research.md', name: 'Semaglutide', subtitle: 'GLP-1 (Ozempic)' },
+                { file: 'peptides/tirzepatide-research.md', name: 'Tirzepatide', subtitle: 'GIP/GLP-1 (Mounjaro)' },
+                { file: 'peptides/retatrutide-research.md', name: 'Retatrutide', subtitle: 'Triple agonist' },
+                { file: 'peptides/aod-9604-research.md', name: 'AOD-9604', subtitle: 'HGH fragment' },
+                { file: 'peptides/adipotide-research.md', name: 'Adipotide', subtitle: 'Fat-targeting' }
+            ]},
+            tissue: { name: 'Tissue Repair', icon: 'Band', files: [
+                { file: 'peptides/bpc-157-research.md', name: 'BPC-157', subtitle: 'Body protection compound' },
+                { file: 'peptides/tb-500-research.md', name: 'TB-500', subtitle: 'Thymosin Beta-4' },
+                { file: 'peptides/ghk-cu-research.md', name: 'GHK-Cu', subtitle: 'Copper peptide' },
+                { file: 'peptides/teriparatide-research.md', name: 'Teriparatide', subtitle: 'PTH for bone' }
+            ]},
+            cognitive: { name: 'Cognitive', icon: 'Brain', files: [
+                { file: 'peptides/semax-research.md', name: 'Semax', subtitle: 'Nootropic' },
+                { file: 'peptides/selank-research.md', name: 'Selank', subtitle: 'Anxiolytic' },
+                { file: 'peptides/dihexa-research.md', name: 'Dihexa', subtitle: 'HGF mimetic (caution)' },
+                { file: 'peptides/phdp5-research.md', name: 'PHDP-5', subtitle: 'Cognitive peptide' }
+            ]},
+            immune: { name: 'Immune & Thymus', icon: 'Shield', files: [
+                { file: 'peptides/thymalin-research.md', name: 'Thymalin', subtitle: 'Thymic peptide' },
+                { file: 'peptides/thymosin-alpha-1-research.md', name: 'Thymosin Alpha-1', subtitle: 'Immune modulator' },
+                { file: 'peptides/thymogen-research.md', name: 'Thymogen', subtitle: 'Thymic dipeptide' },
+                { file: 'peptides/kpv-research.md', name: 'KPV', subtitle: 'Anti-inflammatory' },
+                { file: 'peptides/gcmaf-research.md', name: 'GcMAF', subtitle: 'Macrophage activator' },
+                { file: 'peptides/cecropins-research.md', name: 'Cecropins', subtitle: 'Antimicrobial' }
+            ]},
+            longevity: { name: 'Longevity', icon: 'Hour', files: [
+                { file: 'peptides/epitalon-research.md', name: 'Epitalon', subtitle: 'Telomerase activator' },
+                { file: 'peptides/mots-c-research.md', name: 'MOTS-c', subtitle: 'Mitochondrial peptide' },
+                { file: 'peptides/humanin-research.md', name: 'Humanin', subtitle: 'Cytoprotective' },
+                { file: 'peptides/ss-31-research.md', name: 'SS-31', subtitle: 'Mitochondrial protector' },
+                { file: 'peptides/nad-research.md', name: 'NAD+', subtitle: 'Cellular energy' }
+            ]},
+            sexual: { name: 'Sexual & Hormonal', icon: 'Heart', files: [
+                { file: 'peptides/pt-141-research.md', name: 'PT-141', subtitle: 'Sexual function' },
+                { file: 'peptides/melanotan-2-research.md', name: 'Melanotan II', subtitle: 'Tanning & libido' },
+                { file: 'peptides/kisspeptin-research.md', name: 'Kisspeptin', subtitle: 'GnRH regulator' },
+                { file: 'peptides/oxytocin-research.md', name: 'Oxytocin', subtitle: 'Bonding hormone' }
+            ]},
+            sleep: { name: 'Sleep', icon: 'Moon', files: [
+                { file: 'peptides/dsip-research.md', name: 'DSIP', subtitle: 'Sleep-inducing' },
+                { file: 'peptides/vip-research.md', name: 'VIP', subtitle: 'Vasoactive peptide' }
+            ]},
+            organ: { name: 'Organ-Specific', icon: 'Organ', files: [
+                { file: 'peptides/cardiogen-research.md', name: 'Cardiogen', subtitle: 'Cardiac' },
+                { file: 'peptides/bronchogen-research.md', name: 'Bronchogen', subtitle: 'Lung' },
+                { file: 'peptides/prostamax-research.md', name: 'Prostamax', subtitle: 'Prostate' },
+                { file: 'peptides/nk-peptide-research.md', name: 'NK Peptide', subtitle: 'Kidney' },
+                { file: 'peptides/melittin-research.md', name: 'Melittin', subtitle: 'Bee venom' }
+            ]}
+        };
+
+        let currentFile = null;
+        let currentMarkdown = '';
+
+        // Count totals
+        const totalPeptides = Object.values(categories).reduce((sum, cat) =>
+            cat.name !== 'Protocols' ? sum + cat.files.length : sum, 0);
+        const totalCategories = Object.keys(categories).length - 1; // exclude Protocols
+        const totalProtocols = categories.protocols.files.length;
+
+        // Auth
         function checkPassword() {
             const input = document.getElementById('passwordInput');
             if (input.value === PASS) {
@@ -495,106 +800,131 @@
             }
         }
 
-        if (sessionStorage.getItem('auth') === '1') {
-            document.getElementById('passwordScreen').classList.add('hidden');
-            document.getElementById('app').classList.add('visible');
-        } else {
-            document.getElementById('passwordInput').focus();
+        function logout() {
+            sessionStorage.removeItem('auth');
+            window.location.reload();
         }
 
-        marked.setOptions({ breaks: true, gfm: true });
-
-        const categories = {
-            protocols: { name: 'Protocols', icon: '📋', files: [
-                { file: 'protocols/titan-protocol.md', name: 'TITAN Protocol', subtitle: 'Complete longevity protocol' }
-            ]},
-            gh_metabolic: { name: 'GH Axis & Metabolic', icon: '⚡', files: [
-                { file: 'peptides/tesamorelin-research.md', name: 'Tesamorelin', subtitle: 'FDA approved GHRH' },
-                { file: 'peptides/ipamorelin-research.md', name: 'Ipamorelin', subtitle: 'Selective GH secretagogue' },
-                { file: 'peptides/cjc-1295-research.md', name: 'CJC-1295', subtitle: 'GHRH analog' },
-                { file: 'peptides/igf-1-lr3-research.md', name: 'IGF-1 LR3', subtitle: 'Long-acting IGF-1' },
-                { file: 'peptides/follistatin-344-research.md', name: 'Follistatin-344', subtitle: 'Myostatin inhibitor' },
-                { file: 'peptides/semaglutide-research.md', name: 'Semaglutide', subtitle: 'GLP-1 (Ozempic)' },
-                { file: 'peptides/tirzepatide-research.md', name: 'Tirzepatide', subtitle: 'GIP/GLP-1 (Mounjaro)' },
-                { file: 'peptides/retatrutide-research.md', name: 'Retatrutide', subtitle: 'Triple agonist' },
-                { file: 'peptides/aod-9604-research.md', name: 'AOD-9604', subtitle: 'HGH fragment' },
-                { file: 'peptides/adipotide-research.md', name: 'Adipotide', subtitle: 'Fat-targeting' }
-            ]},
-            tissue: { name: 'Tissue Repair', icon: '🩹', files: [
-                { file: 'peptides/bpc-157-research.md', name: 'BPC-157', subtitle: 'Body protection compound' },
-                { file: 'peptides/tb-500-research.md', name: 'TB-500', subtitle: 'Thymosin Beta-4' },
-                { file: 'peptides/ghk-cu-research.md', name: 'GHK-Cu', subtitle: 'Copper peptide' },
-                { file: 'peptides/teriparatide-research.md', name: 'Teriparatide', subtitle: 'PTH for bone' }
-            ]},
-            cognitive: { name: 'Cognitive', icon: '🧠', files: [
-                { file: 'peptides/semax-research.md', name: 'Semax', subtitle: 'Nootropic' },
-                { file: 'peptides/selank-research.md', name: 'Selank', subtitle: 'Anxiolytic' },
-                { file: 'peptides/dihexa-research.md', name: 'Dihexa', subtitle: 'HGF mimetic (caution)' },
-                { file: 'peptides/phdp5-research.md', name: 'PHDP-5', subtitle: 'Cognitive peptide' }
-            ]},
-            immune: { name: 'Immune & Thymus', icon: '🛡️', files: [
-                { file: 'peptides/thymalin-research.md', name: 'Thymalin', subtitle: 'Thymic peptide' },
-                { file: 'peptides/thymosin-alpha-1-research.md', name: 'Thymosin Alpha-1', subtitle: 'Immune modulator' },
-                { file: 'peptides/thymogen-research.md', name: 'Thymogen', subtitle: 'Thymic dipeptide' },
-                { file: 'peptides/kpv-research.md', name: 'KPV', subtitle: 'Anti-inflammatory' },
-                { file: 'peptides/gcmaf-research.md', name: 'GcMAF', subtitle: 'Macrophage activator' },
-                { file: 'peptides/cecropins-research.md', name: 'Cecropins', subtitle: 'Antimicrobial' }
-            ]},
-            longevity: { name: 'Longevity', icon: '⏳', files: [
-                { file: 'peptides/epitalon-research.md', name: 'Epitalon', subtitle: 'Telomerase activator' },
-                { file: 'peptides/mots-c-research.md', name: 'MOTS-c', subtitle: 'Mitochondrial peptide' },
-                { file: 'peptides/humanin-research.md', name: 'Humanin', subtitle: 'Cytoprotective' },
-                { file: 'peptides/ss-31-research.md', name: 'SS-31', subtitle: 'Mitochondrial protector' },
-                { file: 'peptides/nad-research.md', name: 'NAD+', subtitle: 'Cellular energy' }
-            ]},
-            sexual: { name: 'Sexual & Hormonal', icon: '💜', files: [
-                { file: 'peptides/pt-141-research.md', name: 'PT-141', subtitle: 'Sexual function' },
-                { file: 'peptides/melanotan-2-research.md', name: 'Melanotan II', subtitle: 'Tanning & libido' },
-                { file: 'peptides/kisspeptin-research.md', name: 'Kisspeptin', subtitle: 'GnRH regulator' },
-                { file: 'peptides/oxytocin-research.md', name: 'Oxytocin', subtitle: 'Bonding hormone' }
-            ]},
-            sleep: { name: 'Sleep', icon: '😴', files: [
-                { file: 'peptides/dsip-research.md', name: 'DSIP', subtitle: 'Sleep-inducing' },
-                { file: 'peptides/vip-research.md', name: 'VIP', subtitle: 'Vasoactive peptide' }
-            ]},
-            organ: { name: 'Organ-Specific', icon: '🫀', files: [
-                { file: 'peptides/cardiogen-research.md', name: 'Cardiogen', subtitle: 'Cardiac' },
-                { file: 'peptides/bronchogen-research.md', name: 'Bronchogen', subtitle: 'Lung' },
-                { file: 'peptides/prostamax-research.md', name: 'Prostamax', subtitle: 'Prostate' },
-                { file: 'peptides/nk-peptide-research.md', name: 'NK Peptide', subtitle: 'Kidney' },
-                { file: 'peptides/melittin-research.md', name: 'Melittin', subtitle: 'Bee venom' }
-            ]}
-        };
-
-        let currentFile = null;
-
-        function init() {
-            renderNav();
-            if (window.location.hash) {
-                const file = decodeURIComponent(window.location.hash.slice(1));
-                if (file) loadFile(file, false);
+        // Dark Mode
+        function initDarkMode() {
+            const stored = localStorage.getItem(STORAGE_DARK);
+            if (stored === 'true' || (stored === null && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                updateDarkModeIcon(true);
             }
-            window.addEventListener('popstate', (e) => {
-                if (e.state?.file) loadFile(e.state.file, false);
-                else showWelcome();
-            });
         }
 
+        function toggleDarkMode() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem(STORAGE_DARK, 'false');
+                updateDarkModeIcon(false);
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem(STORAGE_DARK, 'true');
+                updateDarkModeIcon(true);
+            }
+        }
+
+        function updateDarkModeIcon(isDark) {
+            document.getElementById('darkModeIcon').textContent = isDark ? 'Sun' : 'Moon';
+        }
+
+        // Recently Viewed
+        function getRecent() {
+            try { return JSON.parse(localStorage.getItem(STORAGE_RECENT)) || []; }
+            catch { return []; }
+        }
+
+        function addRecent(file) {
+            let recent = getRecent().filter(f => f !== file);
+            recent.unshift(file);
+            recent = recent.slice(0, 5);
+            localStorage.setItem(STORAGE_RECENT, JSON.stringify(recent));
+            renderRecent();
+        }
+
+        function renderRecent() {
+            const recent = getRecent();
+            const section = document.getElementById('recentSection');
+            const list = document.getElementById('recentList');
+
+            if (recent.length === 0) {
+                section.style.display = 'none';
+                return;
+            }
+
+            section.style.display = 'block';
+            list.innerHTML = recent.map(file => {
+                const info = getFileInfo(file);
+                return `<div class="recent-item" onclick="loadFile('${file}')">${info?.name || file}</div>`;
+            }).join('');
+        }
+
+        // Favorites
+        function getFavorites() {
+            try { return JSON.parse(localStorage.getItem(STORAGE_FAV)) || []; }
+            catch { return []; }
+        }
+
+        function toggleFavorite(file) {
+            let favs = getFavorites();
+            if (favs.includes(file)) {
+                favs = favs.filter(f => f !== file);
+            } else {
+                favs.push(file);
+            }
+            localStorage.setItem(STORAGE_FAV, JSON.stringify(favs));
+            renderFavorites();
+            renderNav();
+        }
+
+        function renderFavorites() {
+            const favs = getFavorites();
+            const section = document.getElementById('favSection');
+            const list = document.getElementById('favList');
+
+            if (favs.length === 0) {
+                section.style.display = 'none';
+                return;
+            }
+
+            section.style.display = 'block';
+            list.innerHTML = favs.map(file => {
+                const info = getFileInfo(file);
+                return `<div class="fav-item" onclick="loadFile('${file}')">${info?.name || file}</div>`;
+            }).join('');
+        }
+
+        function getFileInfo(file) {
+            for (const cat of Object.values(categories)) {
+                const found = cat.files.find(f => f.file === file);
+                if (found) return found;
+            }
+            return null;
+        }
+
+        // Navigation
         function renderNav() {
+            const favs = getFavorites();
             const nav = document.getElementById('navScroll');
             nav.innerHTML = Object.entries(categories).map(([key, cat]) => `
                 <div class="nav-section" data-key="${key}">
                     <div class="nav-section-header" onclick="toggleSection('${key}')">
-                        <span class="icon">${cat.icon}</span>
+                        <span class="icon">${getIcon(cat.icon)}</span>
                         <span class="name">${cat.name}</span>
                         <span class="count">${cat.files.length}</span>
-                        <span class="chevron">▼</span>
+                        <span class="chevron">v</span>
                     </div>
                     <div class="nav-items">
                         ${cat.files.map(f => `
-                            <div class="nav-item" data-file="${f.file}" onclick="loadFile('${f.file}')">
-                                ${f.name}
-                                <span class="subtitle">${f.subtitle}</span>
+                            <div class="nav-item ${currentFile === f.file ? 'active' : ''}" data-file="${f.file}" onclick="loadFile('${f.file}')">
+                                <div class="nav-item-text">
+                                    ${f.name}
+                                    <span class="subtitle">${f.subtitle}</span>
+                                </div>
+                                <span class="star ${favs.includes(f.file) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite('${f.file}')">*</span>
                             </div>
                         `).join('')}
                     </div>
@@ -602,29 +932,63 @@
             `).join('');
         }
 
+        function getIcon(name) {
+            const icons = {
+                'Doc': '[]',
+                'Bolt': '^',
+                'Band': '+',
+                'Brain': '@',
+                'Shield': '#',
+                'Hour': '~',
+                'Heart': '<3',
+                'Moon': ')',
+                'Organ': 'o'
+            };
+            return icons[name] || '*';
+        }
+
         function toggleSection(key) {
             document.querySelector(`.nav-section[data-key="${key}"]`).classList.toggle('collapsed');
         }
 
+        // Progress Bar
+        function updateProgress() {
+            if (!currentFile) {
+                document.getElementById('progressBar').style.display = 'none';
+                return;
+            }
+            document.getElementById('progressBar').style.display = 'block';
+
+            const main = document.getElementById('mainArea');
+            const scrollTop = main.scrollTop || window.scrollY;
+            const scrollHeight = main.scrollHeight - main.clientHeight || document.body.scrollHeight - window.innerHeight;
+            const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+            document.getElementById('progressFill').style.width = Math.min(progress, 100) + '%';
+        }
+
+        // Load File
         async function loadFile(filePath, pushState = true) {
             currentFile = filePath;
+            addRecent(filePath);
 
-            // Update active state
+            // Update nav active state
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.toggle('active', item.dataset.file === filePath);
             });
 
-            // Update breadcrumb
-            let catName = '', fileName = '';
+            // Get file info
+            let catName = '', fileName = '', catKey = '';
             for (const [key, cat] of Object.entries(categories)) {
                 const found = cat.files.find(f => f.file === filePath);
                 if (found) {
                     catName = cat.name;
                     fileName = found.name;
+                    catKey = key;
                     break;
                 }
             }
 
+            // Update breadcrumb
             document.getElementById('breadcrumb').innerHTML = `
                 <a onclick="showWelcome()">Home</a>
                 <span class="separator">/</span>
@@ -635,15 +999,32 @@
 
             // Load content
             const content = document.getElementById('content');
+            const docMeta = document.getElementById('docMeta');
             content.innerHTML = '<p style="color:var(--text-light);padding:2rem;text-align:center;">Loading...</p>';
+            docMeta.innerHTML = '';
 
             try {
                 const res = await fetch(filePath);
                 if (!res.ok) throw new Error();
-                content.innerHTML = marked.parse(await res.text());
+                currentMarkdown = await res.text();
+
+                // Parse metadata from markdown
+                const badges = parseMetadata(currentMarkdown);
+                const readTime = Math.ceil(currentMarkdown.split(/\s+/).length / 200);
+
+                // Render metadata badges
+                docMeta.innerHTML = badges + `<span class="badge badge-neutral">${readTime} min read</span>`;
+
+                // Render content
+                content.innerHTML = marked.parse(currentMarkdown);
+
+                // Add navigation
+                addDocNav(catKey, filePath);
+
                 window.scrollTo(0, 0);
+                updateProgress();
             } catch {
-                content.innerHTML = `<p style="color:#e53e3e;padding:2rem;">Could not load ${filePath}</p>`;
+                content.innerHTML = `<p style="color:var(--danger);padding:2rem;">Could not load ${filePath}</p>`;
             }
 
             if (pushState) {
@@ -651,41 +1032,135 @@
             }
         }
 
+        function parseMetadata(md) {
+            let badges = '';
+
+            // Risk level
+            const riskMatch = md.match(/\*\*Risk Profile:\*\*\s*([^\n]+)/i);
+            if (riskMatch) {
+                const risk = riskMatch[1].toUpperCase();
+                if (risk.includes('HIGH')) {
+                    badges += '<span class="badge badge-high">HIGH RISK</span>';
+                } else if (risk.includes('MODERATE')) {
+                    badges += '<span class="badge badge-moderate">' + (risk.includes('LOW') ? 'LOW-MODERATE' : 'MODERATE') + '</span>';
+                } else if (risk.includes('LOW')) {
+                    badges += '<span class="badge badge-low">LOW RISK</span>';
+                }
+            }
+
+            // Evidence level
+            const evidenceMatch = md.match(/\*\*(?:Evidence Level|OCEBM Evidence Level):\*\*\s*([^\n]+)/i);
+            if (evidenceMatch) {
+                const evidence = evidenceMatch[1];
+                if (evidence.toLowerCase().includes('fda')) {
+                    badges += '<span class="badge badge-fda">FDA Approved</span>';
+                } else if (evidence.toLowerCase().includes('phase')) {
+                    const phase = evidence.match(/phase\s*(\w+)/i);
+                    if (phase) badges += `<span class="badge badge-neutral">Phase ${phase[1]}</span>`;
+                }
+            }
+
+            return badges;
+        }
+
+        function addDocNav(catKey, currentFile) {
+            const cat = categories[catKey];
+            if (!cat) return;
+
+            const files = cat.files;
+            const currentIndex = files.findIndex(f => f.file === currentFile);
+            const prev = currentIndex > 0 ? files[currentIndex - 1] : null;
+            const next = currentIndex < files.length - 1 ? files[currentIndex + 1] : null;
+
+            const content = document.getElementById('content');
+            content.innerHTML += `
+                <div class="doc-nav">
+                    <button class="doc-nav-btn" ${prev ? `onclick="loadFile('${prev.file}')"` : 'disabled'}>
+                        < ${prev ? prev.name : 'Previous'}
+                    </button>
+                    <button class="doc-nav-btn" ${next ? `onclick="loadFile('${next.file}')"` : 'disabled'}>
+                        ${next ? next.name : 'Next'} >
+                    </button>
+                </div>
+            `;
+        }
+
+        // Welcome Screen
         function showWelcome() {
             currentFile = null;
+            currentMarkdown = '';
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             document.getElementById('breadcrumb').innerHTML = '';
+            document.getElementById('docMeta').innerHTML = '';
+            document.getElementById('progressBar').style.display = 'none';
+
+            const recent = getRecent();
+            const favs = getFavorites();
+
             document.getElementById('content').innerHTML = `
                 <div class="welcome">
                     <h1>Welcome</h1>
-                    <p>Select a document from the sidebar to get started</p>
-                    <div class="welcome-grid">
-                        <div class="welcome-card" onclick="loadFile('protocols/titan-protocol.md')">
-                            <h3>📋 TITAN Protocol</h3>
-                            <p>Complete longevity protocol</p>
+                    <p class="welcome-subtitle">Peptide research documentation for the team</p>
+
+                    <div class="stats-bar">
+                        <div class="stat">
+                            <div class="stat-value">${totalPeptides}</div>
+                            <div class="stat-label">Peptides</div>
                         </div>
-                        <div class="welcome-card" onclick="loadFile('peptides/bpc-157-research.md')">
-                            <h3>🔬 BPC-157</h3>
-                            <p>Body protection compound</p>
+                        <div class="stat">
+                            <div class="stat-value">${totalCategories}</div>
+                            <div class="stat-label">Categories</div>
                         </div>
-                        <div class="welcome-card" onclick="loadFile('peptides/semaglutide-research.md')">
-                            <h3>💊 Semaglutide</h3>
-                            <p>GLP-1 for weight loss</p>
+                        <div class="stat">
+                            <div class="stat-value">${totalProtocols}</div>
+                            <div class="stat-label">Protocols</div>
                         </div>
-                        <div class="welcome-card" onclick="loadFile('peptides/epitalon-research.md')">
-                            <h3>⏳ Epitalon</h3>
-                            <p>Telomerase activator</p>
+                    </div>
+
+                    <div class="welcome-sections">
+                        <div class="welcome-section">
+                            <h3>Continue Reading</h3>
+                            ${recent.length > 0 ? recent.slice(0, 3).map(file => {
+                                const info = getFileInfo(file);
+                                return info ? `
+                                    <div class="welcome-card" onclick="loadFile('${file}')">
+                                        <h4>${info.name}</h4>
+                                        <p>${info.subtitle}</p>
+                                    </div>
+                                ` : '';
+                            }).join('') : '<div class="welcome-empty">No recent documents</div>'}
+                        </div>
+
+                        <div class="welcome-section">
+                            <h3>Quick Access</h3>
+                            <div class="welcome-card" onclick="loadFile('protocols/titan-protocol.md')">
+                                <h4>TITAN Protocol</h4>
+                                <p>Complete longevity protocol</p>
+                            </div>
+                            <div class="welcome-card" onclick="loadFile('peptides/bpc-157-research.md')">
+                                <h4>BPC-157</h4>
+                                <p>Body protection compound</p>
+                            </div>
+                            <div class="welcome-card" onclick="loadFile('peptides/semaglutide-research.md')">
+                                <h4>Semaglutide</h4>
+                                <p>GLP-1 (Ozempic)</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             `;
+
             history.pushState({}, '', window.location.pathname);
         }
 
+        // Search
         function handleSearch(query) {
             const q = query.toLowerCase().trim();
             const clearBtn = document.getElementById('searchClear');
+            const hint = document.getElementById('searchHint');
+
             clearBtn.classList.toggle('visible', q.length > 0);
+            hint.style.display = q.length > 0 ? 'none' : 'block';
 
             document.querySelectorAll('.nav-item').forEach(item => {
                 const text = item.textContent.toLowerCase();
@@ -698,7 +1173,7 @@
                 if (q && hasVisible) section.classList.remove('collapsed');
             });
 
-            // Show no results message
+            // No results
             const nav = document.getElementById('navScroll');
             const existing = nav.querySelector('.no-results');
             if (existing) existing.remove();
@@ -711,24 +1186,94 @@
         function clearSearch() {
             document.getElementById('searchInput').value = '';
             document.getElementById('searchClear').classList.remove('visible');
+            document.getElementById('searchHint').style.display = 'block';
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('hidden'));
             document.querySelectorAll('.nav-section').forEach(s => s.style.display = '');
             const nr = document.querySelector('.no-results');
             if (nr) nr.remove();
         }
 
+        // Keyboard shortcuts
         document.addEventListener('keydown', e => {
-            if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+            // Don't trigger when typing in input
+            if (document.activeElement.tagName === 'INPUT') {
+                if (e.key === 'Escape') {
+                    clearSearch();
+                    document.getElementById('searchInput').blur();
+                }
+                return;
+            }
+
+            // Ctrl+K or / for search
+            if ((e.key === 'k' && (e.metaKey || e.ctrlKey)) || e.key === '/') {
                 e.preventDefault();
                 document.getElementById('searchInput').focus();
             }
+
+            // H for home
+            if (e.key === 'h' || e.key === 'H') {
+                e.preventDefault();
+                showWelcome();
+            }
+
+            // D for dark mode
+            if (e.key === 'd' || e.key === 'D') {
+                e.preventDefault();
+                toggleDarkMode();
+            }
+
+            // Arrow keys for prev/next
+            if (currentFile && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+                const btns = document.querySelectorAll('.doc-nav-btn:not([disabled])');
+                if (e.key === 'ArrowLeft' && btns[0]) btns[0].click();
+                if (e.key === 'ArrowRight' && btns[1]) btns[1].click();
+            }
+
+            // Escape to clear
             if (e.key === 'Escape') {
                 clearSearch();
-                document.getElementById('searchInput').blur();
             }
         });
 
-        if (sessionStorage.getItem('auth') === '1') init();
+        // Init
+        function init() {
+            initDarkMode();
+            marked.setOptions({ breaks: true, gfm: true });
+            renderNav();
+            renderRecent();
+            renderFavorites();
+
+            // Check for hash
+            if (window.location.hash) {
+                const file = decodeURIComponent(window.location.hash.slice(1));
+                if (file) loadFile(file, false);
+            } else {
+                showWelcome();
+            }
+
+            // Handle popstate
+            window.addEventListener('popstate', (e) => {
+                if (e.state?.file) loadFile(e.state.file, false);
+                else showWelcome();
+            });
+
+            // Progress bar on scroll
+            window.addEventListener('scroll', updateProgress);
+
+            // Detect OS for shortcut hint
+            if (navigator.platform.indexOf('Mac') > -1) {
+                document.getElementById('searchHint').textContent = 'Cmd+K';
+            }
+        }
+
+        // Check auth on load
+        if (sessionStorage.getItem('auth') === '1') {
+            document.getElementById('passwordScreen').classList.add('hidden');
+            document.getElementById('app').classList.add('visible');
+            init();
+        } else {
+            document.getElementById('passwordInput').focus();
+        }
     </script>
 </body>
 </html>
