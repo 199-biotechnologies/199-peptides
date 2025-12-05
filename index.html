@@ -36,9 +36,7 @@
             z-index: 1000;
         }
 
-        .password-screen.hidden {
-            display: none;
-        }
+        .password-screen.hidden { display: none; }
 
         .password-box {
             background: var(--bg-paper);
@@ -47,7 +45,6 @@
             text-align: center;
             max-width: 400px;
             width: 90%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
         .password-box h1 {
@@ -59,28 +56,21 @@
         .password-box p {
             color: var(--text-light);
             margin-bottom: 2rem;
-            font-size: 0.9rem;
         }
 
-        .password-input {
+        .password-box input {
             width: 100%;
             padding: 1rem;
             border: 2px solid var(--border);
             border-radius: 10px;
             font-size: 1rem;
             text-align: center;
-            outline: none;
             margin-bottom: 1rem;
+            outline: none;
         }
 
-        .password-input:focus {
-            border-color: var(--accent);
-        }
-
-        .password-input.error {
-            border-color: #e53e3e;
-            animation: shake 0.5s;
-        }
+        .password-box input:focus { border-color: var(--accent); }
+        .password-box input.error { border-color: #e53e3e; animation: shake 0.5s; }
 
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
@@ -88,7 +78,7 @@
             75% { transform: translateX(10px); }
         }
 
-        .password-btn {
+        .password-box button {
             width: 100%;
             padding: 1rem;
             background: var(--accent);
@@ -96,151 +86,74 @@
             border: none;
             border-radius: 10px;
             font-size: 1rem;
-            font-weight: 500;
             cursor: pointer;
-            transition: background 0.2s;
         }
 
-        .password-btn:hover {
-            background: #3d5d8a;
+        .password-box button:hover { background: #3d5d8a; }
+
+        .error-msg { color: #e53e3e; margin-top: 1rem; display: none; }
+        .error-msg.visible { display: block; }
+
+        /* App Layout */
+        .app { display: none; }
+        .app.visible { display: flex; min-height: 100vh; }
+
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            background: var(--bg-paper);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
         }
 
-        .error-msg {
-            color: #e53e3e;
-            font-size: 0.85rem;
-            margin-top: 1rem;
-            display: none;
-        }
-
-        .error-msg.visible {
-            display: block;
-        }
-
-        /* Main App (hidden until authenticated) */
-        .app {
-            display: none;
-        }
-
-        .app.visible {
-            display: block;
-        }
-
-        /* Header */
-        .header {
+        .sidebar-header {
+            padding: 1.25rem 1.5rem;
             background: var(--primary);
             color: white;
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
         }
 
-        .header h1 {
-            font-size: 1.25rem;
+        .sidebar-header h1 {
+            font-size: 1.1rem;
             font-weight: 600;
-            cursor: pointer;
         }
 
-        .header h1:hover {
-            opacity: 0.9;
+        .sidebar-header p {
+            font-size: 0.75rem;
+            opacity: 0.8;
         }
 
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .breadcrumb a {
-            color: white;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-
-        .breadcrumb .separator {
-            opacity: 0.5;
-        }
-
-        .breadcrumb .current {
-            opacity: 0.7;
-        }
-
-        .back-btn {
-            background: rgba(255,255,255,0.1);
-            border: none;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            display: none;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .back-btn:hover {
-            background: rgba(255,255,255,0.2);
-        }
-
-        .back-btn.visible {
-            display: flex;
-        }
-
-        /* Main Layout */
-        .main-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        /* Home View */
-        .home-view {
-            display: block;
-        }
-
-        .home-view.hidden {
-            display: none;
-        }
-
+        /* Search */
         .search-box {
-            margin-bottom: 2rem;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
         }
 
         .search-wrapper {
             position: relative;
-            max-width: 500px;
         }
 
         .search-input {
             width: 100%;
-            padding: 1rem 3rem 1rem 1.25rem;
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            font-size: 1rem;
+            padding: 0.6rem 2.5rem 0.6rem 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.85rem;
             outline: none;
-            transition: border-color 0.2s;
         }
 
-        .search-input:focus {
-            border-color: var(--accent);
-        }
+        .search-input:focus { border-color: var(--accent); }
 
         .search-clear {
             position: absolute;
-            right: 12px;
+            right: 8px;
             top: 50%;
             transform: translateY(-50%);
-            width: 24px;
-            height: 24px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             background: var(--border);
             border: none;
@@ -248,189 +161,176 @@
             display: none;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            color: var(--text-light);
-            transition: all 0.15s;
-        }
-
-        .search-clear:hover {
-            background: var(--text-light);
-            color: white;
-        }
-
-        .search-clear.visible {
-            display: flex;
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 2rem;
+            font-size: 11px;
             color: var(--text-light);
         }
 
-        .no-results p {
-            margin-bottom: 1rem;
+        .search-clear:hover { background: var(--text-light); color: white; }
+        .search-clear.visible { display: flex; }
+
+        /* Navigation */
+        .nav-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.5rem 0;
         }
 
-        .clear-search-link {
-            color: var(--accent);
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        .clear-search-link:hover {
-            text-decoration: underline;
-        }
-
-        .section-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .section-card {
-            background: var(--bg-paper);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .section-card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transform: translateY(-2px);
-        }
-
-        .section-card h3 {
-            font-size: 1.1rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .section-card .count {
-            font-size: 0.75rem;
-            background: var(--bg);
-            padding: 0.2rem 0.5rem;
-            border-radius: 10px;
-            color: var(--text-light);
-        }
-
-        .section-card p {
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-
-        /* File List */
-        .file-list {
-            background: var(--bg-paper);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            overflow: hidden;
-        }
-
-        .file-list-header {
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--border);
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .file-item {
-            display: block;
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--border);
-            cursor: pointer;
-            transition: background 0.15s;
-            text-decoration: none;
-            color: var(--text);
-        }
-
-        .file-item:last-child {
-            border-bottom: none;
-        }
-
-        .file-item:hover {
-            background: var(--bg);
-        }
-
-        .file-item .name {
-            font-weight: 500;
+        .nav-section {
             margin-bottom: 0.25rem;
         }
 
-        .file-item .subtitle {
+        .nav-section-header {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            user-select: none;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .nav-section-header:hover { background: var(--bg); }
+
+        .nav-section-header .icon { margin-right: 0.5rem; }
+        .nav-section-header .name { flex: 1; }
+        .nav-section-header .count {
+            background: var(--bg);
+            padding: 0.1rem 0.4rem;
+            border-radius: 8px;
+            font-size: 0.65rem;
+            margin-right: 0.5rem;
+        }
+        .nav-section-header .chevron {
+            font-size: 0.6rem;
+            transition: transform 0.2s;
+        }
+
+        .nav-section.collapsed .chevron { transform: rotate(-90deg); }
+        .nav-section.collapsed .nav-items { display: none; }
+
+        .nav-items { padding-bottom: 0.25rem; }
+
+        .nav-item {
+            display: block;
+            padding: 0.5rem 1rem 0.5rem 2.25rem;
+            font-size: 0.85rem;
+            color: var(--text);
+            cursor: pointer;
+            border-left: 3px solid transparent;
+            transition: all 0.1s;
+        }
+
+        .nav-item:hover {
+            background: var(--bg);
+            color: var(--accent);
+        }
+
+        .nav-item.active {
+            background: rgba(74, 111, 165, 0.1);
+            color: var(--accent);
+            border-left-color: var(--accent);
+            font-weight: 500;
+        }
+
+        .nav-item.hidden { display: none; }
+
+        .nav-item .subtitle {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            display: block;
+        }
+
+        /* Main Content */
+        .main {
+            flex: 1;
+            margin-left: 300px;
+            padding: 2rem;
+            max-width: 900px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
             font-size: 0.85rem;
             color: var(--text-light);
         }
 
-        .file-item.hidden {
-            display: none;
+        .breadcrumb a {
+            color: var(--accent);
+            text-decoration: none;
+            cursor: pointer;
         }
 
-        /* Document View */
-        .doc-view {
-            display: none;
-        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .separator { opacity: 0.5; }
 
-        .doc-view.visible {
-            display: block;
-        }
-
-        .doc-content {
+        .content {
             background: var(--bg-paper);
-            padding: 3rem;
+            padding: 2.5rem;
             border-radius: 12px;
             border: 1px solid var(--border);
         }
 
-        /* Markdown Styles */
-        .doc-content h1 {
-            font-size: 2rem;
+        /* Welcome */
+        .welcome { text-align: center; padding: 3rem 1rem; }
+        .welcome h1 { font-size: 2rem; color: var(--primary); margin-bottom: 0.5rem; border: none; }
+        .welcome p { color: var(--text-light); margin-bottom: 2rem; }
+
+        .welcome-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .welcome-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .welcome-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .welcome-card h3 { font-size: 0.95rem; color: var(--primary); margin-bottom: 0.25rem; }
+        .welcome-card p { font-size: 0.8rem; color: var(--text-light); margin: 0; }
+
+        /* Markdown */
+        .content h1 {
+            font-size: 1.75rem;
             color: var(--primary);
             margin-bottom: 1rem;
             padding-bottom: 1rem;
             border-bottom: 2px solid var(--accent);
         }
 
-        .doc-content h2 {
-            font-size: 1.4rem;
+        .content h2 {
+            font-size: 1.3rem;
             color: var(--primary);
-            margin: 2.5rem 0 1rem;
+            margin: 2rem 0 0.75rem;
             padding-bottom: 0.5rem;
             border-bottom: 1px solid var(--border);
         }
 
-        .doc-content h3 {
-            font-size: 1.15rem;
-            color: var(--text);
-            margin: 2rem 0 0.75rem;
-        }
+        .content h3 { font-size: 1.1rem; color: var(--text); margin: 1.5rem 0 0.5rem; }
+        .content p { margin-bottom: 1rem; line-height: 1.8; }
+        .content ul, .content ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .content li { margin-bottom: 0.4rem; }
+        .content strong { color: var(--primary); }
 
-        .doc-content p {
-            margin-bottom: 1rem;
-            line-height: 1.8;
-        }
-
-        .doc-content ul, .doc-content ol {
-            margin: 1rem 0 1.5rem 1.5rem;
-        }
-
-        .doc-content li {
-            margin-bottom: 0.5rem;
-        }
-
-        .doc-content strong {
-            color: var(--primary);
-        }
-
-        .doc-content blockquote {
+        .content blockquote {
             border-left: 4px solid var(--accent);
             padding: 1rem 1.5rem;
             margin: 1.5rem 0;
@@ -438,7 +338,7 @@
             border-radius: 0 8px 8px 0;
         }
 
-        .doc-content code {
+        .content code {
             font-family: 'SF Mono', monospace;
             font-size: 0.85em;
             background: var(--bg);
@@ -446,171 +346,156 @@
             border-radius: 4px;
         }
 
-        .doc-content pre {
+        .content pre {
             background: var(--primary);
             color: #e2e8f0;
-            padding: 1.5rem;
+            padding: 1.25rem;
             border-radius: 8px;
             overflow-x: auto;
             margin: 1.5rem 0;
         }
 
-        .doc-content pre code {
-            background: none;
-            padding: 0;
-        }
+        .content pre code { background: none; padding: 0; }
 
-        .doc-content hr {
+        .content hr {
             border: none;
             height: 1px;
             background: var(--border);
-            margin: 2.5rem 0;
+            margin: 2rem 0;
         }
 
-        .doc-content table {
+        .content table {
             width: 100%;
             border-collapse: collapse;
             margin: 1.5rem 0;
             font-size: 0.9rem;
         }
 
-        .doc-content th {
+        .content th {
             background: var(--primary);
             color: white;
-            padding: 0.75rem 1rem;
+            padding: 0.6rem 0.75rem;
             text-align: left;
             font-weight: 500;
+            font-size: 0.8rem;
         }
 
-        .doc-content td {
-            padding: 0.75rem 1rem;
+        .content td {
+            padding: 0.6rem 0.75rem;
             border-bottom: 1px solid var(--border);
         }
 
-        .doc-content tr:hover {
-            background: var(--bg);
-        }
+        .content tr:hover { background: var(--bg); }
+        .content a { color: var(--accent); }
 
-        .doc-content a {
-            color: var(--accent);
-        }
-
-        /* Loading */
-        .loading {
+        .no-results {
+            padding: 1rem;
             text-align: center;
-            padding: 4rem;
             color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .no-results a {
+            color: var(--accent);
+            cursor: pointer;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .header {
-                padding: 1rem;
-                flex-wrap: wrap;
+        @media (max-width: 900px) {
+            .sidebar { width: 260px; }
+            .main { margin-left: 260px; padding: 1.5rem; }
+        }
+
+        @media (max-width: 700px) {
+            .app.visible { flex-direction: column; }
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                max-height: 40vh;
             }
-            .main-container {
-                padding: 1rem;
-            }
-            .doc-content {
-                padding: 1.5rem;
-            }
-            .section-grid {
-                grid-template-columns: 1fr;
-            }
+            .main { margin-left: 0; }
+            .welcome-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- Password Screen -->
+    <!-- Password -->
     <div class="password-screen" id="passwordScreen">
         <div class="password-box">
             <h1>Ducu & Bo' Peptides</h1>
             <p>Enter password to access</p>
-            <input type="password" class="password-input" id="passwordInput"
-                   placeholder="Password" onkeypress="if(event.key==='Enter')checkPassword()">
-            <button class="password-btn" onclick="checkPassword()">Enter</button>
+            <input type="password" id="passwordInput" placeholder="Password" onkeypress="if(event.key==='Enter')checkPassword()">
+            <button onclick="checkPassword()">Enter</button>
             <p class="error-msg" id="errorMsg">Incorrect password</p>
         </div>
     </div>
 
-    <!-- Main App -->
+    <!-- App -->
     <div class="app" id="app">
-        <header class="header">
-            <h1 onclick="goHome()">Ducu & Bo' Peptides</h1>
-            <button class="back-btn" id="backBtn" onclick="goBack()">
-                ← Back
-            </button>
-            <nav class="breadcrumb" id="breadcrumb"></nav>
-        </header>
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1>Ducu & Bo' Peptides</h1>
+                <p>Research Documentation</p>
+            </div>
 
-        <div class="main-container">
-            <!-- Home View -->
-            <div class="home-view" id="homeView">
-                <div class="search-box">
-                    <div class="search-wrapper">
-                        <input type="text" class="search-input" id="searchInput"
-                               placeholder="Search peptides and protocols..."
-                               oninput="handleSearch(this.value)">
-                        <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
-                    </div>
+            <div class="search-box">
+                <div class="search-wrapper">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search..." oninput="handleSearch(this.value)">
+                    <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
                 </div>
+            </div>
 
-                <div id="searchResults" style="display:none;">
-                    <h2 style="margin-bottom:1rem;color:var(--primary);">Search Results</h2>
-                    <div class="file-list" id="searchResultsList"></div>
-                </div>
+            <div class="nav-scroll" id="navScroll"></div>
+        </nav>
 
-                <div id="categoriesView">
-                    <h2 style="margin-bottom:1rem;color:var(--primary);">Protocols</h2>
-                    <div class="section-grid" style="margin-bottom:2rem;">
-                        <div class="section-card" onclick="showCategory('protocols')">
-                            <h3>📋 Protocols <span class="count">1</span></h3>
-                            <p>Complete treatment protocols and guidelines</p>
+        <main class="main">
+            <div class="breadcrumb" id="breadcrumb"></div>
+            <div class="content" id="content">
+                <div class="welcome">
+                    <h1>Welcome</h1>
+                    <p>Select a document from the sidebar to get started</p>
+                    <div class="welcome-grid">
+                        <div class="welcome-card" onclick="loadFile('protocols/titan-protocol.md')">
+                            <h3>📋 TITAN Protocol</h3>
+                            <p>Complete longevity protocol</p>
+                        </div>
+                        <div class="welcome-card" onclick="loadFile('peptides/bpc-157-research.md')">
+                            <h3>🔬 BPC-157</h3>
+                            <p>Body protection compound</p>
+                        </div>
+                        <div class="welcome-card" onclick="loadFile('peptides/semaglutide-research.md')">
+                            <h3>💊 Semaglutide</h3>
+                            <p>GLP-1 for weight loss</p>
+                        </div>
+                        <div class="welcome-card" onclick="loadFile('peptides/epitalon-research.md')">
+                            <h3>⏳ Epitalon</h3>
+                            <p>Telomerase activator</p>
                         </div>
                     </div>
-
-                    <h2 style="margin-bottom:1rem;color:var(--primary);">Peptides by Category</h2>
-                    <div class="section-grid" id="categoryGrid"></div>
-                </div>
-
-                <div id="categoryDetail" style="display:none;">
-                    <div class="file-list" id="categoryFiles"></div>
                 </div>
             </div>
-
-            <!-- Document View -->
-            <div class="doc-view" id="docView">
-                <div class="doc-content" id="docContent">
-                    <div class="loading">Loading...</div>
-                </div>
-            </div>
-        </div>
+        </main>
     </div>
 
     <script>
-        // Password check
-        const CORRECT_PASSWORD = 'limitless';
+        const PASS = 'limitless';
 
         function checkPassword() {
             const input = document.getElementById('passwordInput');
-            const errorMsg = document.getElementById('errorMsg');
-
-            if (input.value === CORRECT_PASSWORD) {
-                sessionStorage.setItem('authenticated', 'true');
+            if (input.value === PASS) {
+                sessionStorage.setItem('auth', '1');
                 document.getElementById('passwordScreen').classList.add('hidden');
                 document.getElementById('app').classList.add('visible');
                 init();
             } else {
                 input.classList.add('error');
-                errorMsg.classList.add('visible');
-                setTimeout(() => {
-                    input.classList.remove('error');
-                }, 500);
+                document.getElementById('errorMsg').classList.add('visible');
+                setTimeout(() => input.classList.remove('error'), 500);
             }
         }
 
-        // Check if already authenticated
-        if (sessionStorage.getItem('authenticated') === 'true') {
+        if (sessionStorage.getItem('auth') === '1') {
             document.getElementById('passwordScreen').classList.add('hidden');
             document.getElementById('app').classList.add('visible');
         } else {
@@ -619,360 +504,231 @@
 
         marked.setOptions({ breaks: true, gfm: true });
 
-        // Data structure
         const categories = {
-            protocols: {
-                name: 'Protocols',
-                icon: '📋',
-                files: [
-                    { file: 'protocols/titan-protocol.md', name: 'TITAN Protocol', subtitle: 'Complete longevity protocol' }
-                ]
-            },
-            gh_metabolic: {
-                name: 'GH Axis & Metabolic',
-                icon: '⚡',
-                files: [
-                    { file: 'peptides/tesamorelin-research.md', name: 'Tesamorelin', subtitle: 'FDA approved GHRH analog' },
-                    { file: 'peptides/ipamorelin-research.md', name: 'Ipamorelin', subtitle: 'Selective GH secretagogue' },
-                    { file: 'peptides/cjc-1295-research.md', name: 'CJC-1295', subtitle: 'GHRH analog (with/without DAC)' },
-                    { file: 'peptides/igf-1-lr3-research.md', name: 'IGF-1 LR3', subtitle: 'Long-acting IGF-1' },
-                    { file: 'peptides/follistatin-344-research.md', name: 'Follistatin-344', subtitle: 'Myostatin inhibitor' },
-                    { file: 'peptides/semaglutide-research.md', name: 'Semaglutide', subtitle: 'GLP-1 agonist (Ozempic/Wegovy)' },
-                    { file: 'peptides/tirzepatide-research.md', name: 'Tirzepatide', subtitle: 'Dual GIP/GLP-1 agonist (Mounjaro)' },
-                    { file: 'peptides/retatrutide-research.md', name: 'Retatrutide', subtitle: 'Triple agonist (Phase III)' },
-                    { file: 'peptides/aod-9604-research.md', name: 'AOD-9604', subtitle: 'HGH fragment 177-191' },
-                    { file: 'peptides/adipotide-research.md', name: 'Adipotide', subtitle: 'Fat-targeting peptide' }
-                ]
-            },
-            tissue_repair: {
-                name: 'Tissue Repair & Healing',
-                icon: '🩹',
-                files: [
-                    { file: 'peptides/bpc-157-research.md', name: 'BPC-157', subtitle: 'Body protection compound' },
-                    { file: 'peptides/tb-500-research.md', name: 'TB-500', subtitle: 'Thymosin Beta-4 fragment' },
-                    { file: 'peptides/ghk-cu-research.md', name: 'GHK-Cu', subtitle: 'Copper peptide for skin/tissue' },
-                    { file: 'peptides/teriparatide-research.md', name: 'Teriparatide', subtitle: 'PTH analog for bone (Forteo)' }
-                ]
-            },
-            cognitive: {
-                name: 'Cognitive & Neuroprotective',
-                icon: '🧠',
-                files: [
-                    { file: 'peptides/semax-research.md', name: 'Semax', subtitle: 'ACTH analog nootropic' },
-                    { file: 'peptides/selank-research.md', name: 'Selank', subtitle: 'Anxiolytic peptide' },
-                    { file: 'peptides/dihexa-research.md', name: 'Dihexa', subtitle: 'HGF mimetic (HIGH RISK)' },
-                    { file: 'peptides/phdp5-research.md', name: 'PHDP-5', subtitle: 'Cognitive peptide' }
-                ]
-            },
-            immune: {
-                name: 'Immune & Thymus',
-                icon: '🛡️',
-                files: [
-                    { file: 'peptides/thymalin-research.md', name: 'Thymalin', subtitle: 'Thymic peptide bioregulator' },
-                    { file: 'peptides/thymosin-alpha-1-research.md', name: 'Thymosin Alpha-1', subtitle: 'Immune modulator (Zadaxin)' },
-                    { file: 'peptides/thymogen-research.md', name: 'Thymogen', subtitle: 'Thymic dipeptide' },
-                    { file: 'peptides/kpv-research.md', name: 'KPV', subtitle: 'Anti-inflammatory tripeptide' },
-                    { file: 'peptides/gcmaf-research.md', name: 'GcMAF', subtitle: 'Macrophage activating factor' },
-                    { file: 'peptides/cecropins-research.md', name: 'Cecropins', subtitle: 'Antimicrobial peptides' }
-                ]
-            },
-            longevity: {
-                name: 'Longevity & Mitochondrial',
-                icon: '⏳',
-                files: [
-                    { file: 'peptides/epitalon-research.md', name: 'Epitalon', subtitle: 'Telomerase activator' },
-                    { file: 'peptides/mots-c-research.md', name: 'MOTS-c', subtitle: 'Mitochondrial-derived peptide' },
-                    { file: 'peptides/humanin-research.md', name: 'Humanin', subtitle: 'Cytoprotective peptide' },
-                    { file: 'peptides/ss-31-research.md', name: 'SS-31 (Elamipretide)', subtitle: 'Mitochondrial protector' },
-                    { file: 'peptides/nad-research.md', name: 'NAD+', subtitle: 'Cellular energy cofactor' }
-                ]
-            },
-            sexual: {
-                name: 'Sexual & Hormonal',
-                icon: '💜',
-                files: [
-                    { file: 'peptides/pt-141-research.md', name: 'PT-141 (Bremelanotide)', subtitle: 'Sexual dysfunction (Vyleesi)' },
-                    { file: 'peptides/melanotan-2-research.md', name: 'Melanotan II', subtitle: 'Tanning and libido' },
-                    { file: 'peptides/kisspeptin-research.md', name: 'Kisspeptin', subtitle: 'GnRH/hormone regulator' },
-                    { file: 'peptides/oxytocin-research.md', name: 'Oxytocin', subtitle: 'Bonding/social hormone' }
-                ]
-            },
-            sleep: {
-                name: 'Sleep & Relaxation',
-                icon: '😴',
-                files: [
-                    { file: 'peptides/dsip-research.md', name: 'DSIP', subtitle: 'Delta sleep-inducing peptide' },
-                    { file: 'peptides/vip-research.md', name: 'VIP', subtitle: 'Vasoactive intestinal peptide' }
-                ]
-            },
-            organ: {
-                name: 'Organ-Specific',
-                icon: '🫀',
-                files: [
-                    { file: 'peptides/cardiogen-research.md', name: 'Cardiogen', subtitle: 'Cardiac bioregulator' },
-                    { file: 'peptides/bronchogen-research.md', name: 'Bronchogen', subtitle: 'Lung/bronchial bioregulator' },
-                    { file: 'peptides/prostamax-research.md', name: 'Prostamax', subtitle: 'Prostate bioregulator' },
-                    { file: 'peptides/nk-peptide-research.md', name: 'NK Peptide', subtitle: 'Kidney bioregulator' },
-                    { file: 'peptides/melittin-research.md', name: 'Melittin', subtitle: 'Bee venom peptide' }
-                ]
-            }
+            protocols: { name: 'Protocols', icon: '📋', files: [
+                { file: 'protocols/titan-protocol.md', name: 'TITAN Protocol', subtitle: 'Complete longevity protocol' }
+            ]},
+            gh_metabolic: { name: 'GH Axis & Metabolic', icon: '⚡', files: [
+                { file: 'peptides/tesamorelin-research.md', name: 'Tesamorelin', subtitle: 'FDA approved GHRH' },
+                { file: 'peptides/ipamorelin-research.md', name: 'Ipamorelin', subtitle: 'Selective GH secretagogue' },
+                { file: 'peptides/cjc-1295-research.md', name: 'CJC-1295', subtitle: 'GHRH analog' },
+                { file: 'peptides/igf-1-lr3-research.md', name: 'IGF-1 LR3', subtitle: 'Long-acting IGF-1' },
+                { file: 'peptides/follistatin-344-research.md', name: 'Follistatin-344', subtitle: 'Myostatin inhibitor' },
+                { file: 'peptides/semaglutide-research.md', name: 'Semaglutide', subtitle: 'GLP-1 (Ozempic)' },
+                { file: 'peptides/tirzepatide-research.md', name: 'Tirzepatide', subtitle: 'GIP/GLP-1 (Mounjaro)' },
+                { file: 'peptides/retatrutide-research.md', name: 'Retatrutide', subtitle: 'Triple agonist' },
+                { file: 'peptides/aod-9604-research.md', name: 'AOD-9604', subtitle: 'HGH fragment' },
+                { file: 'peptides/adipotide-research.md', name: 'Adipotide', subtitle: 'Fat-targeting' }
+            ]},
+            tissue: { name: 'Tissue Repair', icon: '🩹', files: [
+                { file: 'peptides/bpc-157-research.md', name: 'BPC-157', subtitle: 'Body protection compound' },
+                { file: 'peptides/tb-500-research.md', name: 'TB-500', subtitle: 'Thymosin Beta-4' },
+                { file: 'peptides/ghk-cu-research.md', name: 'GHK-Cu', subtitle: 'Copper peptide' },
+                { file: 'peptides/teriparatide-research.md', name: 'Teriparatide', subtitle: 'PTH for bone' }
+            ]},
+            cognitive: { name: 'Cognitive', icon: '🧠', files: [
+                { file: 'peptides/semax-research.md', name: 'Semax', subtitle: 'Nootropic' },
+                { file: 'peptides/selank-research.md', name: 'Selank', subtitle: 'Anxiolytic' },
+                { file: 'peptides/dihexa-research.md', name: 'Dihexa', subtitle: 'HGF mimetic (caution)' },
+                { file: 'peptides/phdp5-research.md', name: 'PHDP-5', subtitle: 'Cognitive peptide' }
+            ]},
+            immune: { name: 'Immune & Thymus', icon: '🛡️', files: [
+                { file: 'peptides/thymalin-research.md', name: 'Thymalin', subtitle: 'Thymic peptide' },
+                { file: 'peptides/thymosin-alpha-1-research.md', name: 'Thymosin Alpha-1', subtitle: 'Immune modulator' },
+                { file: 'peptides/thymogen-research.md', name: 'Thymogen', subtitle: 'Thymic dipeptide' },
+                { file: 'peptides/kpv-research.md', name: 'KPV', subtitle: 'Anti-inflammatory' },
+                { file: 'peptides/gcmaf-research.md', name: 'GcMAF', subtitle: 'Macrophage activator' },
+                { file: 'peptides/cecropins-research.md', name: 'Cecropins', subtitle: 'Antimicrobial' }
+            ]},
+            longevity: { name: 'Longevity', icon: '⏳', files: [
+                { file: 'peptides/epitalon-research.md', name: 'Epitalon', subtitle: 'Telomerase activator' },
+                { file: 'peptides/mots-c-research.md', name: 'MOTS-c', subtitle: 'Mitochondrial peptide' },
+                { file: 'peptides/humanin-research.md', name: 'Humanin', subtitle: 'Cytoprotective' },
+                { file: 'peptides/ss-31-research.md', name: 'SS-31', subtitle: 'Mitochondrial protector' },
+                { file: 'peptides/nad-research.md', name: 'NAD+', subtitle: 'Cellular energy' }
+            ]},
+            sexual: { name: 'Sexual & Hormonal', icon: '💜', files: [
+                { file: 'peptides/pt-141-research.md', name: 'PT-141', subtitle: 'Sexual function' },
+                { file: 'peptides/melanotan-2-research.md', name: 'Melanotan II', subtitle: 'Tanning & libido' },
+                { file: 'peptides/kisspeptin-research.md', name: 'Kisspeptin', subtitle: 'GnRH regulator' },
+                { file: 'peptides/oxytocin-research.md', name: 'Oxytocin', subtitle: 'Bonding hormone' }
+            ]},
+            sleep: { name: 'Sleep', icon: '😴', files: [
+                { file: 'peptides/dsip-research.md', name: 'DSIP', subtitle: 'Sleep-inducing' },
+                { file: 'peptides/vip-research.md', name: 'VIP', subtitle: 'Vasoactive peptide' }
+            ]},
+            organ: { name: 'Organ-Specific', icon: '🫀', files: [
+                { file: 'peptides/cardiogen-research.md', name: 'Cardiogen', subtitle: 'Cardiac' },
+                { file: 'peptides/bronchogen-research.md', name: 'Bronchogen', subtitle: 'Lung' },
+                { file: 'peptides/prostamax-research.md', name: 'Prostamax', subtitle: 'Prostate' },
+                { file: 'peptides/nk-peptide-research.md', name: 'NK Peptide', subtitle: 'Kidney' },
+                { file: 'peptides/melittin-research.md', name: 'Melittin', subtitle: 'Bee venom' }
+            ]}
         };
 
-        // State
-        let currentView = 'home';
-        let currentCategory = null;
         let currentFile = null;
 
-        // Initialize
         function init() {
-            renderCategoryGrid();
-
-            // Handle browser back/forward
-            window.addEventListener('popstate', (e) => {
-                if (e.state) {
-                    if (e.state.view === 'home') {
-                        showHome(false);
-                    } else if (e.state.view === 'category') {
-                        showCategory(e.state.category, false);
-                    } else if (e.state.view === 'doc') {
-                        loadDocument(e.state.file, e.state.category, false);
-                    }
-                } else {
-                    showHome(false);
-                }
-            });
-
-            // Check URL hash on load
+            renderNav();
             if (window.location.hash) {
-                const hash = window.location.hash.slice(1);
-                if (hash.includes('/')) {
-                    loadDocument(decodeURIComponent(hash));
-                }
+                const file = decodeURIComponent(window.location.hash.slice(1));
+                if (file) loadFile(file, false);
             }
-        }
-
-        function renderCategoryGrid() {
-            const grid = document.getElementById('categoryGrid');
-            grid.innerHTML = '';
-
-            Object.entries(categories).forEach(([key, cat]) => {
-                if (key === 'protocols') return;
-                const card = document.createElement('div');
-                card.className = 'section-card';
-                card.onclick = () => showCategory(key);
-                card.innerHTML = `
-                    <h3>${cat.icon} ${cat.name} <span class="count">${cat.files.length}</span></h3>
-                    <p>${cat.files.slice(0, 3).map(f => f.name).join(', ')}${cat.files.length > 3 ? '...' : ''}</p>
-                `;
-                grid.appendChild(card);
+            window.addEventListener('popstate', (e) => {
+                if (e.state?.file) loadFile(e.state.file, false);
+                else showWelcome();
             });
         }
 
-        function showHome(pushState = true) {
-            currentView = 'home';
-            currentCategory = null;
-            currentFile = null;
-
-            document.getElementById('homeView').classList.remove('hidden');
-            document.getElementById('docView').classList.remove('visible');
-            document.getElementById('categoriesView').style.display = 'block';
-            document.getElementById('categoryDetail').style.display = 'none';
-            document.getElementById('searchResults').style.display = 'none';
-            document.getElementById('searchInput').value = '';
-            document.getElementById('backBtn').classList.remove('visible');
-            updateBreadcrumb([]);
-
-            if (pushState) {
-                window.history.pushState({ view: 'home' }, '', window.location.pathname);
-            }
+        function renderNav() {
+            const nav = document.getElementById('navScroll');
+            nav.innerHTML = Object.entries(categories).map(([key, cat]) => `
+                <div class="nav-section" data-key="${key}">
+                    <div class="nav-section-header" onclick="toggleSection('${key}')">
+                        <span class="icon">${cat.icon}</span>
+                        <span class="name">${cat.name}</span>
+                        <span class="count">${cat.files.length}</span>
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="nav-items">
+                        ${cat.files.map(f => `
+                            <div class="nav-item" data-file="${f.file}" onclick="loadFile('${f.file}')">
+                                ${f.name}
+                                <span class="subtitle">${f.subtitle}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
         }
 
-        function showCategory(categoryKey, pushState = true) {
-            currentView = 'category';
-            currentCategory = categoryKey;
-            const cat = categories[categoryKey];
-
-            document.getElementById('homeView').classList.remove('hidden');
-            document.getElementById('docView').classList.remove('visible');
-            document.getElementById('categoriesView').style.display = 'none';
-            document.getElementById('categoryDetail').style.display = 'block';
-            document.getElementById('searchResults').style.display = 'none';
-            document.getElementById('backBtn').classList.add('visible');
-
-            updateBreadcrumb([{ name: cat.name }]);
-
-            const list = document.getElementById('categoryFiles');
-            list.innerHTML = `<div class="file-list-header">${cat.icon} ${cat.name}</div>`;
-
-            cat.files.forEach(f => {
-                const item = document.createElement('div');
-                item.className = 'file-item';
-                item.onclick = () => loadDocument(f.file, categoryKey);
-                item.innerHTML = `
-                    <div class="name">${f.name}</div>
-                    <div class="subtitle">${f.subtitle}</div>
-                `;
-                list.appendChild(item);
-            });
-
-            if (pushState) {
-                window.history.pushState({ view: 'category', category: categoryKey }, '', window.location.pathname);
-            }
+        function toggleSection(key) {
+            document.querySelector(`.nav-section[data-key="${key}"]`).classList.toggle('collapsed');
         }
 
-        async function loadDocument(filePath, categoryKey = null, pushState = true) {
-            currentView = 'doc';
+        async function loadFile(filePath, pushState = true) {
             currentFile = filePath;
 
-            // Find file info
-            let fileInfo = null;
-            let catInfo = null;
+            // Update active state
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.toggle('active', item.dataset.file === filePath);
+            });
+
+            // Update breadcrumb
+            let catName = '', fileName = '';
             for (const [key, cat] of Object.entries(categories)) {
                 const found = cat.files.find(f => f.file === filePath);
                 if (found) {
-                    fileInfo = found;
-                    catInfo = { key, ...cat };
-                    if (!categoryKey) categoryKey = key;
+                    catName = cat.name;
+                    fileName = found.name;
                     break;
                 }
             }
 
-            document.getElementById('homeView').classList.add('hidden');
-            document.getElementById('docView').classList.add('visible');
-            document.getElementById('backBtn').classList.add('visible');
+            document.getElementById('breadcrumb').innerHTML = `
+                <a onclick="showWelcome()">Home</a>
+                <span class="separator">/</span>
+                <span>${catName}</span>
+                <span class="separator">/</span>
+                <span>${fileName}</span>
+            `;
 
-            const breadcrumbs = [];
-            if (catInfo) {
-                breadcrumbs.push({ name: catInfo.name, action: () => showCategory(catInfo.key) });
-            }
-            if (fileInfo) {
-                breadcrumbs.push({ name: fileInfo.name });
-            }
-            updateBreadcrumb(breadcrumbs);
-
-            const content = document.getElementById('docContent');
-            content.innerHTML = '<div class="loading">Loading...</div>';
+            // Load content
+            const content = document.getElementById('content');
+            content.innerHTML = '<p style="color:var(--text-light);padding:2rem;text-align:center;">Loading...</p>';
 
             try {
-                const response = await fetch(filePath);
-                if (!response.ok) throw new Error('Not found');
-                const markdown = await response.text();
-                content.innerHTML = marked.parse(markdown);
+                const res = await fetch(filePath);
+                if (!res.ok) throw new Error();
+                content.innerHTML = marked.parse(await res.text());
                 window.scrollTo(0, 0);
-            } catch (error) {
-                content.innerHTML = `<h1>Error</h1><p>Could not load: ${filePath}</p>`;
+            } catch {
+                content.innerHTML = `<p style="color:#e53e3e;padding:2rem;">Could not load ${filePath}</p>`;
             }
 
             if (pushState) {
-                window.history.pushState({ view: 'doc', file: filePath, category: categoryKey }, '', `#${encodeURIComponent(filePath)}`);
+                history.pushState({ file: filePath }, '', `#${encodeURIComponent(filePath)}`);
             }
         }
 
-        function goBack() {
-            if (currentView === 'doc' && currentCategory) {
-                showCategory(currentCategory);
-            } else {
-                showHome();
-            }
-        }
-
-        function goHome() {
-            showHome();
-        }
-
-        function updateBreadcrumb(items) {
-            const bc = document.getElementById('breadcrumb');
-            if (items.length === 0) {
-                bc.innerHTML = '';
-                return;
-            }
-
-            let html = '';
-            items.forEach((item, i) => {
-                if (i > 0) html += '<span class="separator">/</span>';
-                if (item.action) {
-                    html += `<a onclick="event.stopPropagation(); (${item.action.toString()})()">${item.name}</a>`;
-                } else {
-                    html += `<span class="current">${item.name}</span>`;
-                }
-            });
-            bc.innerHTML = html;
+        function showWelcome() {
+            currentFile = null;
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            document.getElementById('breadcrumb').innerHTML = '';
+            document.getElementById('content').innerHTML = `
+                <div class="welcome">
+                    <h1>Welcome</h1>
+                    <p>Select a document from the sidebar to get started</p>
+                    <div class="welcome-grid">
+                        <div class="welcome-card" onclick="loadFile('protocols/titan-protocol.md')">
+                            <h3>📋 TITAN Protocol</h3>
+                            <p>Complete longevity protocol</p>
+                        </div>
+                        <div class="welcome-card" onclick="loadFile('peptides/bpc-157-research.md')">
+                            <h3>🔬 BPC-157</h3>
+                            <p>Body protection compound</p>
+                        </div>
+                        <div class="welcome-card" onclick="loadFile('peptides/semaglutide-research.md')">
+                            <h3>💊 Semaglutide</h3>
+                            <p>GLP-1 for weight loss</p>
+                        </div>
+                        <div class="welcome-card" onclick="loadFile('peptides/epitalon-research.md')">
+                            <h3>⏳ Epitalon</h3>
+                            <p>Telomerase activator</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            history.pushState({}, '', window.location.pathname);
         }
 
         function handleSearch(query) {
             const q = query.toLowerCase().trim();
             const clearBtn = document.getElementById('searchClear');
+            clearBtn.classList.toggle('visible', q.length > 0);
 
-            // Show/hide clear button
-            if (q) {
-                clearBtn.classList.add('visible');
-            } else {
-                clearBtn.classList.remove('visible');
-            }
-
-            if (!q) {
-                document.getElementById('searchResults').style.display = 'none';
-                document.getElementById('categoriesView').style.display = 'block';
-                document.getElementById('categoryDetail').style.display = 'none';
-                return;
-            }
-
-            document.getElementById('searchResults').style.display = 'block';
-            document.getElementById('categoriesView').style.display = 'none';
-            document.getElementById('categoryDetail').style.display = 'none';
-
-            const results = [];
-            Object.entries(categories).forEach(([key, cat]) => {
-                cat.files.forEach(f => {
-                    if (f.name.toLowerCase().includes(q) || f.subtitle.toLowerCase().includes(q)) {
-                        results.push({ ...f, category: cat.name });
-                    }
-                });
+            document.querySelectorAll('.nav-item').forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.classList.toggle('hidden', q && !text.includes(q));
             });
 
-            const list = document.getElementById('searchResultsList');
-            if (results.length === 0) {
-                list.innerHTML = `
-                    <div class="no-results">
-                        <p>No peptides found for "<strong>${q}</strong>"</p>
-                        <a class="clear-search-link" onclick="clearSearch()">Clear search and browse all</a>
-                    </div>
-                `;
-            } else {
-                list.innerHTML = results.map(r => `
-                    <div class="file-item" onclick="loadDocument('${r.file}')">
-                        <div class="name">${r.name}</div>
-                        <div class="subtitle">${r.subtitle} • ${r.category}</div>
-                    </div>
-                `).join('');
+            document.querySelectorAll('.nav-section').forEach(section => {
+                const hasVisible = section.querySelectorAll('.nav-item:not(.hidden)').length > 0;
+                section.style.display = hasVisible ? '' : 'none';
+                if (q && hasVisible) section.classList.remove('collapsed');
+            });
+
+            // Show no results message
+            const nav = document.getElementById('navScroll');
+            const existing = nav.querySelector('.no-results');
+            if (existing) existing.remove();
+
+            if (q && !document.querySelector('.nav-item:not(.hidden)')) {
+                nav.innerHTML += `<div class="no-results">No results for "${q}"<br><a onclick="clearSearch()">Clear search</a></div>`;
             }
         }
 
         function clearSearch() {
             document.getElementById('searchInput').value = '';
             document.getElementById('searchClear').classList.remove('visible');
-            document.getElementById('searchResults').style.display = 'none';
-            document.getElementById('categoriesView').style.display = 'block';
-            document.getElementById('categoryDetail').style.display = 'none';
-            document.getElementById('searchInput').focus();
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('hidden'));
+            document.querySelectorAll('.nav-section').forEach(s => s.style.display = '');
+            const nr = document.querySelector('.no-results');
+            if (nr) nr.remove();
         }
 
-        // Keyboard shortcuts
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', e => {
             if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
                 e.preventDefault();
                 document.getElementById('searchInput').focus();
             }
             if (e.key === 'Escape') {
+                clearSearch();
                 document.getElementById('searchInput').blur();
-                if (currentView !== 'home') goBack();
             }
         });
 
-        // Init if already authenticated
-        if (sessionStorage.getItem('authenticated') === 'true') {
-            init();
-        }
+        if (sessionStorage.getItem('auth') === '1') init();
     </script>
 </body>
 </html>
