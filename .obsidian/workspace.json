@@ -185,6 +185,7 @@
   },
   "active": "a4c604fc572c3327",
   "lastOpenFiles": [
+    "index.html",
     "peptides/vip-research.md",
     "protocols/titan-protocol.md",
     "peptides/cardiogen-research.md",
@@ -220,7 +221,6 @@
     "md-browser/content/peptides/ss-31-research.md",
     "md-browser/content/peptides/semax-research.md",
     "md-browser/content/peptides/semaglutide-research.md",
-    "md-browser/content/peptides/selank-research.md",
     "md-browser/public/window.svg",
     "md-browser/public/vercel.svg",
     "md-browser/public/next.svg",
