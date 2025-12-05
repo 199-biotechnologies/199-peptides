@@ -13,20 +13,24 @@
 - Recovery/Sleep
 - Visceral Fat Reduction
 - Longevity
+- Skin/Appearance
 
 ---
 
-## PEPTIDES (9)
+## PEPTIDES (12)
 
 | Peptide | Dose | Frequency | Intended Benefit |
 |---------|------|-----------|------------------|
 | **Tesamorelin** | 2mg SC | Daily | GH, VAT reduction |
 | **Follistatin-344** | 100mcg SC | Daily x 10-14 days (2 courses) | Myostatin blockade |
-| **Dihexa** | 10-20mg oral | Daily (4-6 weeks on, 2-4 off) | Cognitive enhancement |
-| **SS-31** | 5mg SC | 3x/week | Mitochondrial support |
+| **Dihexa** | 10-20mg oral | Daily (4-6 weeks on, 2-4 off) | Structural cognitive enhancement (HGF/c-Met) |
+| **Semax 0.1%** | 400mcg intranasal | Daily | Acute nootropic, BDNF, dopaminergic |
+| **SS-31** | 5mg SC | 3x/week | Mitochondrial repair (cardiolipin) |
+| **MOTS-c** | 10mg SC | 3x/week | Mitochondrial biogenesis (makes more) |
 | **BPC-157** | 250-500mcg SC | 2x daily | Local tissue repair, GI protection |
 | **TB-500** | 2.5mg SC | 2x/week loading, 1x/week maintenance | Systemic stem cell mobilization |
 | **DSIP** | 200mcg SC | Daily before bed | Sleep architecture, GH pulse optimization |
+| **GHK-Cu** | 1-2mg SC | Daily | Skin elasticity, collagen induction, external youth |
 | **Epithalon** | 5-10mg SC | Daily x 10-20 days (2-3x/year) | Telomerase, longevity |
 | **Thymalin** | 10-20mg SC | Daily x 10-14 days (2-3x/year) | Immune restoration |
 
@@ -40,7 +44,7 @@
 | **Creatine** | 5g | Post-workout | ATP, strength, muscle |
 | **Omega-3** | 2,000mg | With meals | Brain, CV, anti-inflammatory |
 | **Magnesium Glycinate** | 400mg | Before bed | Sleep, muscle, BP |
-| **CoQ10 (Ubiquinol)** | 200mg | Morning with fat | Mitochondrial synergy with SS-31 |
+| **CoQ10 (Ubiquinol)** | 200mg | Morning with fat | ETC support, mitochondrial stack |
 | **Alpha-GPC** | 600mg | Morning | Cognitive synergy with Dihexa |
 | **Zinc** | 30mg | Before bed | Immunity, enzymes |
 | **Ca-AKG** | 1,000mg | 2x daily | Longevity, TCA cycle |
@@ -50,43 +54,91 @@
 
 ---
 
-## PHARMACEUTICALS (4-5)
+## PHARMACEUTICALS (4)
 
 | Drug | Dose | Frequency | Intended Benefit |
 |------|------|-----------|------------------|
 | **Testosterone Cypionate** | Per protocol | Per protocol | Exogenous testosterone |
 | **Metformin** | 500-1000mg | 1-2x daily | AMPK, GH-induced IR mitigation |
 | **Tirzepatide** | Low/micro dose | Per protocol | GLP-1/GIP, appetite, insulin |
-| **Rapamycin** | 3-6mg | Once weekly (rest day) | Autophagy, mTORC1, longevity |
-| **Repatha** | 140mg SC | Every 2 weeks (if ApoB/LDL elevated) | LDL/ApoB reduction |
+| **Repatha** *(optional)* | 140mg SC | Every 2 weeks | PCSK9i: soft plaque reversal, ApoB/LDL reduction, CV prevention |
 
 ---
 
 ## SYNERGY STACKS
 
-**Longevity:**
-Rapamycin (autophagy) + Epithalon (telomerase) + Ca-AKG (biological age) + SS-31 (mitochondria) + Metformin (AMPK)
+### Mitochondrial (Holy Grail)
 
-**Glutathione:**
-Glycine + NAC = GlyNAC protocol
+```mermaid
+flowchart LR
+    SS31[SS-31: Repair] --> E[Enhanced Cellular Energy]
+    MOTS[MOTS-c: Biogenesis] --> E
+    COQ[CoQ10: ETC Fuel] --> E
+```
 
-**Methylation:**
-TMG buffers Metformin's B12/methylation depletion
+### Cognitive
 
-**Cognitive:**
-Dihexa (HGF/c-Met) + Alpha-GPC (acetylcholine)
+```mermaid
+flowchart LR
+    DIH[Dihexa: Structural] --> C[Enhanced Cognition]
+    SEM[Semax: Acute BDNF] --> C
+    ALP[Alpha-GPC: Acetylcholine] --> C
+```
 
-**Mitochondrial:**
-SS-31 (cardiolipin) + CoQ10 (ETC support)
+### Body Composition
 
-**Recovery:**
-BPC-157 (local/NO system) + TB-500 (systemic/stem cells)
+```mermaid
+flowchart LR
+    TES[Tesamorelin: GH] --> R[Lean Mass Up / VAT Down]
+    TIR[Tirzepatide: GLP-1] --> R
+    FOL[Follistatin: Myostatin Block] --> R
+    MET[Metformin: IR Buffer] --> R
+```
 
-**Body Composition:**
-Tesamorelin (GH) + Tirzepatide (GLP-1) + Follistatin (muscle) + Metformin (IR buffer)
+### Recovery
 
-**Immune:**
-Thymalin + Rapamycin (paradoxical immune enhancement)
+```mermaid
+flowchart LR
+    BPC[BPC-157: Local] --> H[Accelerated Healing]
+    TB5[TB-500: Systemic] --> H
+```
+
+### Longevity
+
+```mermaid
+flowchart LR
+    EPI[Epithalon: Telomerase] --> A[Biological Age Reversal]
+    CAA[Ca-AKG: TCA Cycle] --> A
+    THY[Thymalin: Immune] --> A
+    MIT[SS-31 + MOTS-c] --> A
+    METF[Metformin: AMPK] --> A
+```
+
+### Protective
+
+```mermaid
+flowchart LR
+    GLY[Glycine] --> GSH[Glutathione Synthesis]
+    NAC[NAC] --> GSH
+    TMG[TMG] --> B12[Methylation Support]
+```
+
+### Appearance
+
+```mermaid
+flowchart LR
+    GHK[GHK-Cu] --> SKIN[Collagen / Elasticity] --> MATCH[External Matches Internal]
+```
+
+---
+
+## RATIONALE
+
+The Titan Protocol targets seven physiological domains through mechanistically non-redundant synergies. Testosterone Cypionate provides the androgen foundation while Tesamorelin (FDA-approved) drives visceral fat reduction via GH — with Metformin pre-emptively buffering GH-induced insulin resistance. Tirzepatide adds orthogonal GLP-1/GIP appetite and insulin control. Follistatin-344 removes the genetic ceiling on muscle growth by blocking myostatin.
+
+The cognitive stack layers Dihexa's structural brain remodeling (10 million x BDNF potency, persistent dendritic changes) with Semax's acute BDNF/dopaminergic effects — architectural change plus daily sharpness. The mitochondrial "Holy Grail" combines SS-31 (repairs existing mitochondria), MOTS-c (creates new ones), and CoQ10 (fuels the ETC) — repair, build, optimize. BPC-157 and TB-500 deliver dual-layer recovery: local tissue repair plus systemic stem cell mobilization.
+
+Longevity compounds attack aging through multiple vectors: Epithalon (telomerase), Thymalin (immune restoration), Ca-AKG (biological age), while GHK-Cu ensures external appearance matches internal reversal. TMG protects methylation from Metformin depletion; Glycine + NAC drive glutathione synthesis. Every compound was stress-tested for redundancy — what remains is integration, not accumulation.
 
 ---
 
