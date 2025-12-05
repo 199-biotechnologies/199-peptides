@@ -1489,27 +1489,44 @@
         });
 
         // Category tag mapping for markdown content
+        // Maps all tags found in MD files to sidebar categories
         const categoryTagMap = {
+            // GH Axis & Metabolic
             'GH Axis': 'gh_metabolic',
             'Metabolic': 'gh_metabolic',
             'Metabolic / Fat Loss': 'gh_metabolic',
             'Fat Loss': 'gh_metabolic',
             'Muscle & Performance': 'gh_metabolic',
+            // Tissue Repair
             'Tissue Repair': 'tissue',
             'Healing': 'tissue',
+            'Bone & Joint': 'tissue',
+            'Skin & Collagen': 'tissue',
+            // Cognitive
             'Cognitive': 'cognitive',
             'Nootropic': 'cognitive',
+            'Mood & Stress': 'cognitive',
+            // Immune
             'Immune': 'immune',
             'Immune & Thymus': 'immune',
             'Thymus': 'immune',
+            'Gut Health': 'immune',
+            // Longevity
             'Longevity': 'longevity',
             'Anti-Aging': 'longevity',
+            // Sexual & Hormonal
             'Sexual': 'sexual',
             'Sexual & Hormonal': 'sexual',
             'Hormonal': 'sexual',
+            'Sexual Function': 'sexual',
+            'Fertility & Hormones': 'sexual',
+            // Sleep
             'Sleep': 'sleep',
+            // Organ-Specific
             'Organ-Specific': 'organ',
             'Cardiac': 'organ',
+            'Cardiovascular': 'organ',
+            // Protocols
             'Protocols': 'protocols'
         };
 
