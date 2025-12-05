@@ -185,8 +185,9 @@
   },
   "active": "a4c604fc572c3327",
   "lastOpenFiles": [
-    "peptides/cardiogen-research.md",
+    "peptides/vip-research.md",
     "protocols/titan-protocol.md",
+    "peptides/cardiogen-research.md",
     "protocols/titan-protocol.md.tmp.91782.1764883676150",
     "peptides/thymogen-research.md.tmp.46503.1764883630478",
     "peptides/selank-research.md.tmp.46503.1764883629391",
@@ -220,7 +221,6 @@
     "md-browser/content/peptides/semax-research.md",
     "md-browser/content/peptides/semaglutide-research.md",
     "md-browser/content/peptides/selank-research.md",
-    "md-browser/content/peptides/retatrutide-research.md",
     "md-browser/public/window.svg",
     "md-browser/public/vercel.svg",
     "md-browser/public/next.svg",
