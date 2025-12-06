@@ -48,7 +48,7 @@ Athena was the Greek goddess of wisdom, strategic warfare, and craft — revered
 |------------|------|-----------|------------------|
 | **Vitamin D3** | 5,000 IU | Morning with fat | Bone density, immunity, mood |
 | **Vitamin K2 (MK-7)** | 200mcg | Morning with D3 | Calcium direction to bones, CV protection |
-| **Boron** | 6-10mg | Daily | Bone density, D3 synergy, hormone support (see notes) |
+| **Boron** | 6-10mg | Daily | Bone density, D3 synergy, hormone support |
 | **Omega-3** | 2,000mg | With meals | Brain, CV, anti-inflammatory |
 | **Magnesium Glycinate** | 400mg | Before bed | Sleep, mood, bone, muscle |
 | **Collagen Peptides** | 10-15g | Morning | Skin, hair, nails, joints |
@@ -80,7 +80,7 @@ Athena was the Greek goddess of wisdom, strategic warfare, and craft — revered
 *Optional addons:*
 - **Procyanidin C1**: 115mg, 3 days/month (senolytic)
 - **DHEA**: 10-25mg daily if levels low
-- **Teriparatide** (Forteo): 20mcg SC daily, max 2 years (severe osteoporosis — see notes)
+- **Teriparatide** (Forteo): 20mcg SC daily, max 2 years (severe osteoporosis only, FDA-approved)
 
 ---
 
@@ -186,70 +186,6 @@ The Athena Protocol addresses the unique physiological needs of women through me
 The appearance stack leverages GHK-Cu (28% collagen increase in RCT data) with oral collagen peptides and Tesamorelin-driven GH release. BPC-157 supports the gut-hormone axis — gut health drives hormone metabolism. The cognitive-mood axis pairs Semax (BDNF, dopaminergic activation) with Selank (anxiolytic without sedation or dependence), while Creatine provides overlooked cognitive and bone density benefits for women. Tirzepatide adds orthogonal GLP-1/GIP control for body composition.
 
 The "Holy Grail" mitochondrial stack (SS-31 + MOTS-c + NAD+ + CoQ10) addresses cellular energy at four levels: repair existing mitochondria, build new ones, restore the critical NAD+ substrate that declines sharply at menopause, and fuel the electron transport chain. Myo-Inositol provides insulin sensitivity and egg quality support with strong evidence for women. The bone density stack (Estradiol + Vitamin D3 + K2 + Boron + Magnesium + Creatine) addresses the critical concern of postmenopausal bone loss through six synergistic mechanisms — Boron alone extends Vitamin D3 half-life by 20% while stimulating osteoblast differentiation via RUNX2. Longevity vectors include Rapamycin (mTOR), Epithalon (telomerase), NAD+ (cellular energy), and Metformin (AMPK) — attacking aging through four non-redundant pathways. Procyanidin C1 available as optional senolytic addon.
-
----
-
-## NOTES
-
-### Pre-Menopausal Considerations
-- Kisspeptin and HRT doses adjusted per cycle phase
-- PT-141 can be used for libido regardless of hormonal status
-- Cabergoline particularly useful if elevated prolactin or post-pill amenorrhea
-
-### Bone Density Support
-- Estradiol is foundation for bone protection
-- Vitamin D3 + K2 + Boron + Magnesium = comprehensive bone stack
-- Weight-bearing exercise synergizes with protocol
-- Creatine provides additional bone density support
-
-### Boron (Bone & Hormone Synergy)
-
-Boron is a critical trace mineral for women's bone and hormonal health:
-
-| Benefit | Evidence |
-|---------|----------|
-| Bone density | 2024 pilot study: strong correlation between boron intake and BMD in postmenopausal women |
-| Vitamin D3 synergy | Extends D3 half-life by 20%, improves bioavailability |
-| Magnesium absorption | Enhances Mg deposition in bone |
-| Hormone support | 2x increase in free testosterone + increased estradiol in postmenopausal women at 3mg/day |
-| Osteoblast function | Stimulates RUNX2 (essential for bone formation) |
-
-**Dosing notes:**
-- Minimum effective: 3mg/day (benefits don't appear below this)
-- Optimal for women: 6-10mg/day
-- WHO safe range: 1-13mg/day
-- Forms: Boron citrate or boron glycinate
-- Take with Vitamin D3 for synergy
-
-### Teriparatide (Optional — Severe Osteoporosis Only)
-
-For women with established osteoporosis (T-score ≤-2.5) or prior fragility fracture:
-
-| Property | Value |
-|----------|-------|
-| Status | **FDA approved** (2002) |
-| Mechanism | Only drug that BUILDS new bone (anabolic) |
-| Efficacy | 65% vertebral fracture reduction, +9% spine BMD |
-| Dose | 20mcg SC daily (self-injection pen) |
-| Duration | **Maximum 2 years lifetime** |
-| Cost | ~$1,500-2,000/month |
-
-**Important considerations:**
-- Black box warning: osteosarcoma risk in rat studies at high doses
-- NOT for prevention — reserved for established osteoporosis
-- Requires transition to anti-resorptive (bisphosphonate/denosumab) after 2 years
-- Monitor serum calcium
-- Contraindicated: skeletal malignancy, Paget's disease, prior bone radiation
-
-### Hair & Nails
-- GHK-Cu: Proven hair growth effects via Wnt signaling
-- Biotin: Keratin support
-- Collagen peptides: Structural support
-
-### Cycle Timing (for pulsed compounds)
-- Epithalon: 10-20 days, 2-3x/year
-- Rapamycin: Start 2mg weekly, increase to 5mg over time
-- *Optional Procyanidin C1: 3 consecutive days/month*
 
 ---
 
