@@ -1150,6 +1150,12 @@
                 { file: 'peptides/prostamax-research.md', name: 'Prostamax', subtitle: 'Prostate' },
                 { file: 'peptides/nk-peptide-research.md', name: 'NK Peptide', subtitle: 'Kidney' },
                 { file: 'peptides/melittin-research.md', name: 'Melittin', subtitle: 'Bee venom' }
+            ]},
+            documents: { name: 'Documents', icon: 'Folder', files: [
+                { file: 'documents/bespoke-longevity-handout.md', name: 'Bespoke Longevity Handout', subtitle: 'Patient education' },
+                { file: 'documents/consent-liability-waiver.md', name: 'Consent & Liability Waiver', subtitle: 'Legal forms' },
+                { file: 'documents/patient-intake-form.md', name: 'Patient Intake Form', subtitle: 'New patient paperwork' },
+                { file: 'documents/peptide-therapy-presentation.md', name: 'Peptide Therapy Presentation', subtitle: 'Educational slides' }
             ]}
         };
 
@@ -1158,9 +1164,10 @@
 
         // Count totals
         const totalPeptides = Object.values(categories).reduce((sum, cat) =>
-            cat.name !== 'Protocols' ? sum + cat.files.length : sum, 0);
-        const totalCategories = Object.keys(categories).length - 1; // exclude Protocols
+            cat.name !== 'Protocols' && cat.name !== 'Documents' ? sum + cat.files.length : sum, 0);
+        const totalCategories = Object.keys(categories).length - 2; // exclude Protocols and Documents
         const totalProtocols = categories.protocols.files.length;
+        const totalDocuments = categories.documents.files.length;
 
         // Auth
         function checkPassword() {
@@ -1343,7 +1350,8 @@
                 'Hour': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg>',
                 'Heart': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>',
                 'Moon': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>',
-                'Organ': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"/><path d="M12 6l-2 4l4 2l-2 4"/></svg>'
+                'Organ': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"/><path d="M12 6l-2 4l4 2l-2 4"/></svg>',
+                'Folder': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>'
             };
             return icons[name] || '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>';
         }
@@ -1436,9 +1444,9 @@
                 <span>Peptides</span>
             `;
 
-            // Build categories (exclude protocols)
+            // Build categories (exclude protocols and documents)
             const peptideCategories = Object.entries(categories)
-                .filter(([key]) => key !== 'protocols')
+                .filter(([key]) => key !== 'protocols' && key !== 'documents')
                 .map(([key, cat]) => `
                     <div class="category-card" onclick="goToCategory('${key}')">
                         <div class="icon">${getIcon(cat.icon)}</div>
@@ -1631,6 +1639,11 @@
                             <div class="main-choice-icon">${getIcon('Bolt')}</div>
                             <h2>Peptides</h2>
                             <p>${totalPeptides} peptides across ${totalCategories} categories</p>
+                        </div>
+                        <div class="main-choice" onclick="goToCategory('documents')">
+                            <div class="main-choice-icon">${getIcon('Folder')}</div>
+                            <h2>Documents</h2>
+                            <p>${categories.documents.files.length} forms & resources</p>
                         </div>
                     </div>
 
