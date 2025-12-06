@@ -389,9 +389,11 @@
             margin-right: 0.5rem;
         }
         .nav-section-header .chevron {
-            font-size: 0.6rem;
+            display: flex;
+            align-items: center;
             transition: transform 0.2s;
         }
+        .nav-section-header .chevron svg { width: 10px; height: 10px; }
         .nav-section.collapsed .chevron { transform: rotate(-90deg); }
         .nav-section.collapsed .nav-items { display: none; }
 
@@ -1258,7 +1260,7 @@
                         <span class="icon">${getIcon(cat.icon)}</span>
                         <span class="name">${cat.name}</span>
                         <span class="count">${cat.files.length}</span>
-                        <span class="chevron">v</span>
+                        <span class="chevron"><svg viewBox="0 0 10 10" fill="currentColor"><polygon points="0,0 10,0 5,8"/></svg></span>
                     </div>
                     <div class="nav-items">
                         ${cat.files.map(f => `
