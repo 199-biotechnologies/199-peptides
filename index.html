@@ -703,8 +703,42 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 0.75rem;
         }
+        .category-page .category-items.protocols-grouped {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .protocol-group {
+            background: var(--bg-paper);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+        .protocol-group-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .protocol-group-items {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+        .protocol-group-items .welcome-card {
+            padding: 0.75rem;
+        }
+        .protocol-group-items .welcome-card h4 {
+            font-size: 0.85rem;
+        }
+        .protocol-group-items .welcome-card p {
+            font-size: 0.75rem;
+        }
         @media (max-width: 600px) {
             .category-page .category-items { grid-template-columns: 1fr; }
+            .protocol-group-items { grid-template-columns: 1fr; }
         }
 
         .category-tag {
@@ -1470,19 +1504,47 @@
                 <span>${cat.name}</span>
             `;
 
-            // Build items list
-            const itemsHtml = cat.files.map(f => `
-                <div class="welcome-card" onclick="loadFile('${f.file}')">
-                    <h4>${f.name}</h4>
-                    <p>${f.subtitle}</p>
-                </div>
-            `).join('');
+            // Build items list - group protocols by their group property
+            let itemsHtml = '';
+            if (key === 'protocols') {
+                // Group by protocol name (titan, athena, prometheus)
+                const groups = {};
+                cat.files.forEach(f => {
+                    if (!groups[f.group]) groups[f.group] = [];
+                    groups[f.group].push(f);
+                });
+
+                itemsHtml = Object.entries(groups).map(([groupName, files]) => `
+                    <div class="protocol-group">
+                        <h3 class="protocol-group-title">${groupName.toUpperCase()}</h3>
+                        <div class="protocol-group-items">
+                            ${files.map(f => `
+                                <div class="welcome-card" onclick="loadFile('${f.file}')">
+                                    <h4>${f.type === 'protocol' ? 'Protocol' : f.type === 'safety' ? 'Safety' : 'Monitoring'}</h4>
+                                    <p>${f.subtitle}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                itemsHtml = cat.files.map(f => `
+                    <div class="welcome-card" onclick="loadFile('${f.file}')">
+                        <h4>${f.name}</h4>
+                        <p>${f.subtitle}</p>
+                    </div>
+                `).join('');
+            }
+
+            const countText = key === 'protocols'
+                ? `${Object.keys(categories.protocols.files.reduce((g, f) => (g[f.group] = true, g), {})).length} protocols`
+                : `${cat.files.length} ${cat.files.length === 1 ? 'item' : 'items'}`;
 
             document.getElementById('content').innerHTML = `
                 <div class="category-page">
                     <h1>${cat.name}</h1>
-                    <p class="category-count">${cat.files.length} ${cat.files.length === 1 ? 'item' : 'items'}</p>
-                    <div class="category-items">
+                    <p class="category-count">${countText}</p>
+                    <div class="category-items ${key === 'protocols' ? 'protocols-grouped' : ''}">
                         ${itemsHtml}
                     </div>
                 </div>

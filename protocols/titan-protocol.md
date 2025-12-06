@@ -4,8 +4,6 @@
 **Target:** Men
 **Philosophy:** Reclaim masculine vitality through synergistic performance enhancement and longevity integration
 
-**Related:** [Safety Considerations](titan-safety.md) | [Monitoring & Bloodwork](titan-monitoring.md)
-
 ---
 
 In Greek mythology, the Titans were primordial beings of immense strength and power — the original forces that shaped the world before the Olympians. The Titan Protocol is designed for men seeking to build that foundation: raw physical capability, cognitive sharpness, and the metabolic efficiency of youth. This is not about fighting aging defensively — it's about actively reclaiming the performance characteristics that define masculine vitality. The protocol prioritises muscle, mind, and metabolism through synergistic peptide stacks, with longevity as an integrated outcome rather than an afterthought.

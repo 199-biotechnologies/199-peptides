@@ -4,8 +4,6 @@
 **Target:** Men and Women
 **Philosophy:** Aggressive biological age reversal through multi-pathway intervention
 
-**Related:** [Safety Considerations](prometheus-safety.md) | [Monitoring & Bloodwork](prometheus-monitoring.md)
-
 ---
 
 Prometheus was the Titan who stole fire from the gods and gave it to humanity — punished eternally for daring to breach the boundary between mortal limitation and divine capability. The Prometheus Protocol embodies that same defiance: an aggressive, evidence-based assault on biological aging that pushes beyond conservative margins. Built on the TRIIM trial's demonstrated 2.5-year epigenetic age reversal, the NIA Interventions Testing Program's gold-standard lifespan compounds, and PCSK9 inhibition for cardiovascular rejuvenation, this protocol is for those who accept comprehensive monitoring in exchange for magnitude of effect. Peptide selection explicitly minimises oncogenic risk while an oncoprotective pharmaceutical stack (Metformin, Rapamycin, Low-Dose Aspirin, LDN) counterbalances the theoretical concerns of GH-pathway interventions. This is not optimisation — it is reversal.
