@@ -185,6 +185,7 @@
   },
   "active": "a4c604fc572c3327",
   "lastOpenFiles": [
+    "favicon.svg",
     "index.html.tmp.46503.1764990374840",
     "protocols/prometheus-protocol.md",
     "protocols/titan-protocol.md",
@@ -201,7 +202,6 @@
     "peptides/cardiogen-research.md",
     "protocols/titan-protocol.md.tmp.91782.1764883676150",
     "peptides/thymogen-research.md.tmp.46503.1764883630478",
-    "peptides/selank-research.md.tmp.46503.1764883629391",
     "md-browser/node_modules/mdast-util-newline-to-break/readme.md",
     "md-browser/node_modules/remark-breaks/readme.md",
     "peptides/adipotide-research.md",
