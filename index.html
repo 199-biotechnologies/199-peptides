@@ -1207,7 +1207,7 @@
         const totalPeptides = Object.values(categories).reduce((sum, cat) =>
             cat.name !== 'Protocols' && cat.name !== 'Documents' ? sum + cat.files.length : sum, 0);
         const totalCategories = Object.keys(categories).length - 2; // exclude Protocols and Documents
-        const totalProtocols = categories.protocols.files.filter(f => f.type === 'protocol').length;
+        const totalProtocols = categories.protocols.files.length;
         const totalDocuments = categories.documents.files.length;
 
         // Auth
@@ -1359,21 +1359,16 @@
             const favs = getFavorites();
             const nav = document.getElementById('navScroll');
             nav.innerHTML = Object.entries(categories).map(([key, cat]) => {
-                // For protocols, only show main protocol files (not safety/monitoring)
-                const displayFiles = key === 'protocols'
-                    ? cat.files.filter(f => f.type === 'protocol')
-                    : cat.files;
-
                 return `
                 <div class="nav-section" data-key="${key}">
                     <div class="nav-section-header" onclick="toggleSection('${key}')">
                         <span class="icon">${getIcon(cat.icon)}</span>
                         <span class="name">${cat.name}</span>
-                        <span class="count">${displayFiles.length}</span>
+                        <span class="count">${cat.files.length}</span>
                         <span class="chevron"><svg viewBox="0 0 10 10" fill="currentColor"><polygon points="0,0 10,0 5,8"/></svg></span>
                     </div>
                     <div class="nav-items">
-                        ${displayFiles.map(f => `
+                        ${cat.files.map(f => `
                             <div class="nav-item ${currentFile === f.file ? 'active' : ''}" data-file="${f.file}" onclick="loadFile('${f.file}')">
                                 <div class="nav-item-text">
                                     ${f.name}
@@ -1468,11 +1463,6 @@
             const cat = categories[key];
             if (!cat) return;
 
-            // For protocols, only show main protocol files (not safety/monitoring)
-            const displayFiles = key === 'protocols'
-                ? cat.files.filter(f => f.type === 'protocol')
-                : cat.files;
-
             // Update breadcrumb
             document.getElementById('breadcrumb').innerHTML = `
                 <a onclick="showWelcome()">Home</a>
@@ -1481,7 +1471,7 @@
             `;
 
             // Build items list
-            const itemsHtml = displayFiles.map(f => `
+            const itemsHtml = cat.files.map(f => `
                 <div class="welcome-card" onclick="loadFile('${f.file}')">
                     <h4>${f.name}</h4>
                     <p>${f.subtitle}</p>
@@ -1491,7 +1481,7 @@
             document.getElementById('content').innerHTML = `
                 <div class="category-page">
                     <h1>${cat.name}</h1>
-                    <p class="category-count">${displayFiles.length} ${displayFiles.length === 1 ? 'item' : 'items'}</p>
+                    <p class="category-count">${cat.files.length} ${cat.files.length === 1 ? 'item' : 'items'}</p>
                     <div class="category-items">
                         ${itemsHtml}
                     </div>
@@ -1615,6 +1605,9 @@
 
                 // Make category tags clickable
                 makeCategoryTagsClickable();
+
+                // Make internal markdown links work
+                makeLinksClickable();
 
                 // Render mermaid diagrams
                 await renderMermaid();
@@ -1890,6 +1883,30 @@
                             code.replaceWith(span);
                         }
                     });
+                }
+            });
+        }
+
+        // Make internal markdown links work through the app
+        function makeLinksClickable() {
+            const content = document.getElementById('content');
+            const links = content.querySelectorAll('a[href]');
+
+            links.forEach(link => {
+                const href = link.getAttribute('href');
+                // Only handle relative .md links
+                if (href && href.endsWith('.md') && !href.startsWith('http')) {
+                    link.onclick = (e) => {
+                        e.preventDefault();
+                        // Resolve relative path based on current file
+                        let targetPath = href;
+                        if (currentFile && !href.includes('/')) {
+                            // Same directory as current file
+                            const dir = currentFile.substring(0, currentFile.lastIndexOf('/'));
+                            targetPath = dir + '/' + href;
+                        }
+                        loadFile(targetPath);
+                    };
                 }
             });
         }
