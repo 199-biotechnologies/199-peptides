@@ -23,15 +23,14 @@ Prometheus was the Titan who stole fire from the gods and gave it to humanity �
 
 ---
 
-## PHARMACEUTICALS (12) — TRIIM-X Inspired + ITP-Validated + Oncoprotective
+## PHARMACEUTICALS (11) — TRIIM-X Inspired + ITP-Validated + Oncoprotective
 
 | Drug | Dose | Frequency | Intended Benefit |
 |------|------|-----------|------------------|
 | **HGH (rhGH)** | 1-2 IU (titrate to 3 IU) | 3-4x/week | Thymus regeneration, body composition (TRIIM core) |
 | **DHEA** | 25-50mg (F/M) | Daily | Adrenal precursor, immune (TRIIM core) |
-| **Metformin** | 500-1000mg | 1-2x daily | AMPK, insulin mitigation (TRIIM core) |
+| **Metformin** | 500mg | 1-2x daily | AMPK, insulin mitigation (TRIIM core); lower dose with Tirzepatide |
 | **Rapamycin** | 3-6mg | Weekly | mTOR inhibition, longevity (ITP gold standard) |
-| **Acarbose** | 50-100mg | With meals | Alpha-glucosidase inhibitor (stronger in males) |
 | **17-alpha Estradiol** | 50-100mcg *(males)* | Daily | Non-feminizing, 19% male lifespan (ITP) |
 | **Repatha (Evolocumab)** | 140mg SC | Every 2 weeks | PCSK9i: plaque reversal, LDL, CV aging |
 | **Testosterone** | Per protocol (both sexes) | Per protocol | Androgen optimization (low-dose for women) |
@@ -46,7 +45,6 @@ Prometheus was the Titan who stole fire from the gods and gave it to humanity �
 
 *Sex-specific notes:*
 - **17-alpha Estradiol**: Males only (no female lifespan benefit in ITP)
-- **Acarbose**: Stronger effect in males (22%) vs females (5%)
 - **DHEA**: Lower dose for women (25mg) vs men (50mg)
 - **Testosterone**: Standard TRT for men; low-dose (1-5mg cream) for women
 
@@ -129,7 +127,6 @@ flowchart LR
 ```mermaid
 flowchart LR
     RAPA[Rapamycin: mTOR] --> L[Lifespan Extension]
-    ACAR[Acarbose: Glucose] --> L
     E17A[17-alpha Estradiol: Metabolic] --> L
     MET[Metformin: AMPK] --> L
 ```
@@ -189,9 +186,9 @@ flowchart LR
 
 ## RATIONALE
 
-The Prometheus Protocol represents the most aggressive evidence-based approach to biological age reversal, built on three pillars: the TRIIM trial's demonstrated 2.5-year epigenetic age reversal through HGH + DHEA + Metformin thymus regeneration; the NIA Interventions Testing Program's gold-standard lifespan compounds (Rapamycin, Acarbose, 17-alpha Estradiol); and PCSK9 inhibition for cardiovascular aging reversal.
+The Prometheus Protocol represents the most aggressive evidence-based approach to biological age reversal, built on three pillars: the TRIIM trial's demonstrated 2.5-year epigenetic age reversal through HGH + DHEA + Metformin thymus regeneration; the NIA Interventions Testing Program's gold-standard lifespan compounds (Rapamycin, 17-alpha Estradiol); and PCSK9 inhibition for cardiovascular aging reversal.
 
-The pharmaceutical stack targets aging through nine distinct mechanisms: mTOR inhibition (Rapamycin), AMPK activation (Metformin), alpha-glucosidase inhibition (Acarbose), thymic regeneration (HGH + Thymalin), metabolic optimization (17-alpha Estradiol, Tirzepatide), cardiovascular reversal (PCSK9i), senescent cell clearance (Procyanidin C1), and oncoprotective intervention (Low-Dose Aspirin + LDN). Unlike typical protocols, this includes ITP-validated 17-alpha Estradiol — a "non-feminizing" estrogen that extends male lifespan by 19% through metabolic pathways requiring intact testosterone. The oncoprotective layer adds Low-Dose Aspirin (13% CRC reduction in 2.1M patient study) and Low-Dose Naltrexone (immune modulation, NK cell enhancement, TLR4 antagonism) to counterbalance the theoretical oncogenic concerns of GH-pathway interventions.
+The pharmaceutical stack targets aging through eight distinct mechanisms: mTOR inhibition (Rapamycin), AMPK activation (Metformin), thymic regeneration (HGH + Thymalin), metabolic optimization (17-alpha Estradiol, Tirzepatide), cardiovascular reversal (PCSK9i), senescent cell clearance (Procyanidin C1), and oncoprotective intervention (Low-Dose Aspirin + LDN). Unlike typical protocols, this includes ITP-validated 17-alpha Estradiol — a "non-feminizing" estrogen that extends male lifespan by 19% through metabolic pathways requiring intact testosterone. The oncoprotective layer adds Low-Dose Aspirin (13% CRC reduction in 2.1M patient study) and Low-Dose Naltrexone (immune modulation, NK cell enhancement, TLR4 antagonism) to counterbalance the theoretical oncogenic concerns of GH-pathway interventions.
 
 Peptide selection explicitly minimizes oncogenic risk. BPC-157, TB-500, and Follistatin are excluded due to angiogenic and proliferative concerns. The remaining peptides target safe pathways: Epithalon (telomerase — may be protective), Thymalin (immune), Thymosin Alpha-1 (immune modulation with 9% mortality reduction in sepsis meta-analysis, 35+ country approvals, FDA orphan drug — enhances tumor surveillance without stimulating growth), SS-31 and MOTS-c (mitochondrial), NAD+ (sirtuins), KPV (anti-inflammatory without angiogenic risk), and Selank (stress resilience). Tesamorelin is retained as the only GH-pathway peptide due to its FDA approval and targeted VAT reduction.
 

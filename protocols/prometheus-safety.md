@@ -21,7 +21,7 @@
 
 | Condition | Consideration |
 |-----------|---------------|
-| Diabetes | HGH, Acarbose affect glucose; monitor closely |
+| Diabetes | HGH affects glucose; monitor closely |
 | History of GI Ulcers | Aspirin may exacerbate; gastroprotection |
 | Gout | Low-dose Aspirin may increase uric acid |
 | Recent Surgery (<4 weeks) | Rapamycin impairs wound healing |
@@ -54,11 +54,6 @@
 - GI bleeding risk — monitor for dark stools
 - Hold 7 days before surgery
 
-### Acarbose
-- GI effects (flatulence, bloating) very common initially
-- **Glucose tablets for hypoglycaemia** (sucrose won't work)
-- Stronger effect in males (22%) vs females (5%)
-
 ### 17-alpha Estradiol
 - **Males only** — no female lifespan benefit
 - Non-feminising; requires intact testosterone
@@ -78,10 +73,9 @@
 | NSAIDs | Aspirin + NSAIDs = increased GI bleeding — avoid |
 | **CYP3A4 Inhibitors** | Increase Rapamycin levels — grapefruit, ketoconazole, erythromycin |
 | **CYP3A4 Inducers** | Decrease Rapamycin levels — rifampicin, phenytoin, St John's Wort |
-| Insulin / Oral Hypoglycaemics | HGH, Acarbose affect glucose |
+| Insulin / Oral Hypoglycaemics | HGH affects glucose |
 | Immunosuppressants | Additive with Rapamycin |
 | Metformin + IV Contrast | Hold Metformin 48h before/after |
-| Digestive Enzymes | May reduce Acarbose efficacy |
 | **Chemotherapy** | **CONTRAINDICATED** — growth factors + cancer treatment |
 
 ---
@@ -106,7 +100,6 @@
 
 ### Females
 - 17-alpha Estradiol: **not indicated** (no benefit)
-- Acarbose: weaker lifespan effect (5% vs 22% in males)
 
 ---
 

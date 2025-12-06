@@ -8,7 +8,7 @@
 
 | Test | Target | Reason |
 |------|--------|--------|
-| Fasting Glucose | <100 mg/dL | GH, Acarbose, Metformin |
+| Fasting Glucose | <100 mg/dL | GH, Metformin |
 | Fasting Insulin | Low-normal | GH-induced insulin resistance |
 | HbA1c | <5.7% | 3-month glucose average |
 | IGF-1 | 150-250 ng/mL | GH compound dosing |
@@ -78,7 +78,6 @@
 | Rapamycin | All | Mouth sores, infections, wound healing |
 | LDN | Prometheus | **No opioids** — precipitates withdrawal |
 | Aspirin | Prometheus | GI bleeding (dark stools); uric acid |
-| Acarbose | Prometheus | GI effects; glucose tablets for hypo (not sucrose) |
 | 17-alpha Estradiol | Prometheus (M) | Oestradiol stable; no feminisation |
 | Cabergoline | Athena | Prolactin; cardiac echo if >12 months |
 | PT-141 | Athena | BP (transient increase); nausea |
