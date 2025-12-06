@@ -4,6 +4,10 @@
 
 ---
 
+Athena was the Greek goddess of wisdom, strategic warfare, and craft — revered not for brute force but for intelligence, grace, and the ability to navigate complexity. The Athena Protocol addresses the unique physiological landscape of women: hormonal rhythms that shift across decades, bone density that requires active protection, skin and collagen that respond to targeted intervention, and a brain that thrives on specific neurochemical support. This protocol recognises that female optimisation isn't a modified male protocol — it requires compounds selected for women's biology, from ovarian aging interventions (Rapamycin, NAD+) to estrogen metabolism support (DIM) to the anxiolytic-without-sedation profile that women often need (Selank). Longevity here means thriving, not merely surviving.
+
+---
+
 ## GOALS
 
 - Hormonal Balance

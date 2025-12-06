@@ -6,6 +6,10 @@
 
 ---
 
+Prometheus was the Titan who stole fire from the gods and gave it to humanity — punished eternally for daring to breach the boundary between mortal limitation and divine capability. The Prometheus Protocol embodies that same defiance: an aggressive, evidence-based assault on biological aging that pushes beyond conservative margins. Built on the TRIIM trial's demonstrated 2.5-year epigenetic age reversal, the NIA Interventions Testing Program's gold-standard lifespan compounds, and PCSK9 inhibition for cardiovascular rejuvenation, this protocol is for those who accept comprehensive monitoring in exchange for magnitude of effect. Peptide selection explicitly minimises oncogenic risk while an oncoprotective pharmaceutical stack (Metformin, Rapamycin, Low-Dose Aspirin, LDN) counterbalances the theoretical concerns of GH-pathway interventions. This is not optimisation — it is reversal.
+
+---
+
 ## GOALS
 
 - Biological Age Reversal
@@ -19,7 +23,7 @@
 
 ---
 
-## PHARMACEUTICALS (10) — TRIIM-X Inspired + ITP-Validated
+## PHARMACEUTICALS (12) — TRIIM-X Inspired + ITP-Validated + Oncoprotective
 
 | Drug | Dose | Frequency | Intended Benefit |
 |------|------|-----------|------------------|
@@ -33,6 +37,8 @@
 | **Testosterone** | Per protocol (both sexes) | Per protocol | Androgen optimization (low-dose for women) |
 | **Tirzepatide** | Low/micro dose | Per protocol | GLP-1/GIP, visceral fat, metabolic |
 | **Procyanidin C1** | 115mg | 3 days/month | Senolytic, senescent cell clearance |
+| **Low-Dose Aspirin** | 75-100mg | Daily | COX-2 inhibition, 13% CRC reduction, anti-inflammatory |
+| **Low-Dose Naltrexone (LDN)** | 1.5-4.5mg | Nightly | Immune modulation, endorphin upregulation, anti-proliferative |
 
 *Supportive (TRIIM protocol):*
 - **Vitamin D3**: 3,000-5,000 IU daily
@@ -147,6 +153,18 @@ flowchart LR
     RAPA[Rapamycin: Senomorphic] --> S
 ```
 
+### Oncoprotective (Cancer Risk Reduction)
+
+```mermaid
+flowchart LR
+    MET[Metformin: AMPK] --> O[Reduced Cancer Risk]
+    RAPA[Rapamycin: mTOR Inhibition] --> O
+    ASA[Aspirin: COX-2/Prostaglandin] --> O
+    LDN[LDN: Immune/Endorphin] --> O
+    TA1[Thymosin α-1: Tumor Surveillance] --> O
+    SEN[Senolytics: SASP Clearance] --> O
+```
+
 ### Telomere / Longevity
 
 ```mermaid
@@ -173,7 +191,7 @@ flowchart LR
 
 The Prometheus Protocol represents the most aggressive evidence-based approach to biological age reversal, built on three pillars: the TRIIM trial's demonstrated 2.5-year epigenetic age reversal through HGH + DHEA + Metformin thymus regeneration; the NIA Interventions Testing Program's gold-standard lifespan compounds (Rapamycin, Acarbose, 17-alpha Estradiol); and PCSK9 inhibition for cardiovascular aging reversal.
 
-The pharmaceutical stack targets aging through seven distinct mechanisms: mTOR inhibition (Rapamycin), AMPK activation (Metformin), alpha-glucosidase inhibition (Acarbose), thymic regeneration (HGH + Thymalin), metabolic optimization (17-alpha Estradiol, Tirzepatide), cardiovascular reversal (PCSK9i), and senescent cell clearance (Procyanidin C1). Unlike typical protocols, this includes ITP-validated 17-alpha Estradiol — a "non-feminizing" estrogen that extends male lifespan by 19% through metabolic pathways requiring intact testosterone.
+The pharmaceutical stack targets aging through nine distinct mechanisms: mTOR inhibition (Rapamycin), AMPK activation (Metformin), alpha-glucosidase inhibition (Acarbose), thymic regeneration (HGH + Thymalin), metabolic optimization (17-alpha Estradiol, Tirzepatide), cardiovascular reversal (PCSK9i), senescent cell clearance (Procyanidin C1), and oncoprotective intervention (Low-Dose Aspirin + LDN). Unlike typical protocols, this includes ITP-validated 17-alpha Estradiol — a "non-feminizing" estrogen that extends male lifespan by 19% through metabolic pathways requiring intact testosterone. The oncoprotective layer adds Low-Dose Aspirin (13% CRC reduction in 2.1M patient study) and Low-Dose Naltrexone (immune modulation, NK cell enhancement, TLR4 antagonism) to counterbalance the theoretical oncogenic concerns of GH-pathway interventions.
 
 Peptide selection explicitly minimizes oncogenic risk. BPC-157, TB-500, and Follistatin are excluded due to angiogenic and proliferative concerns. The remaining peptides target safe pathways: Epithalon (telomerase — may be protective), Thymalin (immune), Thymosin Alpha-1 (immune modulation with 9% mortality reduction in sepsis meta-analysis, 35+ country approvals, FDA orphan drug — enhances tumor surveillance without stimulating growth), SS-31 and MOTS-c (mitochondrial), NAD+ (sirtuins), KPV (anti-inflammatory without angiogenic risk), and Selank (stress resilience). Tesamorelin is retained as the only GH-pathway peptide due to its FDA approval and targeted VAT reduction.
 
@@ -240,6 +258,28 @@ HGH/IGF-1 pathway carries theoretical cancer risk. Mitigations:
 
 Works significantly better in males (22% lifespan) than females (5%). Women may still benefit from glucose control effects but should not expect equivalent lifespan extension.
 
+### Low-Dose Aspirin (Oncoprotective)
+
+Evidence for cancer risk reduction:
+- **Norwegian study (n=2.1M)**: 13% lower colorectal cancer risk
+- **NEJM 2025**: 49% lower CRC recurrence in PI3K-mutated tumors
+- **Harvard 2024**: 10-year CRC incidence 1.98% vs 2.95% (aspirin vs no aspirin)
+- Mechanism: COX-2 inhibition, blocks prostaglandins, anti-inflammatory
+- Benefits emerge after 5-10+ years of consistent use
+- Consider: GI bleeding risk (mitigated by low dose, monitor)
+
+### Low-Dose Naltrexone (LDN)
+
+LDN (1.5-4.5mg nightly) works through paradoxical opioid receptor blockade:
+- Brief receptor blockade → compensatory endorphin upregulation
+- Enhanced NK cell activity and immune surveillance
+- Anti-proliferative effects in various cancer cell lines
+- Toll-like receptor 4 (TLR4) antagonism → reduced inflammation
+- Off-label use for autoimmune conditions, cancer adjunct
+- Timing: Take at bedtime (endorphin surge occurs overnight)
+- Titration: Start 1.5mg, increase by 0.5mg weekly to 4.5mg
+- Generally well-tolerated; vivid dreams common initially
+
 ### Thymosin Alpha-1 + Thymalin Synergy
 
 These are NOT redundant — they work through different mechanisms:
@@ -260,6 +300,8 @@ These are NOT redundant — they work through different mechanisms:
 | Fisetin | 2 days/month |
 | HGH | Continuous with monitoring |
 | Rapamycin | Weekly, continuous |
+| Low-Dose Aspirin | Daily, continuous |
+| LDN | Nightly, continuous (titrate up from 1.5mg) |
 
 ---
 

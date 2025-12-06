@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "protocols/athena-protocol.md",
+                "file": "protocols/prometheus-protocol.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "athena-protocol"
+              "title": "prometheus-protocol"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "protocols/athena-protocol.md",
+                "file": "protocols/prometheus-protocol.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for athena-protocol"
+              "title": "Backlinks for prometheus-protocol"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "protocols/athena-protocol.md",
+                "file": "protocols/prometheus-protocol.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from athena-protocol"
+              "title": "Outgoing links from prometheus-protocol"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "protocols/athena-protocol.md",
+                "file": "protocols/prometheus-protocol.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of athena-protocol"
+              "title": "Outline of prometheus-protocol"
             }
           }
         ]
@@ -183,14 +183,17 @@
       "bases:Create new base": false
     }
   },
-  "active": "a4c604fc572c3327",
+  "active": "32cfa7ccb7dfd18d",
   "lastOpenFiles": [
+    "protocols/athena-protocol.md",
+    "protocols/athena-protocol.md.tmp.91782.1764987839022",
+    "protocols/prometheus-protocol.md.tmp.91782.1764987738085",
+    "protocols/prometheus-protocol.md.tmp.91782.1764987728357",
     "protocols/prometheus-protocol.md.tmp.91782.1764986975059",
     "protocols/prometheus-protocol.md.tmp.91782.1764986966014",
     "protocols/prometheus-protocol.md",
     "protocols/athena-protocol.md.tmp.91782.1764983791902",
     "protocols/titan-protocol.md",
-    "protocols/athena-protocol.md",
     "peptides/tirzepatide-research.md",
     "index.html",
     "peptides/vip-research.md",
@@ -198,10 +201,6 @@
     "protocols/titan-protocol.md.tmp.91782.1764883676150",
     "peptides/thymogen-research.md.tmp.46503.1764883630478",
     "peptides/selank-research.md.tmp.46503.1764883629391",
-    "peptides/vip-research.md.tmp.46503.1764883570989",
-    "peptides/kpv-research.md.tmp.46503.1764883475718",
-    "md-browser/node_modules/mdast-util-newline-to-break/lib/index.js",
-    "md-browser/node_modules/mdast-util-newline-to-break/lib/index.d.ts",
     "md-browser/node_modules/mdast-util-newline-to-break/readme.md",
     "md-browser/node_modules/remark-breaks/readme.md",
     "peptides/adipotide-research.md",
