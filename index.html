@@ -1162,13 +1162,11 @@
             protocols: { name: 'Protocols', icon: 'Doc', files: [
                 { file: 'protocols/titan-protocol.md', name: 'TITAN Protocol', subtitle: 'Complete longevity protocol', group: 'titan', type: 'protocol' },
                 { file: 'protocols/titan-safety.md', name: 'TITAN Safety', subtitle: 'Contraindications & side effects', group: 'titan', type: 'safety' },
-                { file: 'protocols/titan-monitoring.md', name: 'TITAN Monitoring', subtitle: 'Bloodwork & tracking', group: 'titan', type: 'monitoring' },
                 { file: 'protocols/athena-protocol.md', name: 'ATHENA Protocol', subtitle: 'Women\'s health & hormones', group: 'athena', type: 'protocol' },
                 { file: 'protocols/athena-safety.md', name: 'ATHENA Safety', subtitle: 'Contraindications & side effects', group: 'athena', type: 'safety' },
-                { file: 'protocols/athena-monitoring.md', name: 'ATHENA Monitoring', subtitle: 'Bloodwork & tracking', group: 'athena', type: 'monitoring' },
                 { file: 'protocols/prometheus-protocol.md', name: 'PROMETHEUS Protocol', subtitle: 'Aggressive age reversal', group: 'prometheus', type: 'protocol' },
                 { file: 'protocols/prometheus-safety.md', name: 'PROMETHEUS Safety', subtitle: 'Contraindications & side effects', group: 'prometheus', type: 'safety' },
-                { file: 'protocols/prometheus-monitoring.md', name: 'PROMETHEUS Monitoring', subtitle: 'Bloodwork & tracking', group: 'prometheus', type: 'monitoring' }
+                { file: 'protocols/peptide-protocol-monitoring.md', name: 'Monitoring & Bloodwork', subtitle: 'Universal tracking guide', type: 'monitoring' }
             ]},
             gh_metabolic: { name: 'GH Axis & Metabolic', icon: 'Bolt', files: [
                 { file: 'peptides/tesamorelin-research.md', name: 'Tesamorelin', subtitle: 'FDA approved GHRH' },
@@ -1438,22 +1436,38 @@
         function getProtocolTabs(filePath) {
             const protocolFiles = categories.protocols.files;
             const currentItem = protocolFiles.find(f => f.file === filePath);
-            if (!currentItem || !currentItem.group) return '';
+
+            // No tabs for non-protocol files
+            if (!currentItem) return '';
+
+            // If viewing the unified monitoring file, no tabs needed (it's standalone)
+            if (currentItem.type === 'monitoring' && !currentItem.group) return '';
+
+            // If no group (shouldn't happen for protocol/safety), skip
+            if (!currentItem.group) return '';
 
             const group = currentItem.group;
-            const relatedFiles = protocolFiles.filter(f => f.group === group);
+            const monitoringFile = protocolFiles.find(f => f.type === 'monitoring');
 
-            const tabs = relatedFiles.map(f => {
-                const isActive = f.file === filePath;
-                let icon = 'Doc';
-                let label = 'Protocol';
-                if (f.type === 'safety') { icon = 'Safety'; label = 'Safety'; }
-                if (f.type === 'monitoring') { icon = 'Monitoring'; label = 'Monitoring'; }
+            // Get protocol and safety for this group
+            const protocolFile = protocolFiles.find(f => f.group === group && f.type === 'protocol');
+            const safetyFile = protocolFiles.find(f => f.group === group && f.type === 'safety');
 
-                return `<button class="protocol-tab ${isActive ? 'active' : ''}" onclick="loadFile('${f.file}')">${getIcon(icon)} ${label}</button>`;
-            }).join('');
+            const tabs = [];
 
-            return `<div class="protocol-tabs">${tabs}</div>`;
+            if (protocolFile) {
+                const isActive = filePath === protocolFile.file;
+                tabs.push(`<button class="protocol-tab ${isActive ? 'active' : ''}" onclick="loadFile('${protocolFile.file}')">${getIcon('Doc')} Protocol</button>`);
+            }
+            if (safetyFile) {
+                const isActive = filePath === safetyFile.file;
+                tabs.push(`<button class="protocol-tab ${isActive ? 'active' : ''}" onclick="loadFile('${safetyFile.file}')">${getIcon('Safety')} Safety</button>`);
+            }
+            if (monitoringFile) {
+                tabs.push(`<button class="protocol-tab" onclick="loadFile('${monitoringFile.file}')">${getIcon('Monitoring')} Monitoring</button>`);
+            }
+
+            return `<div class="protocol-tabs">${tabs.join('')}</div>`;
         }
 
         function toggleSection(key) {
@@ -1507,26 +1521,48 @@
             // Build items list - group protocols by their group property
             let itemsHtml = '';
             if (key === 'protocols') {
+                // Separate grouped files (protocol/safety) from standalone (monitoring)
+                const groupedFiles = cat.files.filter(f => f.group);
+                const standaloneFiles = cat.files.filter(f => !f.group);
+
                 // Group by protocol name (titan, athena, prometheus)
                 const groups = {};
-                cat.files.forEach(f => {
+                groupedFiles.forEach(f => {
                     if (!groups[f.group]) groups[f.group] = [];
                     groups[f.group].push(f);
                 });
 
+                // Build grouped protocols
                 itemsHtml = Object.entries(groups).map(([groupName, files]) => `
                     <div class="protocol-group">
                         <h3 class="protocol-group-title">${groupName.toUpperCase()}</h3>
                         <div class="protocol-group-items">
                             ${files.map(f => `
                                 <div class="welcome-card" onclick="loadFile('${f.file}')">
-                                    <h4>${f.type === 'protocol' ? 'Protocol' : f.type === 'safety' ? 'Safety' : 'Monitoring'}</h4>
+                                    <h4>${f.type === 'protocol' ? 'Protocol' : 'Safety'}</h4>
                                     <p>${f.subtitle}</p>
                                 </div>
                             `).join('')}
                         </div>
                     </div>
                 `).join('');
+
+                // Add standalone files (monitoring) at the end
+                if (standaloneFiles.length > 0) {
+                    itemsHtml += `
+                        <div class="protocol-group">
+                            <h3 class="protocol-group-title">UNIVERSAL</h3>
+                            <div class="protocol-group-items">
+                                ${standaloneFiles.map(f => `
+                                    <div class="welcome-card" onclick="loadFile('${f.file}')">
+                                        <h4>${f.name}</h4>
+                                        <p>${f.subtitle}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
             } else {
                 itemsHtml = cat.files.map(f => `
                     <div class="welcome-card" onclick="loadFile('${f.file}')">
@@ -1537,7 +1573,7 @@
             }
 
             const countText = key === 'protocols'
-                ? `${Object.keys(categories.protocols.files.reduce((g, f) => (g[f.group] = true, g), {})).length} protocols`
+                ? '3 protocols + monitoring guide'
                 : `${cat.files.length} ${cat.files.length === 1 ? 'item' : 'items'}`;
 
             document.getElementById('content').innerHTML = `

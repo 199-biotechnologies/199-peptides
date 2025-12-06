@@ -47,6 +47,10 @@ I understand that I am voluntarily choosing to participate in a peptide therapy 
 - Changes in hormone levels
 - Effects on tumor growth in those with cancer or pre-cancerous conditions
 
+### Experimental Compounds — Cancer Risk Acknowledgment:
+
+**I UNDERSTAND AND ACKNOWLEDGE** that certain compounds in this protocol (including but not limited to BPC-157, TB-500, MOTS-c, Follistatin, Dihexa) are classified as **experimental interventions with no long-term human safety data regarding cancer risk**. These compounds have growth-promoting or angiogenic properties that theoretically could affect tumor growth. I accept this risk and confirm I have no history of cancer or pre-cancerous conditions.
+
 ### Critical Acknowledgment — Unknown Risks:
 
 **I ACKNOWLEDGE AND ACCEPT** that many potential side effects, adverse reactions, and long-term consequences of peptide therapy are **CURRENTLY UNKNOWN**. Because these compounds have not undergone comprehensive clinical trials, there may be risks that have not yet been identified or documented. New adverse effects may be discovered in the future. I accept full responsibility for any known OR unknown side effects that may result from this treatment.

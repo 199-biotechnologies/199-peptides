@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "documents/bespoke-longevity-handout.md",
+                "file": "protocols/peptide-protocol-monitoring.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "bespoke-longevity-handout"
+              "title": "peptide-protocol-monitoring"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "documents/bespoke-longevity-handout.md",
+                "file": "protocols/peptide-protocol-monitoring.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for bespoke-longevity-handout"
+              "title": "Backlinks for peptide-protocol-monitoring"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "documents/bespoke-longevity-handout.md",
+                "file": "protocols/peptide-protocol-monitoring.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from bespoke-longevity-handout"
+              "title": "Outgoing links from peptide-protocol-monitoring"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "documents/bespoke-longevity-handout.md",
+                "file": "protocols/peptide-protocol-monitoring.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of bespoke-longevity-handout"
+              "title": "Outline of peptide-protocol-monitoring"
             }
           }
         ]
@@ -185,6 +185,10 @@
   },
   "active": "a4c604fc572c3327",
   "lastOpenFiles": [
+    "protocols/prometheus-protocol.md",
+    "documents/bespoke-longevity-handout.md",
+    "protocols/peptide-protocol-monitoring.md",
+    "protocols/monitoring-bloodwork.md",
     "index.html.tmp.46503.1764996205375",
     "index.html.tmp.46503.1764995935362",
     "protocols/titan-monitoring.md",
@@ -196,7 +200,6 @@
     "documents/consent-liability-waiver.md",
     "documents/patient-intake-form.md",
     "documents/peptide-therapy-presentation.md",
-    "documents/bespoke-longevity-handout.md",
     "protocols/athena-protocol.md",
     "documents/Dr_Ducu_Bespoke_Longevity_Handout.pdf",
     "documents/DrDucu_Peptide_Therapy_Presentation.pdf",
@@ -206,9 +209,7 @@
     "other/DrDucu_Peptide_Therapy_Presentation.pdf",
     "other/DrDucu_Consent_Liability_Waiver.pdf",
     "other/DrDucu_Patient_Intake_Form.pdf",
-    "other/Dr_Ducu_Bespoke_Longevity_Handout.pdf",
     "favicon.svg",
-    "protocols/prometheus-protocol.md",
     "protocols/titan-protocol.md",
     "peptides/tirzepatide-research.md",
     "peptides/vip-research.md",
@@ -221,7 +222,6 @@
     "peptides/cecropins-research.md",
     "peptides/cjc-1295-research.md",
     "peptides/igf-1-lr3-research.md",
-    "peptides/gcmaf-research.md",
     "md-browser/public/window.svg",
     "md-browser/public/vercel.svg",
     "md-browser/public/next.svg",
