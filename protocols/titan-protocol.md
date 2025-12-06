@@ -54,14 +54,16 @@
 
 ---
 
-## PHARMACEUTICALS (4)
+## PHARMACEUTICALS (3)
 
 | Drug | Dose | Frequency | Intended Benefit |
 |------|------|-----------|------------------|
 | **Testosterone Cypionate** | Per protocol | Per protocol | Exogenous testosterone |
 | **Metformin** | 500-1000mg | 1-2x daily | AMPK, GH-induced IR mitigation |
 | **Tirzepatide** | Low/micro dose | Per protocol | GLP-1/GIP, appetite, insulin |
-| **Repatha** *(optional)* | 140mg SC | Every 2 weeks | PCSK9i: soft plaque reversal, ApoB/LDL reduction, CV prevention |
+
+*Optional addons:*
+- **Procyanidin C1**: 115mg, 3 days/month (senolytic)
 
 ---
 

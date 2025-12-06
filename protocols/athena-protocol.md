@@ -36,7 +36,7 @@
 
 ---
 
-## SUPPLEMENTS (14)
+## SUPPLEMENTS (15)
 
 | Supplement | Dose | Frequency | Intended Benefit |
 |------------|------|-----------|------------------|
@@ -54,10 +54,11 @@
 | **Myo-Inositol** | 2-4g | Daily | Insulin sensitivity, egg quality, PCOS, mood |
 | **DIM** | 100-200mg | Daily | Estrogen metabolism (critical with HRT) |
 | **Creatine** | 3g | Daily | Cognitive function, bone density |
+| **Lithium Orotate** | 5mg | Daily | Mood stabilization, neuroprotection |
 
 ---
 
-## PHARMACEUTICALS (8)
+## PHARMACEUTICALS (7)
 
 | Drug | Dose | Frequency | Intended Benefit |
 |------|------|-----------|------------------|
@@ -67,11 +68,12 @@
 | **Cabergoline** (Dostinex) | 0.25-0.5mg | 1-2x/week | Prolactin control, libido, dopaminergic mood |
 | **Metformin** | 500-1000mg | 1-2x daily | AMPK activation, longevity, insulin sensitivity |
 | **Rapamycin** | 2mg (increase to 5mg over time) | Weekly | Ovarian aging (20% slower), mTOR inhibition, longevity |
-| **Procyanidin C1** | 115mg | 3 days/month | Senolytic, senescent cell clearance |
 | **Tirzepatide** | Low/micro dose | Per protocol | GLP-1/GIP, body composition, appetite |
 
-*Optional:*
+*Optional addons:*
+- **Procyanidin C1**: 115mg, 3 days/month (senolytic)
 - **DHEA**: 10-25mg daily if levels low
+- **Teriparatide** (Forteo): 20mcg SC daily, max 2 years (severe osteoporosis — see notes)
 
 ---
 
@@ -103,6 +105,7 @@ flowchart LR
 flowchart LR
     SEM[Semax: BDNF/Focus] --> C[Mental Clarity & Calm]
     SEL[Selank: Anxiolytic] --> C
+    LI[Lithium: Mood Stability] --> C
     E2M[Estradiol: Neuroprotection] --> C
 ```
 
@@ -132,7 +135,6 @@ flowchart LR
 flowchart LR
     RAPA[Rapamycin: mTOR/Ovarian] --> L[Biological Age Reversal]
     EPI[Epithalon: Telomerase] --> L
-    PC1[Procyanidin C1: Senolytic] --> L
     NAD[NAD+: Cellular Energy] --> L
     MET[Metformin: AMPK] --> L
 ```
@@ -164,7 +166,7 @@ The Athena Protocol addresses the unique physiological needs of women through me
 
 The appearance stack leverages GHK-Cu (28% collagen increase in RCT data) with oral collagen peptides and Tesamorelin-driven GH release. BPC-157 supports the gut-hormone axis — gut health drives hormone metabolism. The cognitive-mood axis pairs Semax (BDNF, dopaminergic activation) with Selank (anxiolytic without sedation or dependence), while Creatine provides overlooked cognitive and bone density benefits for women. Tirzepatide adds orthogonal GLP-1/GIP control for body composition.
 
-The "Holy Grail" mitochondrial stack (SS-31 + MOTS-c + NAD+ + CoQ10) addresses cellular energy at four levels: repair existing mitochondria, build new ones, restore the critical NAD+ substrate that declines sharply at menopause, and fuel the electron transport chain. Myo-Inositol provides insulin sensitivity and egg quality support with strong evidence for women. Longevity vectors include Rapamycin (mTOR), Epithalon (telomerase), Procyanidin C1 (senolytic), NAD+ (cellular energy), and Metformin (AMPK) — attacking aging through five non-redundant pathways.
+The "Holy Grail" mitochondrial stack (SS-31 + MOTS-c + NAD+ + CoQ10) addresses cellular energy at four levels: repair existing mitochondria, build new ones, restore the critical NAD+ substrate that declines sharply at menopause, and fuel the electron transport chain. Myo-Inositol provides insulin sensitivity and egg quality support with strong evidence for women. Longevity vectors include Rapamycin (mTOR), Epithalon (telomerase), NAD+ (cellular energy), and Metformin (AMPK) — attacking aging through four non-redundant pathways. Procyanidin C1 available as optional senolytic addon.
 
 ---
 
@@ -179,6 +181,27 @@ The "Holy Grail" mitochondrial stack (SS-31 + MOTS-c + NAD+ + CoQ10) addresses c
 - Estradiol is foundation for bone protection
 - Vitamin D3 + K2 combination directs calcium appropriately
 - Weight-bearing exercise synergizes with protocol
+- Creatine provides additional bone density support
+
+### Teriparatide (Optional — Severe Osteoporosis Only)
+
+For women with established osteoporosis (T-score ≤-2.5) or prior fragility fracture:
+
+| Property | Value |
+|----------|-------|
+| Status | **FDA approved** (2002) |
+| Mechanism | Only drug that BUILDS new bone (anabolic) |
+| Efficacy | 65% vertebral fracture reduction, +9% spine BMD |
+| Dose | 20mcg SC daily (self-injection pen) |
+| Duration | **Maximum 2 years lifetime** |
+| Cost | ~$1,500-2,000/month |
+
+**Important considerations:**
+- Black box warning: osteosarcoma risk in rat studies at high doses
+- NOT for prevention — reserved for established osteoporosis
+- Requires transition to anti-resorptive (bisphosphonate/denosumab) after 2 years
+- Monitor serum calcium
+- Contraindicated: skeletal malignancy, Paget's disease, prior bone radiation
 
 ### Hair & Nails
 - GHK-Cu: Proven hair growth effects via Wnt signaling
@@ -187,8 +210,8 @@ The "Holy Grail" mitochondrial stack (SS-31 + MOTS-c + NAD+ + CoQ10) addresses c
 
 ### Cycle Timing (for pulsed compounds)
 - Epithalon: 10-20 days, 2-3x/year
-- Procyanidin C1: 3 consecutive days/month
 - Rapamycin: Start 2mg weekly, increase to 5mg over time
+- *Optional Procyanidin C1: 3 consecutive days/month*
 
 ---
 
