@@ -178,8 +178,13 @@
             top: 50%;
             transform: translateY(-50%);
             color: rgba(255,255,255,0.5);
-            font-size: 0.9rem;
             pointer-events: none;
+            display: flex;
+            align-items: center;
+        }
+        .search-icon svg {
+            width: 14px;
+            height: 14px;
         }
 
         .search-hint {
@@ -238,7 +243,9 @@
             gap: 0.4rem;
         }
         .topbar-btn:hover { background: rgba(255,255,255,0.2); }
-        .topbar-btn.icon-only { padding: 0 0.6rem; font-size: 1.1rem; }
+        .topbar-btn.icon-only { padding: 0 0.6rem; }
+        .topbar-btn.icon-only span { display: flex; align-items: center; }
+        .topbar-btn.icon-only svg { width: 16px; height: 16px; }
 
         /* App Body */
         .app-body {
@@ -371,7 +378,8 @@
             transition: background 0.1s;
         }
         .nav-section-header:hover { background: var(--bg); }
-        .nav-section-header .icon { margin-right: 0.5rem; }
+        .nav-section-header .icon { margin-right: 0.5rem; display: inline-flex; align-items: center; }
+        .nav-section-header .icon svg { vertical-align: middle; }
         .nav-section-header .name { flex: 1; }
         .nav-section-header .count {
             background: var(--bg);
@@ -623,8 +631,14 @@
         }
 
         .category-card .icon {
-            font-size: 1.25rem;
             margin-bottom: 0.25rem;
+            display: flex;
+            justify-content: center;
+            color: var(--accent);
+        }
+        .category-card .icon svg {
+            width: 20px;
+            height: 20px;
         }
 
         .category-card .name {
@@ -850,14 +864,14 @@
         <header class="topbar">
             <div class="topbar-logo" onclick="showWelcome()">Ducu & Bo' Peptides</div>
             <div class="topbar-search">
-                <span class="search-icon">/</span>
+                <span class="search-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
                 <input type="text" id="searchInput" placeholder="Search peptides..." oninput="handleSearch(this.value)">
                 <span class="search-hint" id="searchHint">Ctrl+K</span>
                 <button class="search-clear" id="searchClear" onclick="clearSearch()">&#10005;</button>
             </div>
             <div class="topbar-actions">
                 <button class="topbar-btn icon-only" onclick="toggleDarkMode()" id="darkModeBtn" title="Toggle dark mode (D)">
-                    <span id="darkModeIcon">D</span>
+                    <span id="darkModeIcon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></span>
                 </button>
                 <button class="topbar-btn" onclick="logout()">Logout</button>
             </div>
@@ -1028,7 +1042,9 @@
         }
 
         function updateDarkModeIcon(isDark) {
-            document.getElementById('darkModeIcon').innerHTML = isDark ? 'L' : 'D';
+            const moonSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>';
+            const sunSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>';
+            document.getElementById('darkModeIcon').innerHTML = isDark ? sunSvg : moonSvg;
         }
 
         // Recently Viewed
@@ -1134,17 +1150,17 @@
 
         function getIcon(name) {
             const icons = {
-                'Doc': '[]',
-                'Bolt': '^',
-                'Band': '+',
-                'Brain': '@',
-                'Shield': '#',
-                'Hour': '~',
-                'Heart': '<3',
-                'Moon': ')',
-                'Organ': 'o'
+                'Doc': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+                'Bolt': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+                'Band': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M8.5 8.5l-2 2a4.95 4.95 0 0 0 7 7l2-2"/><path d="M15.5 15.5l2-2a4.95 4.95 0 0 0-7-7l-2 2"/></svg>',
+                'Brain': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M12 5v13"/></svg>',
+                'Shield': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>',
+                'Hour': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg>',
+                'Heart': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>',
+                'Moon': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>',
+                'Organ': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"/><path d="M12 6l-2 4l4 2l-2 4"/></svg>'
             };
-            return icons[name] || '*';
+            return icons[name] || '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>';
         }
 
         function toggleSection(key) {

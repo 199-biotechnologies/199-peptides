@@ -185,6 +185,7 @@
   },
   "active": "a4c604fc572c3327",
   "lastOpenFiles": [
+    "protocols/athena-protocol.md",
     "peptides/tirzepatide-research.md",
     "protocols/titan-protocol.md",
     "index.html",
@@ -220,7 +221,6 @@
     "md-browser/content/peptides/tb-500-research.md",
     "md-browser/content/peptides/ss-31-research.md",
     "md-browser/content/peptides/semax-research.md",
-    "md-browser/content/peptides/semaglutide-research.md",
     "md-browser/public/window.svg",
     "md-browser/public/vercel.svg",
     "md-browser/public/next.svg",
