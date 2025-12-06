@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "protocols/titan-protocol.md",
+                "file": "protocols/athena-protocol.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "titan-protocol"
+              "title": "athena-protocol"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "protocols/titan-protocol.md",
+                "file": "protocols/athena-protocol.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for titan-protocol"
+              "title": "Backlinks for athena-protocol"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "protocols/titan-protocol.md",
+                "file": "protocols/athena-protocol.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from titan-protocol"
+              "title": "Outgoing links from athena-protocol"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "protocols/titan-protocol.md",
+                "file": "protocols/athena-protocol.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of titan-protocol"
+              "title": "Outline of athena-protocol"
             }
           }
         ]
@@ -185,9 +185,10 @@
   },
   "active": "a4c604fc572c3327",
   "lastOpenFiles": [
+    "protocols/athena-protocol.md.tmp.91782.1764983791902",
+    "protocols/titan-protocol.md",
     "protocols/athena-protocol.md",
     "peptides/tirzepatide-research.md",
-    "protocols/titan-protocol.md",
     "index.html",
     "peptides/vip-research.md",
     "peptides/cardiogen-research.md",
@@ -220,7 +221,6 @@
     "md-browser/content/peptides/teriparatide-research.md",
     "md-browser/content/peptides/tb-500-research.md",
     "md-browser/content/peptides/ss-31-research.md",
-    "md-browser/content/peptides/semax-research.md",
     "md-browser/public/window.svg",
     "md-browser/public/vercel.svg",
     "md-browser/public/next.svg",
