@@ -654,6 +654,29 @@
             color: var(--text-light);
         }
 
+        /* Category listing page */
+        .category-page { padding: 1rem 0; }
+        .category-page h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+            border: none;
+            padding: 0;
+        }
+        .category-page .category-count {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        .category-page .category-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+        @media (max-width: 600px) {
+            .category-page .category-items { grid-template-columns: 1fr; }
+        }
+
         .category-tag {
             display: inline-block;
             background: var(--bg);
@@ -1318,16 +1341,52 @@
         }
 
         function goToCategory(key) {
-            // Expand the category and scroll to it
+            // Show category listing page
+            showCategoryPage(key);
+        }
+
+        function showCategoryPage(key) {
+            closeMobileMenu();
+            currentFile = null;
+            currentMarkdown = '';
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            document.getElementById('docMeta').innerHTML = '';
+            document.getElementById('progressBar').style.display = 'none';
+
+            const cat = categories[key];
+            if (!cat) return;
+
+            // Update breadcrumb
+            document.getElementById('breadcrumb').innerHTML = `
+                <a onclick="showWelcome()">Home</a>
+                <span class="separator">/</span>
+                <span>${cat.name}</span>
+            `;
+
+            // Build items list
+            const itemsHtml = cat.files.map(f => `
+                <div class="welcome-card" onclick="loadFile('${f.file}')">
+                    <h4>${f.name}</h4>
+                    <p>${f.subtitle}</p>
+                </div>
+            `).join('');
+
+            document.getElementById('content').innerHTML = `
+                <div class="category-page">
+                    <h1>${cat.name}</h1>
+                    <p class="category-count">${cat.files.length} ${cat.files.length === 1 ? 'item' : 'items'}</p>
+                    <div class="category-items">
+                        ${itemsHtml}
+                    </div>
+                </div>
+            `;
+
+            // Expand this category in sidebar
             const section = document.querySelector(`.nav-section[data-key="${key}"]`);
-            if (section) {
-                section.classList.remove('collapsed');
-                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                // Briefly highlight
-                section.style.background = 'rgba(74, 111, 165, 0.1)';
-                setTimeout(() => section.style.background = '', 1000);
-            }
+            if (section) section.classList.remove('collapsed');
             updateToggleButton();
+
+            history.pushState({ category: key }, '', `#category/${key}`);
         }
 
         // Progress Bar
@@ -1767,8 +1826,16 @@
 
             // Check for hash
             if (window.location.hash) {
-                const file = decodeURIComponent(window.location.hash.slice(1));
-                if (file) loadFile(file, false);
+                const hash = decodeURIComponent(window.location.hash.slice(1));
+                if (hash.startsWith('category/')) {
+                    const catKey = hash.replace('category/', '');
+                    if (categories[catKey]) showCategoryPage(catKey);
+                    else showWelcome();
+                } else if (hash) {
+                    loadFile(hash, false);
+                } else {
+                    showWelcome();
+                }
             } else {
                 showWelcome();
             }
@@ -1776,6 +1843,7 @@
             // Handle popstate
             window.addEventListener('popstate', (e) => {
                 if (e.state?.file) loadFile(e.state.file, false);
+                else if (e.state?.category) showCategoryPage(e.state.category);
                 else showWelcome();
             });
 
