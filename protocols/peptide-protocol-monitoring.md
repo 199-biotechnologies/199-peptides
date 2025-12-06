@@ -14,9 +14,7 @@
 | IGF-1 | 150-250 ng/mL | GH compound dosing |
 | ALT, AST, GGT | <2x upper limit | Hepatic clearance |
 | Creatinine, eGFR | eGFR >60 | Renal clearance; <30 contraindicated |
-| Cystatin C | Normal | More accurate renal function (not affected by muscle mass) |
-| CBC + Differential | Normal | Baseline; infections on Rapamycin |
-| Haematocrit | <52% | GH + TRT elevate; polycythaemia |
+| CBC + Differential | Normal; Haematocrit <52% | Baseline; infections on Rapamycin; polycythaemia |
 | Lipid Panel | Stable/improving | CV risk |
 | ApoB | <65 mg/dL | Atherogenic particles; Repatha target |
 | Lp(a) | Baseline only | Genetic CV risk (one-time) |
@@ -25,17 +23,15 @@
 | Free Testosterone | Upper quartile | Bioavailable T |
 | Oestradiol (sensitive) | M: 20-35 pg/mL | Aromatisation |
 | SHBG | Context-dependent | Interprets free hormones |
-| Prolactin | Normal | Cabergoline monitoring |
-| DHEA-S | Upper age-appropriate | Adrenal; TRIIM component |
+| Prolactin | Normal | Cabergoline monitoring (Athena only) |
 | PSA (M >40) | <4.0; stable | Oncogenic risk — growth factors |
 | CEA | <3.0 ng/mL | Oncogenic risk — growth factors |
 | CA-125 (F) | <35 U/mL | Oncogenic risk — growth factors |
 | Ferritin | M: 50-150 / F: 50-100 | Iron stores |
-| Homocysteine | <10 μmol/L | Metformin depletes B12 |
 | Vitamin B12 | >400 pg/mL | Metformin depletion |
 | Vitamin D | 50-80 ng/mL | Bone, immune |
 
-**Female Hormone Timing:** Oestradiol/FSH/LH day 3-5; Progesterone day 21; AMH any day
+**Note (F):** Test Oestradiol day 3-5 of cycle for consistency
 
 ---
 
@@ -109,6 +105,7 @@
 
 | Test | Purpose |
 |------|---------|
+| Cystatin C | More accurate renal function (not affected by muscle mass) |
 | Biological Age (TruDiagnostic/GlycanAge) | Protocol efficacy |
 | Telomere Length | Pre/post Epithalon |
 | DUTCH Complete | Hormone metabolites |
