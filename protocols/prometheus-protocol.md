@@ -77,7 +77,7 @@ Prometheus was the Titan who stole fire from the gods and gave it to humanity �
 
 ---
 
-## SUPPLEMENTS (16) — Bryan Johnson / Longevity-Optimized
+## SUPPLEMENTS (16)
 
 | Supplement | Dose | Frequency | Intended Benefit |
 |------------|------|-----------|------------------|
@@ -195,7 +195,7 @@ The pharmaceutical stack targets aging through nine distinct mechanisms: mTOR in
 
 Peptide selection explicitly minimizes oncogenic risk. BPC-157, TB-500, and Follistatin are excluded due to angiogenic and proliferative concerns. The remaining peptides target safe pathways: Epithalon (telomerase — may be protective), Thymalin (immune), Thymosin Alpha-1 (immune modulation with 9% mortality reduction in sepsis meta-analysis, 35+ country approvals, FDA orphan drug — enhances tumor surveillance without stimulating growth), SS-31 and MOTS-c (mitochondrial), NAD+ (sirtuins), KPV (anti-inflammatory without angiogenic risk), and Selank (stress resilience). Tesamorelin is retained as the only GH-pathway peptide due to its FDA approval and targeted VAT reduction.
 
-The supplement stack combines Bryan Johnson's validated longevity compounds (Ca-AKG, Creatine, Glycine, Taurine, Lithium) with autophagy inducers (Spermidine, Fisetin) and protective methylation support (TMG — critical given Metformin's B12/folate depletion). This is designed for individuals with comprehensive monitoring who prioritize magnitude of effect over conservative safety margins.
+The supplement stack combines evidence-based longevity compounds (Ca-AKG, Creatine, Glycine, Taurine, Lithium) with autophagy inducers (Spermidine, Fisetin) and protective methylation support (TMG — critical given Metformin's B12/folate depletion). This is designed for individuals with comprehensive monitoring who prioritise magnitude of effect over conservative safety margins.
 
 ---
 

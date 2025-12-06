@@ -1,6 +1,8 @@
 # TITAN PROTOCOL
 
 **Duration:** 16 Weeks
+**Target:** Men
+**Philosophy:** Reclaim masculine vitality through synergistic performance enhancement and longevity integration
 
 ---
 

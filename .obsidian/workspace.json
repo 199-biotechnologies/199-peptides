@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "protocols/prometheus-protocol.md",
+                "file": "protocols/athena-protocol.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "prometheus-protocol"
+              "title": "athena-protocol"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "protocols/prometheus-protocol.md",
+                "file": "protocols/athena-protocol.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for prometheus-protocol"
+              "title": "Backlinks for athena-protocol"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "protocols/prometheus-protocol.md",
+                "file": "protocols/athena-protocol.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from prometheus-protocol"
+              "title": "Outgoing links from athena-protocol"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "protocols/prometheus-protocol.md",
+                "file": "protocols/athena-protocol.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of prometheus-protocol"
+              "title": "Outline of athena-protocol"
             }
           }
         ]
@@ -185,9 +185,9 @@
   },
   "active": "a4c604fc572c3327",
   "lastOpenFiles": [
-    "protocols/athena-protocol.md",
-    "protocols/titan-protocol.md",
     "protocols/prometheus-protocol.md",
+    "protocols/titan-protocol.md",
+    "protocols/athena-protocol.md",
     "protocols/athena-protocol.md.tmp.91782.1764987839022",
     "protocols/prometheus-protocol.md.tmp.91782.1764987738085",
     "protocols/prometheus-protocol.md.tmp.91782.1764987728357",

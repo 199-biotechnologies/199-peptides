@@ -1,6 +1,8 @@
 # ATHENA PROTOCOL
 
 **Duration:** 16 Weeks
+**Target:** Women
+**Philosophy:** Female-specific optimisation addressing hormonal, structural, and cognitive domains across life phases
 
 ---
 
