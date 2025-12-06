@@ -857,6 +857,41 @@
             color: var(--text);
         }
 
+        /* Protocol Tabs */
+        .protocol-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .protocol-tab {
+            padding: 0.5rem 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .protocol-tab:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .protocol-tab.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        .protocol-tab svg {
+            width: 14px;
+            height: 14px;
+        }
+
         .no-results {
             padding: 1rem;
             text-align: center;
@@ -1091,9 +1126,15 @@
         // Categories
         const categories = {
             protocols: { name: 'Protocols', icon: 'Doc', files: [
-                { file: 'protocols/titan-protocol.md', name: 'TITAN Protocol', subtitle: 'Complete longevity protocol' },
-                { file: 'protocols/athena-protocol.md', name: 'ATHENA Protocol', subtitle: 'Women\'s health & hormones' },
-                { file: 'protocols/prometheus-protocol.md', name: 'PROMETHEUS Protocol', subtitle: 'Aggressive age reversal' }
+                { file: 'protocols/titan-protocol.md', name: 'TITAN Protocol', subtitle: 'Complete longevity protocol', group: 'titan', type: 'protocol' },
+                { file: 'protocols/titan-safety.md', name: 'TITAN Safety', subtitle: 'Contraindications & side effects', group: 'titan', type: 'safety' },
+                { file: 'protocols/titan-monitoring.md', name: 'TITAN Monitoring', subtitle: 'Bloodwork & tracking', group: 'titan', type: 'monitoring' },
+                { file: 'protocols/athena-protocol.md', name: 'ATHENA Protocol', subtitle: 'Women\'s health & hormones', group: 'athena', type: 'protocol' },
+                { file: 'protocols/athena-safety.md', name: 'ATHENA Safety', subtitle: 'Contraindications & side effects', group: 'athena', type: 'safety' },
+                { file: 'protocols/athena-monitoring.md', name: 'ATHENA Monitoring', subtitle: 'Bloodwork & tracking', group: 'athena', type: 'monitoring' },
+                { file: 'protocols/prometheus-protocol.md', name: 'PROMETHEUS Protocol', subtitle: 'Aggressive age reversal', group: 'prometheus', type: 'protocol' },
+                { file: 'protocols/prometheus-safety.md', name: 'PROMETHEUS Safety', subtitle: 'Contraindications & side effects', group: 'prometheus', type: 'safety' },
+                { file: 'protocols/prometheus-monitoring.md', name: 'PROMETHEUS Monitoring', subtitle: 'Bloodwork & tracking', group: 'prometheus', type: 'monitoring' }
             ]},
             gh_metabolic: { name: 'GH Axis & Metabolic', icon: 'Bolt', files: [
                 { file: 'peptides/tesamorelin-research.md', name: 'Tesamorelin', subtitle: 'FDA approved GHRH' },
@@ -1166,7 +1207,7 @@
         const totalPeptides = Object.values(categories).reduce((sum, cat) =>
             cat.name !== 'Protocols' && cat.name !== 'Documents' ? sum + cat.files.length : sum, 0);
         const totalCategories = Object.keys(categories).length - 2; // exclude Protocols and Documents
-        const totalProtocols = categories.protocols.files.length;
+        const totalProtocols = categories.protocols.files.filter(f => f.type === 'protocol').length;
         const totalDocuments = categories.documents.files.length;
 
         // Auth
@@ -1317,16 +1358,22 @@
         function renderNav() {
             const favs = getFavorites();
             const nav = document.getElementById('navScroll');
-            nav.innerHTML = Object.entries(categories).map(([key, cat]) => `
+            nav.innerHTML = Object.entries(categories).map(([key, cat]) => {
+                // For protocols, only show main protocol files (not safety/monitoring)
+                const displayFiles = key === 'protocols'
+                    ? cat.files.filter(f => f.type === 'protocol')
+                    : cat.files;
+
+                return `
                 <div class="nav-section" data-key="${key}">
                     <div class="nav-section-header" onclick="toggleSection('${key}')">
                         <span class="icon">${getIcon(cat.icon)}</span>
                         <span class="name">${cat.name}</span>
-                        <span class="count">${cat.files.length}</span>
+                        <span class="count">${displayFiles.length}</span>
                         <span class="chevron"><svg viewBox="0 0 10 10" fill="currentColor"><polygon points="0,0 10,0 5,8"/></svg></span>
                     </div>
                     <div class="nav-items">
-                        ${cat.files.map(f => `
+                        ${displayFiles.map(f => `
                             <div class="nav-item ${currentFile === f.file ? 'active' : ''}" data-file="${f.file}" onclick="loadFile('${f.file}')">
                                 <div class="nav-item-text">
                                     ${f.name}
@@ -1337,7 +1384,7 @@
                         `).join('')}
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
         }
 
         function getIcon(name) {
@@ -1351,9 +1398,33 @@
                 'Heart': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>',
                 'Moon': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>',
                 'Organ': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"/><path d="M12 6l-2 4l4 2l-2 4"/></svg>',
-                'Folder': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>'
+                'Folder': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>',
+                'Safety': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+                'Monitoring': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>'
             };
             return icons[name] || '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>';
+        }
+
+        // Get protocol tabs for a given file
+        function getProtocolTabs(filePath) {
+            const protocolFiles = categories.protocols.files;
+            const currentItem = protocolFiles.find(f => f.file === filePath);
+            if (!currentItem || !currentItem.group) return '';
+
+            const group = currentItem.group;
+            const relatedFiles = protocolFiles.filter(f => f.group === group);
+
+            const tabs = relatedFiles.map(f => {
+                const isActive = f.file === filePath;
+                let icon = 'Doc';
+                let label = 'Protocol';
+                if (f.type === 'safety') { icon = 'Safety'; label = 'Safety'; }
+                if (f.type === 'monitoring') { icon = 'Monitoring'; label = 'Monitoring'; }
+
+                return `<button class="protocol-tab ${isActive ? 'active' : ''}" onclick="loadFile('${f.file}')">${getIcon(icon)} ${label}</button>`;
+            }).join('');
+
+            return `<div class="protocol-tabs">${tabs}</div>`;
         }
 
         function toggleSection(key) {
@@ -1397,6 +1468,11 @@
             const cat = categories[key];
             if (!cat) return;
 
+            // For protocols, only show main protocol files (not safety/monitoring)
+            const displayFiles = key === 'protocols'
+                ? cat.files.filter(f => f.type === 'protocol')
+                : cat.files;
+
             // Update breadcrumb
             document.getElementById('breadcrumb').innerHTML = `
                 <a onclick="showWelcome()">Home</a>
@@ -1405,7 +1481,7 @@
             `;
 
             // Build items list
-            const itemsHtml = cat.files.map(f => `
+            const itemsHtml = displayFiles.map(f => `
                 <div class="welcome-card" onclick="loadFile('${f.file}')">
                     <h4>${f.name}</h4>
                     <p>${f.subtitle}</p>
@@ -1415,7 +1491,7 @@
             document.getElementById('content').innerHTML = `
                 <div class="category-page">
                     <h1>${cat.name}</h1>
-                    <p class="category-count">${cat.files.length} ${cat.files.length === 1 ? 'item' : 'items'}</p>
+                    <p class="category-count">${displayFiles.length} ${displayFiles.length === 1 ? 'item' : 'items'}</p>
                     <div class="category-items">
                         ${itemsHtml}
                     </div>
@@ -1533,8 +1609,9 @@
                 // Render metadata badges
                 docMeta.innerHTML = badges + `<span class="badge badge-neutral">${readTime} min read</span>`;
 
-                // Render content
-                content.innerHTML = marked.parse(currentMarkdown);
+                // Render content with protocol tabs if applicable
+                const protocolTabs = getProtocolTabs(filePath);
+                content.innerHTML = protocolTabs + marked.parse(currentMarkdown);
 
                 // Make category tags clickable
                 makeCategoryTagsClickable();

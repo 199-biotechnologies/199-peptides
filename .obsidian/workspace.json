@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "protocols/athena-protocol.md",
+                "file": "documents/bespoke-longevity-handout.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "athena-protocol"
+              "title": "bespoke-longevity-handout"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "protocols/athena-protocol.md",
+                "file": "documents/bespoke-longevity-handout.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for athena-protocol"
+              "title": "Backlinks for bespoke-longevity-handout"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "protocols/athena-protocol.md",
+                "file": "documents/bespoke-longevity-handout.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from athena-protocol"
+              "title": "Outgoing links from bespoke-longevity-handout"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "protocols/athena-protocol.md",
+                "file": "documents/bespoke-longevity-handout.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of athena-protocol"
+              "title": "Outline of bespoke-longevity-handout"
             }
           }
         ]
@@ -185,10 +185,18 @@
   },
   "active": "a4c604fc572c3327",
   "lastOpenFiles": [
-    "documents/peptide-therapy-presentation.md",
-    "documents/patient-intake-form.md",
+    "index.html.tmp.46503.1764995935362",
+    "protocols/titan-monitoring.md",
+    "protocols/titan-safety.md",
+    "protocols/athena-monitoring.md",
+    "protocols/athena-safety.md",
+    "protocols/prometheus-monitoring.md",
+    "protocols/prometheus-safety.md",
     "documents/consent-liability-waiver.md",
+    "documents/patient-intake-form.md",
+    "documents/peptide-therapy-presentation.md",
     "documents/bespoke-longevity-handout.md",
+    "protocols/athena-protocol.md",
     "documents/Dr_Ducu_Bespoke_Longevity_Handout.pdf",
     "documents/DrDucu_Peptide_Therapy_Presentation.pdf",
     "documents/DrDucu_Patient_Intake_Form.pdf",
@@ -202,7 +210,6 @@
     "index.html.tmp.46503.1764990374840",
     "protocols/prometheus-protocol.md",
     "protocols/titan-protocol.md",
-    "protocols/athena-protocol.md",
     "peptides/tirzepatide-research.md",
     "peptides/vip-research.md",
     "peptides/cardiogen-research.md",
@@ -215,13 +222,6 @@
     "peptides/cjc-1295-research.md",
     "peptides/igf-1-lr3-research.md",
     "peptides/gcmaf-research.md",
-    "peptides/epitalon-research.md",
-    "peptides/follistatin-344-research.md",
-    "md-browser/content/peptides/vip-research.md",
-    "md-browser/content/peptides/tirzepatide-research.md",
-    "md-browser/content/peptides/thymosin-alpha-1-research.md",
-    "md-browser/content/peptides/thymogen-research.md",
-    "md-browser/content/peptides/thymalin-research.md",
     "md-browser/public/window.svg",
     "md-browser/public/vercel.svg",
     "md-browser/public/next.svg",
